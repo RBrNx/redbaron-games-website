@@ -70,6 +70,14 @@ export default {
     padding: 0 25px;
     font-size: 18px;
   }
+
+  .projects {
+    padding: 0 25px;
+
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 30px;
+  }
 }
 </style>
 
