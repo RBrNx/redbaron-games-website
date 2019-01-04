@@ -1,0 +1,226 @@
+﻿<div class="blog-post">
+    <header>
+        <div class="titles">
+            <div class="title">ASP.Net Logging with NLog and JSNLog Part 1: NLog Setup</div>
+            <div class="subtitle">A very long description should go here to describe what the blog is about.</div>
+        </div>
+        <div class="mouse-scroll">
+            <span></span>
+        </div>
+    </header>
+    <article>
+        <div class="author">
+            <figure>
+                <img src="../img/profile-picture.png" />
+            </figure>
+            <div>
+                <h4>Conor Watson</h4>
+                <h5>Full Stack Web Developer</h5>
+                <small><span class="publish-date"></span> - <span>7 min read.</span></small>
+            </div>
+        </div>
+        <div class="article-body language-markup" >
+            <div class="heading">Overview</div>
+            <hr />
+            <p>For a project I am currently in the midst of developing in ASP.Net, I figured that implementing a logging system would come in handy once the application was up and running in the real world, because unforeseen errors are likely to crop up and debugging issues that are explained to you by a non-techie user can be a royal pain. Displaying an error message to the user is all well and good, but actually getting the context of an error message from inside your own program can be invaluable in finding the dark corner where the bug is hiding.</p>
+            <figure><img src="../blogs/images/1/ErrorMessage.png" /></figure>
+            <p>Enter NLog (<span class='fancyLink'><a href="http://nlog-project.org/" rel="noopener" target="_blank">Website</a></span>/<span class='fancyLink'><a href="https://github.com/NLog/NLog" rel="noopener" target="_blank">GitHub</a></span>). It is probably the easiest to use logging framework for .NET I have come across and <span class='fancyLink'><a href="https://www.loggly.com/blog/benchmarking-5-popular-net-logging-libraries/" rel="noopener" target="_blank">apparently the fastest too!</a></span> Ideally this logging system would allow me to access the logs without me having to remote onto the server that is running my application, a challenge which I will discuss later.</p>
+            <div class="heading">Getting Started</div>
+            <hr />
+            <p>Logs can be shown/stored in many places, the most common ones being the <em>Console</em>, a <em>File (Plain Text, XML etc)</em> and a <em>Database</em>. NLog calls these different places, “Targets”. While all of these have their uses, only one really stood out as a good solution for my use case. For example, my application is not a console application so there is no console to actually log to, and even if there was the logs would be lost as soon as the application was closed. Not to mention that I’d have to physically be there to see the console which mostly defeats the purpose of the logging!</p>
+            <p>File logging is a decent solution, the logs would at least not disappear when the application is closed, but sorting through a thousand line text file will be cumbersome and not something I’m particularly interested in doing. This would also require me to remote into the server to check the logs which is not what my ideal solution would be, so sadly we will have to leave File logging by the wayside. </p>
+            <p>So that just leaves Database logging, or more specifically SQL Server logging in my case. This is the ideal solution for my use case as I am already using SQL Server databases as part of my application so adding an extra table for logging made a lot of sense. Now some of you might be shouting “but you’ll still need access to the server to view those logs!!”, I concede that normally you would have to, yes. However I do have a solution for this later on!</p>
+            <p>There are many more “Targets” than I have mentioned here, and NLog can be used to log to multiple Targets at the one time. You can find more information on the Targets I have mentioned and the many others NLog supports at the <span class="fancyLink"><a href="https://github.com/nlog/nlog/wiki/Targets" rel="noopener" target="_blank">NLog Target Wiki</a></span>.</p>
+            <p>So let’s get started, the easiest way to install it into your .NET project is via the NuGet Package Manager:<br /><figure><img src="../blogs/images/1/Visual Studio.png" /></figure></p>
+            <p>Install the <code class="language-markup">NLog</code> and <code>NLog.Config</code> NuGet packages. This will create the <code>NLog.config</code> and <code>NLog.xsd</code> files in your project along with adding the NLog library to your project references.</p>
+            <div class="heading">SQL Setup</div>
+            <hr />
+            <p>The first step on your road to SQL Server logging is to add a connection string to your <code>app.config/web.config</code> file. I’m assuming that you have managed to set up SQL Server instance and create a Database in it. We will create a Table for this database shortly. Take note of the <code>name</code> parameter, we will use this later.</p>
+            <script type="text/plain" class="language-markup">
+                <connectionStrings>
+                    <add name="ErrorLog" connectionString="Server=[YourServerNameHere];Database=[YourDatabaseNameHere];USER ID=[YourUserIDHere];PASSWORD=[YourPasswordHere];" />
+                </connectionStrings>
+            </script>
+            <p>Next we will have to create the table for the logs to go in along with a Stored Procedure that will perform the insertion of each log. The table we create will be called <code>dbo.Logs</code> and the Stored Procedure will be called <code>dbo.InsertLog</code>. Right-click on your Database in SQL Server Manager and choose <em>New Query</em>, copy and paste the below SQL Query and press <em>F5</em> or the <em>Execute</em> button to run the query. Note: I’ve set limits for each column in the Table, feel free to change these to suit your use case though.</p>
+            <script type="text/plain" class="language-sql line-numbers">
+                create table [dbo].[Logs](
+                [LogId] [int] IDENTITY(1,1) not null,
+                [Level] [varchar](100) not null,
+                [CallSite] [varchar](250) not null,
+                [Type] [varchar](250) not null,
+                [ExceptionMessage] [varchar](max) not null,
+                [StackTrace] [varchar](max) not null,
+                [InnerException] [varchar](max) not null,
+                [LogMessage] [varchar](max) not null,
+                [LoggedOnDate] [datetime] not null constraint [df_logs_loggedondate]  default (getutcdate()),
+
+                constraint [pk_logs] primary key clustered
+                (
+                [LogId]
+                )
+                )
+
+                GO
+
+                /*
+                Create InsertLog stored procedure
+                */
+
+                create procedure [dbo].[InsertLog]
+                (
+                @level varchar(100),
+                @callSite varchar(250),
+                @type varchar(250),
+                @exceptionMessage varchar(max),
+                @stackTrace varchar(max),
+                @innerException varchar(max),
+                @logMessage varchar(max)
+                )
+                as
+
+                insert into dbo.Logs
+                (
+                [Level],
+                CallSite,
+                [Type],
+                ExceptionMessage,
+                StackTrace,
+                InnerException,
+                LogMessage
+                )
+                values
+                (
+                @level,
+                @callSite,
+                @type,
+                @exceptionMessage,
+                @stackTrace,
+                @innerException,
+                @logMessage
+                )
+
+                go
+            </script>
+            <br />
+            <br />
+            <div class="heading">NLog.Config Setup</div>
+            <hr />
+            <p>The last piece of the puzzle (for NLog at least) is to add some XML to the <code>NLog.Config</code> file. Earlier on I mentioned that NLog could log to multiple ‘targets’ at the same time, the <code>NLog.config</code> is where you set up these targets. Each <code>target</code> specifies <em>where</em> or <em>what</em> you want to log to, and each <code>rule</code> links a <code>target</code> to a Logger name. Inside the <code>targets</code> node add the following XML:</p>
+            <script type="text/plain" class="language-markup line-numbers">
+                <target name="database"
+                        xsi:type="Database"
+                        connectionStringName="ErrorLog"
+                        commandText="exec dbo.InsertLog
+                      @level,
+                      @callSite,
+                      @type,
+                      @exceptionMessage,
+                      @stackTrace,
+                      @innerException,
+                      @logMessage">
+                    <parameter name="@level" layout="${level}" />
+                    <parameter name="@callSite" layout="${callsite}" />
+                    <parameter name="@type" layout="${exception:format=type}" />
+                    <parameter name="@exceptionMessage" layout="${exception:format=message}" />
+                    <parameter name="@stackTrace" layout="${exception:format=stackTrace}" />
+                    <parameter name="@innerException"
+                               layout="${exception:format=:innerFormat=ShortType,Message,Method:MaxInnerExceptionLevel=1:InnerExceptionSeparator=}" />
+                    <parameter name="@logMessage" layout="${message}" />
+                </target>
+            </script>
+            <p>Make sure to set the <code>connectionStringName</code> to match the name parameter of the connection string we added earlier, in this case it should be <code>ErrorLog</code>. The <code>commandText</code> parameter is a SQL Command which executes the Stored Procedure we created earlier to insert a Log into our table, and each of the <code>parameter</code> nodes provides a link between the SQL Parameter name and the relevant values that come from the NLog log (level, callsite etc). You can learn more about the NLog log values <span class="fancyLink"><a href="https://github.com/NLog/NLog/wiki/Layout-Renderers" rel="noopener" target="_blank">here.</a></span></p>
+            <p>
+                The last step of the NLog.config setup is to add a rule which tells NLog to link a Logger name to the target that we just created, and also specifies which logging levels you would actually like to log. There are 6 levels in total, here they are in descending order along with examples of where they might be used:
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Level</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th>Fatal</th>
+                            <th>Application Crashes</th>
+                        </tr>
+                        <tr>
+                            <th>Error</th>
+                            <th>Unhandled Exceptions/Missing Files</th>
+                        </tr>
+                        <tr>
+                            <th>Warn</th>
+                            <th>Incorrect behaviour or potentially fatal</th>
+                        </tr>
+                        <tr>
+                            <th>Info</th>
+                            <th>Regular Information. Profile Updated, Message Sent</th>
+                        </tr>
+                        <tr>
+                            <th>Debug</th>
+                            <th>Executed Query, API Call Successful</th>
+                        </tr>
+                        <tr>
+                            <th>Trace</th>
+                            <th>Begin Function A, End Function A</th>
+                        </tr>
+                    </tbody>
+                </table>
+            </p>
+            <p>Under the <code>rules</code> node you should add the following line of XML, making sure that the <code>writeTo</code> parameter matches the <code>name</code> parameter of the target we just added.</p>
+            <script type="text/plain" class="language-csharp">
+                Logger logger = LogManager.GetLogger("databaseLogger");
+            </script>
+            <p>again making sure that the name you pass to the <code>GetLogger</code> function is the same as the name parameter on the target we created!</p>
+            <p>However instead of having to create this instance each time you need to log something, I’d recommend creating a static Logger as a private member of the Class you are attempting to log in, this means you can simply use the one Logger instance each time.</p>
+            <script type="text/plain" class="language-csharp line-numbers">
+                public partial class WebForm1 : System.Web.UI.Page
+                {
+                    private static readonly Logger logger = LogManager.GetLogger("databaseLogger");
+
+                    protected void Page_Load(object sender, EventArgs e)
+                    {
+
+                    }
+                }
+            </script>
+            <p>Now all we need to do is add some function calls to the logger and watch the magic happen!</p>
+            <script type="text/plain" class="language-csharp line-numbers">
+                public partial class WebForm1 : System.Web.UI.Page
+                {
+                    private static readonly Logger logger = LogManager.GetLogger("databaseLogger");
+
+                    protected void Page_Load(object sender, EventArgs e)
+                    {
+                        try
+                        {
+                            logger.Info("Attempting to Divide by Zeo");
+
+                            int zero = 0;
+                            int result = 10 / zero;
+                        }
+                        catch(Exception ex)
+                        {
+                            logger.Error(ex, "Can't do that!");
+                        }
+                    }
+                }
+            </script>
+            <p>
+                If everything was set up correctly then we should get some logs added to our SQL Database!<br>
+                <figure><img src="../blogs/images/1/SQL.png"></figure>
+            </p>
+            <br />
+            <br />
+            <div class="heading">Troubleshooting</div>
+            <hr />
+            <p>If you don’t get the same results as me then luckily NLog has it’s own internal logging system built in which is useful for debugging problems when setting NLog up. You can turn this on by finding the <code>nlog</code> node in the NLog.config file and changing the <code>internalLogLevel</code> property to </p>
+            <script type="text/plain" class="language-markup">
+                internalLogLevel = "Trace"
+            </script>
+            <p>You should also make sure that the <code>internalLogFile</code> property is set to somewhere you can find it, mine is set to <code>c:\temp\nlog-internal.log</code>. Reading this log should give you an idea of what is happening when your application is started up and where logs are getting sent to.</p>
+            <div class="subheading"> The Solution for Accessing the Server Logs remotely! </div>
+            <p>I mentioned earlier that there would be a way of accessing the SQL Database logs without having to remote into the server itself. I do not actually have a working solution for this as of yet but I have a solution in mind which I will put into code in the near future. It will involve creating an ASP.NET application which will poll the Log database for entries and display them in a nicely formatted HTML GUI. It will also feature the functionality to show or hide certain logging levels at will, and ‘pretty-print’ the stack traces that are logged for ease of reading. Perhaps once it is created I will make a blog post about it and update with a link here.</p>
+            <p>If you are only interested in Server Side/.NET logging then feel free to leave this Blog Post here, however if you are interested in some Client Side/Javascript Logging then stick around for Part 2!</p>
+        </div>
+    </article>
+</div>

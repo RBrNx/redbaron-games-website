@@ -1,0 +1,40 @@
+﻿{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "ASP.Net Logging with NLog and JSNLog Part 1: NLog Setup",
+      "titleHTML": "ASP.Net Logging with NLog and JSNLog Part 1: <span class='highlight'>NLog Setup</span>",
+      "description": "Blah",
+      "imageMain": "",
+      "imageDrop": "",
+      "file": "Logging1.html",
+      "type": "blog",
+      "date": "2017-10-06T12:00:00.000Z",
+      "show": true
+    },
+    {
+      "id": 2,
+      "title": "ASP.Net Logging with NLog and JSNLog Part 2: JSNLog Setup",
+      "titleHTML": "ASP.Net Logging with NLog and JSNLog Part 2: <span class='highlight'>JSNLog Setup</span>",
+      "description": "Blah",
+      "imageMain": "",
+      "imageDrop": "",
+      "file": "Logging2.html",
+      "type": "blog",
+      "date": "2017-10-09T12:00:00.000Z",
+      "show": true
+    },
+    {
+      "id": 3,
+      "title": "ASP.Net Logging with NLog and JSNLog Part 3: Extending NLog",
+      "titleHTML": "ASP.Net Logging with NLog and JSNLog Part 3: <span class='highlight'>Extending NLog</span>",
+      "description": "Blah",
+      "imageMain": "",
+      "imageDrop": "",
+      "file": "Logging3.html",
+      "type": "blog",
+      "date": "2017-10-11T12:00:00.000Z",
+      "show": true
+    }
+  ]
+}
