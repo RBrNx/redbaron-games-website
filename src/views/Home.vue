@@ -120,40 +120,5 @@ export default {
     }
   }
 }
-
-.portfolioContainer {
-  height: 400px;
-  width: 100%;
-  background: $primaryGrey;
-  color: $bodytextGrey;
-  font-family: "Roboto", sans-serif;
-  text-align: left;
-
-  h2 {
-    margin: 0;
-    padding: 25px 0 0 25px;
-    font-family: "Fjalla One", sans-serif;
-    font-size: 32px;
-    text-transform: uppercase;
-    color: $headingGrey;
-    position: relative;
-    display: inline-block;
-
-    &:after {
-      content: " ";
-      position: absolute;
-      top: calc(100% + 6px);
-      left: 25px;
-      height: 1px;
-      width: calc(100% - 25px);
-      background: $headingGrey;
-    }
-  }
-
-  p {
-    padding: 0 25px;
-    font-size: 18px;
-  }
-}
 </style>
 

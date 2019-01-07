@@ -38,7 +38,7 @@ export default {
 @import "../assets/global.scss";
 
 .portfolioContainer {
-  height: 400px;
+  //height: 400px;
   width: 100%;
   background: $primaryGrey;
   color: $bodytextGrey;
@@ -72,7 +72,7 @@ export default {
   }
 
   .projects {
-    padding: 0 25px;
+    padding: 0 15%;
 
     display: grid;
     grid-template-columns: repeat(1, 1fr);

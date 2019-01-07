@@ -4,8 +4,8 @@
       <img :src="require(`../assets${imageLink}`)">
     </div>
     <div class="body">
-      <div class="title"></div>
-      <div class="description"></div>
+      <div class="title">{{ title }}</div>
+      <div class="description">{{ description }}</div>
       <button>Learn More</button>
     </div>
   </div>
@@ -17,6 +17,12 @@ export default {
   components: {},
   props: ["itemData"],
   computed: {
+    title() {
+      return this.itemData ? this.itemData.title : null;
+    },
+    description() {
+      return this.itemData ? this.itemData.description : null;
+    },
     imageLink() {
       return this.itemData ? this.itemData.imageMain : null;
     },
@@ -33,21 +39,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.portfolioHeader {
+.portfolioItem {
   display: grid;
-  grid-template-rows: 150px 1fr;
+  //grid-template-rows: 350px 1fr;
 
   .header {
     overflow: hidden;
     position: relative;
 
     img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
       width: 100%;
-      -webkit-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%);
     }
   }
 
