@@ -43,6 +43,7 @@ export default {
   color: $bodytextGrey;
   font-family: "Roboto", sans-serif;
   text-align: left;
+  padding-bottom: 50px;
 
   h2 {
     margin: 0;
@@ -76,6 +77,10 @@ export default {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 30px;
+
+    @include desktop {
+      grid-template-columns: repeat(4, 2fr);
+    }
   }
 }
 </style>

@@ -6,18 +6,17 @@
     <div class="body">
       <div class="title">{{ title }}</div>
       <div class="description">{{ description }}</div>
-      <link-button>Learn More</link-button>
+      <primary-button>Learn More</primary-button>
     </div>
   </div>
 </template>
 
 <script>
 import PrimaryButton from "./PrimaryButton";
-import LinkButton from "./LinkButton";
 
 export default {
   name: "PortfolioItem",
-  components: { PrimaryButton, LinkButton },
+  components: { PrimaryButton },
   props: ["itemData"],
   computed: {
     title() {
@@ -63,6 +62,10 @@ export default {
     img {
       width: 100%;
       border-radius: 5px 5px 0 0;
+    }
+
+    @include desktop {
+      max-height: 350px;
     }
   }
 

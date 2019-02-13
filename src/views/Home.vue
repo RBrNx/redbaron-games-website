@@ -101,6 +101,7 @@ export default {
       top: 50%;
       transform: translateY(-50%);
       padding: 0 20%;
+      position: absolute;
     }
 
     .title {
