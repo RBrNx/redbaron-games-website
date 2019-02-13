@@ -6,15 +6,18 @@
     <div class="body">
       <div class="title">{{ title }}</div>
       <div class="description">{{ description }}</div>
-      <button>Learn More</button>
+      <link-button>Learn More</link-button>
     </div>
   </div>
 </template>
 
 <script>
+import PrimaryButton from "./PrimaryButton";
+import LinkButton from "./LinkButton";
+
 export default {
   name: "PortfolioItem",
-  components: {},
+  components: { PrimaryButton, LinkButton },
   props: ["itemData"],
   computed: {
     title() {
@@ -39,9 +42,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/global.scss";
+
 .portfolioItem {
   display: grid;
-  //grid-template-rows: 350px 1fr;
+  background: lighten($primaryGrey, 5%);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
+
+  &:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    transform: scale(1.048);
+  }
 
   .header {
     overflow: hidden;
@@ -49,6 +62,7 @@ export default {
 
     img {
       width: 100%;
+      border-radius: 5px 5px 0 0;
     }
   }
 
@@ -56,11 +70,15 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 15px;
-    padding-left: 0px;
 
     .title {
       font-weight: bold;
-      margin-bottom: 0;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .description {
+      margin-bottom: 30px;
     }
   }
 }

@@ -26,13 +26,11 @@
           </h2>
         </div>
         <div class="subtitle">
-          <p>
-            I am a
-            <span class="highlight">Full Stack Developer</span> with a passion for problem solving,
-            an
-            <span class="highlight">eye for design</span> and a devotion to creating
-            <span class="highlight">Web Applications</span> more useful than a Bond gadget.
-          </p>
+          I am a
+          <span class="highlight">Full Stack Developer</span> with a passion for problem solving,
+          an
+          <span class="highlight">eye for design</span> and a devotion to creating
+          <span class="highlight">Web Apps</span> more useful than a Bond gadget.
         </div>
       </div>
       <div class="heroButton"></div>
@@ -61,7 +59,6 @@ export default {
 .heroImage {
   background: url("../assets/HeroHeader2.jpg") no-repeat center;
   background-size: cover;
-  height: 150vh;
   position: relative;
 
   &:before {
@@ -79,7 +76,7 @@ export default {
   }
 
   @include desktop {
-    height: 100vh;
+    min-height: 100vh;
   }
 
   #particles-js {
@@ -96,7 +93,7 @@ export default {
     position: relative;
     text-transform: uppercase;
     font-size: 24px;
-    padding: 0 15%;
+    padding: 100px 15%;
     top: 15%;
 
     @include desktop {
