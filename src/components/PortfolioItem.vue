@@ -45,6 +45,7 @@ export default {
 
 .portfolioItem {
   display: grid;
+  grid-template-rows: 250px auto;
   background: lighten($primaryGrey, 5%);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
@@ -61,11 +62,13 @@ export default {
 
     img {
       width: 100%;
+      height: 250px;
+      object-fit: cover;
       border-radius: 5px 5px 0 0;
     }
 
     @include desktop {
-      max-height: 350px;
+      //height: 250px;
     }
   }
 
@@ -73,6 +76,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 15px;
+    position: relative;
 
     .title {
       font-weight: bold;
@@ -82,6 +86,7 @@ export default {
 
     .description {
       margin-bottom: 30px;
+      flex: 1;
     }
   }
 }

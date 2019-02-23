@@ -1,7 +1,7 @@
 <template>
   <div class="portfolioContainer">
     <h2>Portfolio</h2>
-    <p>From Minigolf Games to Christmas Puzzle Events! Check out some of my personal projects.</p>
+    <p>From Minigolf Games to Christmas Puzzle Events, Check out some of my personal projects!</p>
     <div class="projects">
       <portfolio-item v-for="(item, index) in portfolioItems" :key="index" :itemData="item"></portfolio-item>
     </div>
