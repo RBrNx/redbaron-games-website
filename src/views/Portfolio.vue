@@ -3,22 +3,54 @@
     <h2>Portfolio</h2>
     <p>From Minigolf Games to Christmas Puzzle Events, Check out some of my personal projects!</p>
     <div class="projects">
-      <portfolio-item v-for="(item, index) in portfolioItems" :key="index" :itemData="item"></portfolio-item>
+      <portfolio-item
+        v-for="(item, index) in portfolioItems"
+        :key="index"
+        ref="portfolioItems"
+        :itemData="item"
+        @click.native="cardOnClick(index)"
+      ></portfolio-item>
+      <card-clone
+        v-if="clickedItem !== null"
+        :width="clickedItem.width"
+        :height="clickedItem.height"
+      >
+        <template v-slot:cardFront>
+          <portfolio-item :itemData="clickedItem.item" :bodySize="clickedItem.bodyHeight"></portfolio-item>
+        </template>
+      </card-clone>
     </div>
   </div>
 </template>
 
 <script>
 import PortfolioItem from "../components/PortfolioItem";
+import CardClone from "../components/CardClone";
 
 export default {
   name: "portfolio",
   components: {
-    PortfolioItem
+    PortfolioItem,
+    CardClone
+  },
+  methods: {
+    cardOnClick(index) {
+      const ref = this.$refs.portfolioItems[index].$el;
+
+      this.clickedItem = {
+        item: this.portfolioItems[index],
+        height: ref.clientHeight,
+        width: ref.clientWidth,
+        bodyHeight: ref.getElementsByClassName("body")[0].clientHeight
+      };
+
+      console.log(this.clickedItem);
+    }
   },
   data() {
     return {
       portfolioItems: [],
+      clickedItem: null,
       gistID: process.env.VUE_APP_GIST_ID
     };
   },

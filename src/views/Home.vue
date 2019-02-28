@@ -25,12 +25,24 @@
             <span class="highlight">Conor Watson.</span>
           </h2>
         </div>
-        <div class="subtitle">
+        <!-- <div class="subtitle">
           I am a
           <span class="highlight">Full Stack Developer</span> with a passion for problem solving,
           an
           <span class="highlight">eye for design</span> and a devotion to creating
           <span class="highlight">Web Apps</span> more useful than a Bond gadget.
+        </div>-->
+        <div class="subtitle">
+          <span>I am a Full Stack Developer with&nbsp;</span>
+          <div class="subtitleWords">
+            <span class="highlight">a passion for problem solving.</span>
+            <span class="highlight">an eye for design.</span>
+            <span
+              class="highlight"
+            >a love for creating Web Apps with more features than a Bond gadget.</span>
+            <span class="highlight">the knack of picking up new skills quickly.</span>
+            <span class="highlight">the most handsome dog in the world.</span>
+          </div>
         </div>
       </div>
       <div class="heroButton"></div>
@@ -93,6 +105,7 @@ export default {
     position: relative;
     text-transform: uppercase;
     font-size: 24px;
+    width: 100%;
     padding: 100px 15%;
     top: 15%;
 
@@ -113,9 +126,79 @@ export default {
       }
     }
 
+    .subtitle {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      .subtitleWords {
+        //height: 50px;
+        margin-top: 15px;
+        position: relative;
+        width: 100%;
+
+        span {
+          display: block;
+          position: absolute;
+          width: 100%;
+          opacity: 0;
+          overflow: hidden;
+          text-align: center;
+          animation: rotateWords 20s linear infinite 0s;
+
+          &:nth-child(2) {
+            animation-delay: 4s;
+          }
+          &:nth-child(3) {
+            animation-delay: 8s;
+          }
+          &:nth-child(4) {
+            animation-delay: 12s;
+          }
+          &:nth-child(5) {
+            animation-delay: 16s;
+          }
+          &:nth-child(6) {
+            animation-delay: 20s;
+          }
+        }
+      }
+    }
+
     .highlight {
       color: $primaryRed;
     }
+  }
+}
+
+@keyframes rotateWords {
+  0% {
+    opacity: 0;
+  }
+  2% {
+    opacity: 0;
+    -webkit-transform: translateY(-30px);
+    transform: translateY(-30px);
+  }
+  8% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  18% {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+  }
+  22% {
+    opacity: 0;
+    -webkit-transform: translateY(30px);
+    transform: translateY(30px);
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
   }
 }
 </style>

@@ -3,7 +3,7 @@
     <div class="header">
       <img :src="require(`../assets${imageLink}`)">
     </div>
-    <div class="body">
+    <div class="body" :style="{ 'height': bodyHeight }">
       <div class="title">{{ title }}</div>
       <div class="description">{{ description }}</div>
       <primary-button>Learn More</primary-button>
@@ -17,7 +17,7 @@ import PrimaryButton from "./PrimaryButton";
 export default {
   name: "PortfolioItem",
   components: { PrimaryButton },
-  props: ["itemData"],
+  props: ["itemData", "bodySize"],
   computed: {
     title() {
       return this.itemData ? this.itemData.title : null;
@@ -30,6 +30,9 @@ export default {
     },
     name() {
       return this.itemData ? this.itemData.name : null;
+    },
+    bodyHeight() {
+      return this.bodySize ? this.bodySize + "px" : null;
     }
   },
   watch: {
@@ -50,6 +53,7 @@ export default {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   border-radius: 5px;
+  cursor: pointer;
 
   &:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
