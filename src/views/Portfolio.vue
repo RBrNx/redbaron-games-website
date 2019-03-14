@@ -8,15 +8,25 @@
         :key="index"
         ref="portfolioItems"
         :itemData="item"
-        @click.native="cardOnClick(index)"
+        @buttonClick="cardOnClick(index)"
       ></portfolio-item>
       <card-clone
         v-if="clickedItem !== null"
         :width="clickedItem.width"
         :height="clickedItem.height"
+        :x="clickedItem.x"
+        :y="clickedItem.y"
+        :transform="clickedItem.transform"
+        :customStyle="cardCloneStyle"
+        @overlayClicked="overlayClicked"
       >
         <template v-slot:cardFront>
           <portfolio-item :itemData="clickedItem.item" :bodySize="clickedItem.bodyHeight"></portfolio-item>
+        </template>
+        <template v-slot:cardBack>
+          <portfolio-item-information>
+            <p>Here is a little test!</p>
+          </portfolio-item-information>
         </template>
       </card-clone>
     </div>
@@ -25,32 +35,66 @@
 
 <script>
 import PortfolioItem from "../components/PortfolioItem";
+import PortfolioItemInformation from "../components/PortfolioItemInformation";
 import CardClone from "../components/CardClone";
 
 export default {
   name: "portfolio",
   components: {
     PortfolioItem,
+    PortfolioItemInformation,
     CardClone
   },
   methods: {
     cardOnClick(index) {
       const ref = this.$refs.portfolioItems[index].$el;
+      const viewportOffset = ref.getBoundingClientRect();
 
       this.clickedItem = {
         item: this.portfolioItems[index],
-        height: ref.clientHeight,
-        width: ref.clientWidth,
+        ref: ref,
         bodyHeight: ref.getElementsByClassName("body")[0].clientHeight
       };
+      this.cardCloneStyle = {
+        height: `${ref.clientHeight}px`,
+        width: `${ref.clientWidth}px`,
+        left: `${viewportOffset.left}px`,
+        top: `${viewportOffset.top}px`
+      };
 
-      console.log(this.clickedItem);
+      ref.style.opacity = 0;
+
+      setTimeout(() => {
+        this.cardCloneStyle.height = "80%";
+        this.cardCloneStyle.width = "50%";
+        this.cardCloneStyle.left = "50vw";
+        this.cardCloneStyle.top = "50vh";
+        this.cardCloneStyle.transform = "translate(-50%, -50%)";
+      }, 100);
+    },
+    overlayClicked() {
+      const ref = this.clickedItem.ref;
+      const viewportOffset = ref.getBoundingClientRect();
+
+      this.cardCloneStyle = {
+        height: `${ref.clientHeight}px`,
+        width: `${ref.clientWidth}px`,
+        left: `${viewportOffset.left}px`,
+        top: `${viewportOffset.top}px`,
+        transform: null
+      };
+
+      setTimeout(() => {
+        ref.style.opacity = 1;
+        this.clickedItem = null;
+      }, 600);
     }
   },
   data() {
     return {
       portfolioItems: [],
       clickedItem: null,
+      cardCloneStyle: {},
       gistID: process.env.VUE_APP_GIST_ID
     };
   },
@@ -105,6 +149,7 @@ export default {
 
   .projects {
     padding: 0 25px;
+    position: relative;
 
     display: grid;
     grid-template-columns: repeat(1, 1fr);

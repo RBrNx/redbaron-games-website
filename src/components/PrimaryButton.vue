@@ -1,5 +1,5 @@
 <template>
-  <div class="primaryButton">
+  <div class="primaryButton" @click="buttonClick">
     <slot></slot>
   </div>
 </template>
@@ -7,7 +7,12 @@
 <script>
 export default {
   name: "PrimaryButton",
-  components: {}
+  components: {},
+  methods: {
+    buttonClick() {
+      this.$emit("buttonClick");
+    }
+  }
 };
 </script>
 
@@ -30,6 +35,7 @@ export default {
   border: 3px solid $primaryRed;
   border-radius: 5px;
   position: relative;
+  z-index: 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
 
   &:before {
@@ -43,7 +49,7 @@ export default {
     opacity: 0;
     content: "";
     background-color: $primaryRed;
-    z-index: -2;
+    z-index: -1;
     color: #fff;
   }
   &:hover {

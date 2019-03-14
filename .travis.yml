@@ -1,0 +1,10 @@
+deploy:
+  provider: s3
+  access_key_id: AKIAIUBFKWXZLN3XN5BA
+  secret_access_key:
+    secure: j+ohJK1cHeLYneOj4CdFArwc2O9tHiObri7w2ax/efZZaKT8vNXF310+abuXVKXjJmlU1JzzQTAKcLeSK2bDQkdy/kWx0P+iKA2qwix/dGF9jsYCbcCwW66aMv/fGXKZPfH+PFbaRGNSih7SHH1H5TE8/A+H4wXdpjR2hcl86jDd70hcQxk544QVMENDSQKsCo65Yn2cDS+itLtMQE6uz9DVVCyOm7JQt7d/46hhKsMlgV1QujRhEfDu5bU+ID+qa4/vT48003CgPtz/WdzM5OP7QDRqAIAo5wYRs43FIOinW8ZLIRwyfJ1PhByfRDgKPY3fh6EkCSTEB5luWV2rUj0mt9vf9H3T14GRzJHSnoY8pjnpdwW52RrVAxrDTIE3Gt5dpEcKb9+sS0YTsjvuuo47Bl7FIlk5Q+rVUUotNT4BiwDkeqEUEGIlnVCA2NKySsv52/1EzqEFGlia2gmE/Etfuehz2Mmn7YfflYtRMQOQpyPlX9M5RFD9Ql6KhOLo4/WQoNcwbrC3B3VWHa4QzUcL68+LT5xyVRiVEzEKsoOtzjaQNJrbGerUMztJKmXl42l8kjnCjxBXHnPF0lO2TFqLBhBk+2EY3mZii7D42rrElxGw3SG3+rW14MUdC08SLO1I6RczauAqrMeHPGeTZnULLcCIdFPM2g74C3lK8Kg=
+  bucket: redbarongames.co.uk
+  local-dir: dist
+  acl: public_read
+  on:
+    repo: RBrNx/RedbaronGames-v3

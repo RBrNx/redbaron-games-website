@@ -1,10 +1,13 @@
 <template>
-  <div id="cardClone" :style="{ 'width': cardWidth, 'height': cardHeight }">
-    <div id="cardFront">
-      <slot name="cardFront"></slot>
-    </div>
-    <div id="cardBack">
-      <slot name="cardBack"></slot>
+  <div>
+    <div id="cardCloneOverlay" :class="cloneClass" @click="overlayClicked"></div>
+    <div id="cardClone" :style="cardStyle" :class="cloneClass">
+      <div id="cardFront" :style="cardFrontStyle">
+        <slot name="cardFront"></slot>
+      </div>
+      <div id="cardBack" :style="cardBackStyle">
+        <slot name="cardBack"></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -12,14 +15,39 @@
 <script>
 export default {
   name: "CardClone",
-  props: ["width", "height"],
+  props: ["width", "height", "x", "y", "transform", "customStyle"],
   computed: {
-    cardWidth() {
-      return this.width ? this.width + "px" : "0px";
-    },
-    cardHeight() {
-      return this.height ? this.height + "px" : "0px";
+    cardStyle() {
+      return this.customStyle ? this.customStyle : {};
     }
+  },
+  data() {
+    return {
+      cloneClass: null,
+      cardFrontStyle: {},
+      cardBackStyle: {}
+    };
+  },
+  methods: {
+    overlayClicked() {
+      this.$emit("overlayClicked");
+      const ref = this.$el;
+      this.cardFrontStyle.transform = "rotateY(0deg)";
+      this.cardBackStyle.transform = "rotateY(-180deg)";
+      this.cloneClass = null;
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      const ref = this.$el;
+      this.cardFrontStyle.transform = "rotateY(180deg)";
+      this.cardBackStyle.transform = "rotateY(0deg)";
+      if (ref.offsetLeft + ref.clientWidth / 2 > window.innerWidth / 2) {
+        this.cardFrontStyle.transform = "rotateY(-180deg)";
+        this.cardBackStyle.transform = "rotateY(-360deg)";
+      }
+      this.cloneClass = "shown";
+    }, 50);
   }
 };
 </script>
@@ -27,13 +55,28 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/global.scss";
 
+#cardCloneOverlay {
+  &.shown {
+    opacity: 0.7;
+  }
+
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background-color: #000;
+  opacity: 0;
+  transition: opacity 1.6s;
+}
+
 #cardClone {
   //display: none;
   transition: 0.6s;
   transform-style: preserve-3d;
   z-index: 99;
   perspective: 1000px;
-  position: absolute;
+  position: fixed;
 
   #cardFront {
     backface-visibility: hidden;

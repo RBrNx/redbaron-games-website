@@ -6,7 +6,7 @@
     <div class="body" :style="{ 'height': bodyHeight }">
       <div class="title">{{ title }}</div>
       <div class="description">{{ description }}</div>
-      <primary-button>Learn More</primary-button>
+      <primary-button @buttonClick="buttonClick">Learn More</primary-button>
     </div>
   </div>
 </template>
@@ -39,6 +39,11 @@ export default {
     itemData() {
       console.log(this.itemData);
     }
+  },
+  methods: {
+    buttonClick() {
+      this.$emit("buttonClick");
+    }
   }
 };
 </script>
@@ -53,11 +58,9 @@ export default {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   border-radius: 5px;
-  cursor: pointer;
 
   &:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    transform: scale(1.048);
   }
 
   .header {
