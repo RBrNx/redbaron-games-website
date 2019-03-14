@@ -31,7 +31,6 @@ export default {
   methods: {
     overlayClicked() {
       this.$emit("overlayClicked");
-      const ref = this.$el;
       this.cardFrontStyle.transform = "rotateY(0deg)";
       this.cardBackStyle.transform = "rotateY(-180deg)";
       this.cloneClass = null;
