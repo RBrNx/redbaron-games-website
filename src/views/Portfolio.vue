@@ -86,7 +86,9 @@ export default {
 
       setTimeout(() => {
         ref.style.opacity = 1;
-        this.clickedItem = null;
+        setTimeout(() => {
+          this.clickedItem = null;
+        }, 600);
       }, 600);
     }
   },
