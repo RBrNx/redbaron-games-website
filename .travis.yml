@@ -11,5 +11,6 @@ deploy:
   bucket: redbarongames.co.uk
   local-dir: dist
   acl: public_read
+  skip_cleanup: true
   on:
     repo: RBrNx/RedbaronGames-v3
