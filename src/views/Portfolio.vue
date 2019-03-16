@@ -12,11 +12,6 @@
       ></portfolio-item>
       <card-clone
         v-if="clickedItem !== null"
-        :width="clickedItem.width"
-        :height="clickedItem.height"
-        :x="clickedItem.x"
-        :y="clickedItem.y"
-        :transform="clickedItem.transform"
         :customStyle="cardCloneStyle"
         @overlayClicked="overlayClicked"
       >

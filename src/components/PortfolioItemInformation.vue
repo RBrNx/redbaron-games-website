@@ -19,7 +19,7 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/global.scss";
 
-.portfolioItem {
+.portfolioItemInformation {
   background: lighten($primaryGrey, 5%);
   height: 100%;
   width: 100%;

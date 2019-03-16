@@ -2,11 +2,13 @@
   <div>
     <div id="cardCloneOverlay" :class="cloneClass" @click="overlayClicked"></div>
     <div id="cardClone" :style="cardStyle" :class="cloneClass">
-      <div id="cardFront" :style="cardFrontStyle">
-        <slot name="cardFront"></slot>
-      </div>
-      <div id="cardBack" :style="cardBackStyle">
-        <slot name="cardBack"></slot>
+      <div id="cardFlip" :style="cardFlipStyle">
+        <div id="cardFront" :style="cardFrontStyle">
+          <slot name="cardFront"></slot>
+        </div>
+        <div id="cardBack" :style="cardBackStyle">
+          <slot name="cardBack"></slot>
+        </div>
       </div>
     </div>
   </div>
@@ -15,7 +17,7 @@
 <script>
 export default {
   name: "CardClone",
-  props: ["width", "height", "x", "y", "transform", "customStyle"],
+  props: ["customStyle"],
   computed: {
     cardStyle() {
       return this.customStyle ? this.customStyle : {};
@@ -25,26 +27,27 @@ export default {
     return {
       cloneClass: null,
       cardFrontStyle: {},
-      cardBackStyle: {}
+      cardBackStyle: {},
+      cardFlipStyle: {}
     };
   },
   methods: {
     overlayClicked() {
       this.$emit("overlayClicked");
-      this.cardFrontStyle.transform = "rotateY(0deg)";
-      this.cardBackStyle.transform = "rotateY(-180deg)";
+      this.cardFlipStyle.transform = "rotateY(0deg)";
       this.cloneClass = null;
     }
   },
   mounted() {
     setTimeout(() => {
       const ref = this.$el;
-      this.cardFrontStyle.transform = "rotateY(180deg)";
-      this.cardBackStyle.transform = "rotateY(0deg)";
-      if (ref.offsetLeft + ref.clientWidth / 2 > window.innerWidth / 2) {
-        this.cardFrontStyle.transform = "rotateY(-180deg)";
-        this.cardBackStyle.transform = "rotateY(-360deg)";
-      }
+      const isOverHalfway =
+        parseFloat(this.customStyle.left) +
+          parseFloat(this.customStyle.width) / 2 >
+        window.innerWidth / 2;
+      const transform = isOverHalfway ? "rotateY(-180deg)" : "rotateY(180deg)";
+
+      this.cardFlipStyle.transform = transform;
       this.cloneClass = "shown";
     }, 50);
   }
@@ -70,37 +73,36 @@ export default {
 }
 
 #cardClone {
-  //display: none;
   transition: 0.6s;
-  transform-style: preserve-3d;
-  z-index: 99;
-  perspective: 1000px;
+  background-color: transparent;
   position: fixed;
+  perspective: 1000px;
 
-  #cardFront {
-    backface-visibility: hidden;
+  #cardFlip {
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: relative;
     -webkit-transition: 0.6s;
     transition: 0.6s;
-    overflow: hidden;
-    z-index: 100;
-    //background-color: #59a3ff;
-    transform: translatez(0);
+    z-index: 99;
+    transform-style: preserve-3d;
   }
 
+  #cardFront,
   #cardBack {
     backface-visibility: hidden;
     width: 100%;
     height: 100%;
     position: absolute;
-    -webkit-transition: 0.6s;
-    transition: 0.6s;
-    overflow: hidden;
-    transform: rotateY(-180deg);
+  }
+
+  #cardFront {
+    z-index: 100;
+  }
+
+  #cardBack {
     z-index: 101;
-    background-color: #aaa;
+    transform: rotateY(180deg);
   }
 }
 </style>
