@@ -15,13 +15,13 @@
       <card-clone
         v-if="clickedItem !== null"
         :customStyle="cardCloneStyle"
-        @overlayClicked="closeCardModal"
+        @closeCardClone="closeCardModal"
       >
         <template v-slot:cardFront>
           <portfolio-item :itemData="clickedItem.item" :bodySize="clickedItem.bodyHeight"></portfolio-item>
         </template>
         <template v-slot:cardBack>
-          <portfolio-item-information :itemData="clickedItem.item" @crossClicked="closeCardModal()"></portfolio-item-information>
+          <portfolio-item-information :itemData="clickedItem.item"></portfolio-item-information>
         </template>
       </card-clone>
     </div>

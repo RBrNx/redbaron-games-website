@@ -1,34 +1,31 @@
 <template>
   <div class="portfolioItemInformation">
-    <font-awesome-icon id="closeIcon" icon="times" @click="crossClicked"></font-awesome-icon>
-    <div id="scrollContainer">
-      <div id="title">{{ itemData.title }}</div>
-      <div id="subtitle">{{ itemData.description }}</div>
-      <div id="carousel">
-        <carousel :perPage="1" :navigationEnable="true" ref="carousel">
-          <slide v-for="(image, index) in itemData.carouselImages" :key="index">
-            <img class="carouselImage" :src="require(`@/assets/img/${image}`)">
-          </slide>
-        </carousel>
+    <div id="title">{{ itemData.title }}</div>
+    <div id="subtitle">{{ itemData.description }}</div>
+    <div id="carousel">
+      <carousel :perPage="1" :navigationEnable="true" ref="carousel">
+        <slide v-for="(image, index) in itemData.carouselImages" :key="index">
+          <img class="carouselImage" :src="require(`@/assets/img/${image}`)">
+        </slide>
+      </carousel>
+    </div>
+    <div id="info">
+      <div id="description">
+        <div class="title">About this project</div>
+        <div class="text" v-html="itemData.aboutProject"></div>
       </div>
-      <div id="info">
-        <div id="description">
-          <div class="title">About this project</div>
-          <div class="text" v-html="itemData.aboutProject"></div>
-        </div>
-        <div id="techSheet">
-          <div class="title">Technical Sheet</div>
-          <div class="subtitle">Code technologies and Skills used in this project</div>
-          <ul class="list">
-            <li v-for="(tech, index) in itemData.techSheet" :key="index">{{ tech }}</li>
-          </ul>
-        </div>
-        <div id="links">
-          <link-button v-for="(link, index) in itemData.links" :key="index" :href="link.link">
-            <font-awesome-icon :icon="linkIcon(link.linkType)"></font-awesome-icon>
-            {{ link.linkText }}
-          </link-button>
-        </div>
+      <div id="techSheet">
+        <div class="title">Technical Sheet</div>
+        <div class="subtitle">Code technologies and Skills used in this project</div>
+        <ul class="list">
+          <li v-for="(tech, index) in itemData.techSheet" :key="index">{{ tech }}</li>
+        </ul>
+      </div>
+      <div id="links">
+        <link-button v-for="(link, index) in itemData.links" :key="index" :href="link.link">
+          <font-awesome-icon :icon="linkIcon(link.linkType)"></font-awesome-icon>
+          {{ link.linkText }}
+        </link-button>
       </div>
     </div>
   </div>
@@ -69,27 +66,7 @@ export default {
   background: lighten($primaryGrey, 5%);
   height: 100%;
   width: 100%;
-  border-radius: 5px;
-  padding: 50px;
-  overflow: hidden;
-
-  #closeIcon {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 30px;
-    color: lighten($primaryGrey, 15%);
-    cursor: pointer;
-
-    &:hover {
-      color: lighten($headingGrey, 5%);
-    }
-  }
-
-  #scrollContainer {
-    overflow-y: auto;
-    height: 100%;
-  }
+  //border-radius: 5px;
 
   #title {
     font-family: "Fjalla One", sans-serif;

@@ -1,13 +1,16 @@
 <template>
   <div>
-    <div id="cardCloneOverlay" :class="cloneClass" @click="overlayClicked"></div>
+    <div id="cardCloneOverlay" :class="cloneClass" @click="closeCardClone"></div>
     <div id="cardClone" :style="cardStyle" :class="cloneClass">
       <div id="cardFlip" :style="cardFlipStyle">
         <div id="cardFront" :style="cardFrontStyle">
           <slot name="cardFront"></slot>
         </div>
         <div id="cardBack" :style="cardBackStyle">
-          <slot name="cardBack"></slot>
+          <font-awesome-icon id="closeIcon" icon="times" @click="closeCardClone"></font-awesome-icon>
+          <div id="scrollContainer">
+            <slot name="cardBack"></slot>
+          </div>
         </div>
       </div>
     </div>
@@ -32,8 +35,8 @@ export default {
     };
   },
   methods: {
-    overlayClicked() {
-      this.$emit("overlayClicked");
+    closeCardClone() {
+      this.$emit("closeCardClone");
       this.cardFlipStyle.transform = "rotateY(0deg)";
       this.cloneClass = null;
     }
@@ -103,6 +106,28 @@ export default {
   #cardBack {
     z-index: 101;
     transform: rotateY(180deg);
+    background: lighten($primaryGrey, 5%);
+    padding: 50px;
+    overflow: hidden;
+    border-radius: 5px;
+
+    #scrollContainer {
+      overflow-y: auto;
+      height: 100%;
+    }
+
+    #closeIcon {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 30px;
+      color: lighten($primaryGrey, 15%);
+      cursor: pointer;
+
+      &:hover {
+        color: lighten($headingGrey, 5%);
+      }
+    }
   }
 }
 </style>
