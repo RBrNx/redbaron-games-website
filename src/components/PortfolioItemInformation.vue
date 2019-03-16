@@ -4,7 +4,13 @@
     <div id="scrollContainer">
       <div id="title">{{ itemData.title }}</div>
       <div id="subtitle">{{ itemData.description }}</div>
-      <div id="carousel"></div>
+      <div id="carousel">
+        <carousel :perPage="1" :navigationEnable="true" ref="carousel">
+          <slide v-for="(image, index) in itemData.carouselImages" :key="index">
+            <img class="carouselImage" :src="require(`@/assets/img/${image}`)">
+          </slide>
+        </carousel>
+      </div>
       <div id="info">
         <div id="description">
           <div class="title">About this project</div>
@@ -30,18 +36,27 @@
 
 <script>
 import LinkButton from "./LinkButton";
-import { link } from "fs";
+import { Carousel, Slide } from "vue-carousel";
 
 export default {
   name: "PortfolioItemInformation",
   props: ["itemData"],
-  components: { LinkButton },
+  components: {
+    LinkButton,
+    Carousel,
+    Slide
+  },
   methods: {
     crossClicked() {
       this.$parent.overlayClicked();
     },
     linkIcon(linkType) {
       return linkType ? ["fab", linkType] : "external-link-alt";
+    }
+  },
+  mounted() {
+    for (let i = 0; i <= 7; i++) {
+      setTimeout(() => this.$refs.carousel.onResize(), i * 100);
     }
   }
 };
@@ -88,6 +103,26 @@ export default {
     font-size: 20px;
     color: $bodytextGrey;
     font-style: italic;
+  }
+
+  #carousel {
+    margin-top: 40px;
+
+    .VueCarousel-slide {
+      display: flex;
+      justify-content: center;
+    }
+
+    .VueCarousel-dot {
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .carouselImage {
+      max-width: 100%;
+      max-height: 300px;
+    }
   }
 
   #info {
