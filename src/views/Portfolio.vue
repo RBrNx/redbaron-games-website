@@ -37,6 +37,7 @@
 import PortfolioItem from "../components/PortfolioItem";
 import PortfolioItemInformation from "../components/PortfolioItemInformation";
 import CardClone from "../components/CardClone";
+import { setTimeout } from "timers";
 
 export default {
   name: "portfolio",
@@ -47,6 +48,7 @@ export default {
   },
   methods: {
     cardOnClick(index) {
+      if (this.clickedItem !== null) return;
       const ref = this.$refs.portfolioItems[index].$el;
       const viewportOffset = ref.getBoundingClientRect();
 
@@ -85,10 +87,10 @@ export default {
       };
 
       setTimeout(() => {
-        ref.style.opacity = 1;
-        setTimeout(() => {
-          this.clickedItem = null;
-        }, 600);
+        for (let i = 0; i < this.$refs.portfolioItems.length; i++) {
+          this.$refs.portfolioItems[i].$el.style.opacity = 1;
+        }
+        this.clickedItem = null;
       }, 600);
     }
   },
