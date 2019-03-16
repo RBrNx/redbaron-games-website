@@ -181,6 +181,8 @@ export default {
     }
 
     #links {
+      margin-bottom: 40px;
+
       .linkButton {
         margin-bottom: 10px;
 

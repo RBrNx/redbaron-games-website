@@ -8,9 +8,9 @@
         </div>
         <div id="cardBack" :style="cardBackStyle">
           <font-awesome-icon id="closeIcon" icon="times" @click="closeCardClone"></font-awesome-icon>
-          <div id="scrollContainer">
+          <v-bar wrapper="scrollContainer">
             <slot name="cardBack"></slot>
-          </div>
+          </v-bar>
         </div>
       </div>
     </div>
@@ -18,9 +18,14 @@
 </template>
 
 <script>
+import VBar from "v-bar";
+
 export default {
   name: "CardClone",
   props: ["customStyle"],
+  components: {
+    VBar
+  },
   computed: {
     cardStyle() {
       return this.customStyle ? this.customStyle : {};
@@ -111,8 +116,8 @@ export default {
     overflow: hidden;
     border-radius: 5px;
 
-    #scrollContainer {
-      overflow-y: auto;
+    .scrollContainer {
+      //overflow-y: auto;
       height: 100%;
     }
 

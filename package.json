@@ -15,6 +15,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.7.2",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
     "@fortawesome/vue-fontawesome": "^0.1.5",
+    "v-bar": "^3.0.0",
     "vue-carousel": "^0.18.0-alpha",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -30,6 +31,8 @@
     "ghooks": "^1.2.4",
     "node-sass": "^4.9.0",
     "nyc": "^13.3.0",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
     "sass-loader": "^7.0.1",
     "standard": "^8.4.0",
     "vue": "^2.6.7",
