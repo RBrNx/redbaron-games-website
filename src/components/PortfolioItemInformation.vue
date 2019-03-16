@@ -1,5 +1,6 @@
 <template>
   <div class="portfolioItemInformation">
+    <font-awesome-icon id="closeIcon" icon="times" @click="crossClicked"></font-awesome-icon>
     <div id="scrollContainer">
       <div id="title">{{ itemData.title }}</div>
       <div id="subtitle">{{ itemData.description }}</div>
@@ -17,11 +18,10 @@
           </ul>
         </div>
         <div id="links">
-          <link-button
-            v-for="(link, index) in itemData.links"
-            :key="index"
-            :href="link.link"
-          >{{ link.linkText }}</link-button>
+          <link-button v-for="(link, index) in itemData.links" :key="index" :href="link.link">
+            <font-awesome-icon :icon="linkIcon(link.linkType)"></font-awesome-icon>
+            {{ link.linkText }}
+          </link-button>
         </div>
       </div>
     </div>
@@ -30,14 +30,18 @@
 
 <script>
 import LinkButton from "./LinkButton";
+import { link } from "fs";
 
 export default {
   name: "PortfolioItemInformation",
   props: ["itemData"],
   components: { LinkButton },
   methods: {
-    buttonClick() {
-      this.$emit("buttonClick");
+    crossClicked() {
+      this.$parent.overlayClicked();
+    },
+    linkIcon(linkType) {
+      return linkType ? ["fab", linkType] : "external-link-alt";
     }
   }
 };
@@ -51,8 +55,21 @@ export default {
   height: 100%;
   width: 100%;
   border-radius: 5px;
-  padding: 30px;
+  padding: 50px;
   overflow: hidden;
+
+  #closeIcon {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    color: lighten($primaryGrey, 15%);
+    cursor: pointer;
+
+    &:hover {
+      color: lighten($headingGrey, 5%);
+    }
+  }
 
   #scrollContainer {
     overflow-y: auto;
@@ -142,6 +159,9 @@ export default {
     }
 
     #techSheet {
+      color: $bodytextGrey;
+      font-size: 18px;
+
       li {
         line-height: 1.5em;
         margin-bottom: 5px;
@@ -151,6 +171,10 @@ export default {
     #links {
       .linkButton {
         margin-bottom: 10px;
+
+        svg {
+          margin-right: 10px;
+        }
       }
     }
   }

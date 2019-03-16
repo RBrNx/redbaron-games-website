@@ -10,18 +10,18 @@
         :key="index"
         ref="portfolioItems"
         :itemData="item"
-        @buttonClick="cardOnClick(index)"
+        @buttonClick="openCardModal(index)"
       ></portfolio-item>
       <card-clone
         v-if="clickedItem !== null"
         :customStyle="cardCloneStyle"
-        @overlayClicked="overlayClicked"
+        @overlayClicked="closeCardModal"
       >
         <template v-slot:cardFront>
           <portfolio-item :itemData="clickedItem.item" :bodySize="clickedItem.bodyHeight"></portfolio-item>
         </template>
         <template v-slot:cardBack>
-          <portfolio-item-information :itemData="clickedItem.item"></portfolio-item-information>
+          <portfolio-item-information :itemData="clickedItem.item" @crossClicked="closeCardModal()"></portfolio-item-information>
         </template>
       </card-clone>
     </div>
@@ -42,7 +42,7 @@ export default {
     CardClone
   },
   methods: {
-    cardOnClick(index) {
+    openCardModal(index) {
       if (this.clickedItem !== null) return;
       const ref = this.$refs.portfolioItems[index].$el;
       const viewportOffset = ref.getBoundingClientRect();
@@ -69,7 +69,7 @@ export default {
         this.cardCloneStyle.transform = "translate(-50%, -50%)";
       }, 100);
     },
-    overlayClicked() {
+    closeCardModal() {
       const ref = this.clickedItem.ref;
       const viewportOffset = ref.getBoundingClientRect();
 
