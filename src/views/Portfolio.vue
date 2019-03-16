@@ -1,7 +1,9 @@
 <template>
   <div class="portfolioContainer">
     <h2>Portfolio</h2>
-    <p>From Minigolf Games to Christmas Puzzle Events, Check out some of my personal projects!</p>
+    <p
+      class="blurb"
+    >From Minigolf Games to Christmas Puzzle Events, Check out some of my personal projects!</p>
     <div class="projects">
       <portfolio-item
         v-for="(item, index) in portfolioItems"
@@ -19,9 +21,7 @@
           <portfolio-item :itemData="clickedItem.item" :bodySize="clickedItem.bodyHeight"></portfolio-item>
         </template>
         <template v-slot:cardBack>
-          <portfolio-item-information>
-            <p>Here is a little test!</p>
-          </portfolio-item-information>
+          <portfolio-item-information :itemData="clickedItem.item"></portfolio-item-information>
         </template>
       </card-clone>
     </div>
@@ -103,6 +103,7 @@ export default {
     const gist = await res.json();
     const websiteconfig = JSON.parse(gist.files["websiteconfig.json"].content);
     this.portfolioItems = websiteconfig.repositories;
+    console.log(websiteconfig);
   }
 };
 </script>
@@ -141,7 +142,7 @@ export default {
     }
   }
 
-  p {
+  .blurb {
     padding: 0 25px;
     font-size: 18px;
   }
