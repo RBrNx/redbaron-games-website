@@ -4,7 +4,13 @@ $headingGrey: #cacaca;
 $bodytextGrey: #8a8a8a;
 
 @mixin desktop {
-    @media(min-width: 1024px){
-        @content;
-    }
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 768px) {
+    @content;
+  }
 }

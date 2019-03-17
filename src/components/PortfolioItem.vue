@@ -35,11 +35,6 @@ export default {
       return this.bodySize ? this.bodySize + "px" : null;
     }
   },
-  watch: {
-    itemData() {
-      console.log(this.itemData);
-    }
-  },
   methods: {
     buttonClick() {
       this.$emit("buttonClick");

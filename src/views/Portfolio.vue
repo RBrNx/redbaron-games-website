@@ -15,6 +15,7 @@
       <card-clone
         v-if="clickedItem !== null"
         :customStyle="cardCloneStyle"
+        :cardClass="cardClass"
         @closeCardClone="closeCardModal"
       >
         <template v-slot:cardFront>
@@ -56,17 +57,14 @@ export default {
         height: `${ref.clientHeight}px`,
         width: `${ref.clientWidth}px`,
         left: `${viewportOffset.left}px`,
-        top: `${viewportOffset.top}px`
+        top: `${viewportOffset.top}px`,
+        transform: null
       };
 
       ref.style.opacity = 0;
 
       setTimeout(() => {
-        this.cardCloneStyle.height = "80%";
-        this.cardCloneStyle.width = "50%";
-        this.cardCloneStyle.left = "50vw";
-        this.cardCloneStyle.top = "50vh";
-        this.cardCloneStyle.transform = "translate(-50%, -50%)";
+        this.cardClass = "shown";
       }, 100);
     },
     closeCardModal() {
@@ -94,6 +92,7 @@ export default {
       portfolioItems: [],
       clickedItem: null,
       cardCloneStyle: {},
+      cardClass: null,
       gistID: process.env.VUE_APP_GIST_ID
     };
   },
@@ -103,7 +102,6 @@ export default {
     const gist = await res.json();
     const websiteconfig = JSON.parse(gist.files["websiteconfig.json"].content);
     this.portfolioItems = websiteconfig.repositories;
-    console.log(websiteconfig);
   }
 };
 </script>
@@ -154,6 +152,10 @@ export default {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 30px;
+
+    @include tablet {
+      grid-template-columns: repeat(2, 2fr);
+    }
 
     @include desktop {
       grid-template-columns: repeat(4, 2fr);

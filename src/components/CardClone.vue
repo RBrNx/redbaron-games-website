@@ -8,9 +8,9 @@
         </div>
         <div id="cardBack" :style="cardBackStyle">
           <font-awesome-icon id="closeIcon" icon="times" @click="closeCardClone"></font-awesome-icon>
-          <v-bar wrapper="scrollContainer">
+          <VuePerfectScrollbar class="scrollContainer">
             <slot name="cardBack"></slot>
-          </v-bar>
+          </VuePerfectScrollbar>
         </div>
       </div>
     </div>
@@ -18,13 +18,13 @@
 </template>
 
 <script>
-import VBar from "v-bar";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "CardClone",
-  props: ["customStyle"],
+  props: ["customStyle", "cardClass"],
   components: {
-    VBar
+    VuePerfectScrollbar
   },
   computed: {
     cardStyle() {
@@ -39,11 +39,17 @@ export default {
       cardFlipStyle: {}
     };
   },
+  watch: {
+    cardClass(val) {
+      this.cloneClass = val;
+    }
+  },
   methods: {
     closeCardClone() {
       this.$emit("closeCardClone");
       this.cardFlipStyle.transform = "rotateY(0deg)";
       this.cloneClass = null;
+      document.body.classList.remove("overlayShown");
     }
   },
   mounted() {
@@ -57,12 +63,13 @@ export default {
 
       this.cardFlipStyle.transform = transform;
       this.cloneClass = "shown";
+      document.body.classList.add("overlayShown");
     }, 50);
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../assets/global.scss";
 
 #cardCloneOverlay {
@@ -85,6 +92,35 @@ export default {
   background-color: transparent;
   position: fixed;
   perspective: 1000px;
+  z-index: 100;
+
+  &.shown {
+    height: 100% !important;
+    width: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+
+    @include tablet {
+      height: 90% !important;
+      width: 80% !important;
+      left: 50vw !important;
+      top: 50vh !important;
+      transform: translate(-50%, -50%) !important;
+    }
+
+    @include desktop {
+      height: 80% !important;
+      width: 50% !important;
+      left: 50vw !important;
+      top: 50vh !important;
+      transform: translate(-50%, -50%) !important;
+    }
+
+    #cardBack {
+      padding: 15px;
+      padding-top: 50px;
+    }
+  }
 
   #cardFlip {
     width: 100%;
@@ -112,7 +148,7 @@ export default {
     z-index: 101;
     transform: rotateY(180deg);
     background: lighten($primaryGrey, 5%);
-    padding: 50px;
+    //padding: 50px;
     overflow: hidden;
     border-radius: 5px;
 
@@ -128,11 +164,43 @@ export default {
       font-size: 30px;
       color: lighten($primaryGrey, 15%);
       cursor: pointer;
+      z-index: 99;
 
       &:hover {
         color: lighten($headingGrey, 5%);
       }
     }
   }
+}
+
+.ps:hover > .ps__scrollbar-y-rail:hover {
+  background-color: transparent;
+}
+
+.ps:hover.ps--in-scrolling.ps--y > .ps__scrollbar-y-rail {
+  background-color: transparent;
+}
+
+.ps.ps--in-scrolling.ps--y > .ps__scrollbar-y-rail {
+  background-color: transparent;
+}
+
+.ps > .ps__scrollbar-y-rail > .ps__scrollbar-y {
+  background-color: lighten($primaryGrey, 15%);
+}
+
+.ps:hover > .ps__scrollbar-y-rail:hover > .ps__scrollbar-y {
+  background-color: $headingGrey;
+  width: 6px;
+}
+
+.ps:hover.ps--in-scrolling.ps--y > .ps__scrollbar-y-rail > .ps__scrollbar-y {
+  background-color: $headingGrey;
+  width: 6px;
+}
+
+.ps.ps--in-scrolling.ps--y > .ps__scrollbar-y-rail > .ps__scrollbar-y {
+  background-color: $headingGrey;
+  width: 6px;
 }
 </style>

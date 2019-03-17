@@ -22,6 +22,10 @@ export default {
 
 body {
   margin: 0;
+
+  &.overlayShown {
+    overflow: hidden;
+  }
 }
 
 * {

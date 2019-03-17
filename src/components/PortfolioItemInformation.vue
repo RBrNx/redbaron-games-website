@@ -66,6 +66,8 @@ export default {
   background: lighten($primaryGrey, 5%);
   height: 100%;
   width: 100%;
+  padding-left: 25px;
+  padding-right: 25px;
   //border-radius: 5px;
 
   #title {
