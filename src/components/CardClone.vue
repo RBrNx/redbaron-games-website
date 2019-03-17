@@ -2,11 +2,11 @@
   <div>
     <div id="cardCloneOverlay" :class="cloneClass" @click="closeCardClone"></div>
     <div id="cardClone" :style="cardStyle" :class="cloneClass">
-      <div id="cardFlip" :style="cardFlipStyle">
-        <div id="cardFront" :style="cardFrontStyle">
+      <div id="cardFlip" :style="{ transform: cardTransform }">
+        <div id="cardFront">
           <slot name="cardFront"></slot>
         </div>
-        <div id="cardBack" :style="cardBackStyle">
+        <div id="cardBack">
           <font-awesome-icon id="closeIcon" icon="times" @click="closeCardClone"></font-awesome-icon>
           <VuePerfectScrollbar class="scrollContainer">
             <slot name="cardBack"></slot>
@@ -34,9 +34,7 @@ export default {
   data() {
     return {
       cloneClass: null,
-      cardFrontStyle: {},
-      cardBackStyle: {},
-      cardFlipStyle: {}
+      cardTransform: "rotateY(0deg)"
     };
   },
   watch: {
@@ -47,7 +45,7 @@ export default {
   methods: {
     closeCardClone() {
       this.$emit("closeCardClone");
-      this.cardFlipStyle.transform = "rotateY(0deg)";
+      this.cardTransform = "rotateY(0deg)";
       this.cloneClass = null;
       document.body.classList.remove("overlayShown");
     }
@@ -61,7 +59,7 @@ export default {
         window.innerWidth / 2;
       const transform = isOverHalfway ? "rotateY(-180deg)" : "rotateY(180deg)";
 
-      this.cardFlipStyle.transform = transform;
+      this.cardTransform = transform;
       this.cloneClass = "shown";
       document.body.classList.add("overlayShown");
     }, 50);
@@ -130,6 +128,7 @@ export default {
     transition: 0.6s;
     z-index: 99;
     transform-style: preserve-3d;
+    transform: rotate(0deg);
   }
 
   #cardFront,
