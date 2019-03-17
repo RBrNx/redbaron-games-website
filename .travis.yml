@@ -10,3 +10,4 @@ deploy:
   skip_cleanup: true
   on:
     repo: RBrNx/RedbaronGames-v3
+after_deploy: ~/.local/bin/aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_ID --paths /*
