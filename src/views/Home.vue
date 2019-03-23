@@ -25,13 +25,6 @@
             <span class="highlight">Conor Watson.</span>
           </h2>
         </div>
-        <!-- <div class="subtitle">
-          I am a
-          <span class="highlight">Full Stack Developer</span> with a passion for problem solving,
-          an
-          <span class="highlight">eye for design</span> and a devotion to creating
-          <span class="highlight">Web Apps</span> more useful than a Bond gadget.
-        </div>-->
         <div class="subtitle">
           <span>I am a Full Stack Developer with&nbsp;</span>
           <div class="subtitleWords">
@@ -130,6 +123,8 @@ export default {
       display: flex;
       align-items: center;
       flex-direction: column;
+      font-family: Roboto;
+
       .subtitleWords {
         //height: 50px;
         margin-top: 15px;
