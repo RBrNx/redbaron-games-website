@@ -29,6 +29,7 @@
     "codecov": "^1.0.1",
     "file-loader": "^3.0.1",
     "ghooks": "^1.2.4",
+    "html-loader": "^0.5.5",
     "node-sass": "^4.9.0",
     "nyc": "^13.3.0",
     "pug": "^2.0.3",
