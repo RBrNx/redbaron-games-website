@@ -1,6 +1,6 @@
 <template>
   <div class="portfolioContainer">
-    <h2>Portfolio</h2>
+    <h2 class="sectionTitle">Portfolio</h2>
     <p
       class="blurb"
     >From Minigolf Games to Christmas Puzzle Events, Check out some of my personal projects!</p>
@@ -118,32 +118,6 @@ export default {
   font-family: "Roboto", sans-serif;
   text-align: left;
   padding-bottom: 50px;
-
-  h2 {
-    margin: 0;
-    padding: 25px 0 0 25px;
-    font-family: "Fjalla One", sans-serif;
-    font-size: 32px;
-    text-transform: uppercase;
-    color: $headingGrey;
-    position: relative;
-    display: inline-block;
-
-    &:after {
-      content: " ";
-      position: absolute;
-      top: calc(100% + 6px);
-      left: 25px;
-      height: 1px;
-      width: calc(100% - 25px);
-      background: $headingGrey;
-    }
-  }
-
-  .blurb {
-    padding: 0 25px;
-    font-size: 18px;
-  }
 
   .projects {
     padding: 0 25px;
