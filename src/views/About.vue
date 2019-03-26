@@ -16,6 +16,7 @@
       </span>
     </hero-header>
     <specialities></specialities>
+    <technologies></technologies>
     <div id="preload">
       <img src="../assets/ClydeArc.jpg">
       <img src="../assets/DukeOfWellington.jpg">
@@ -32,12 +33,14 @@ import GeorgeSquare from "../assets/GeorgeSquare.jpg";
 import Hydro from "../assets/Hydro.jpg";
 import HeroHeader from "../components/HeroHeader";
 import Specialities from "../components/Specialities";
+import Technologies from "../components/Technologies";
 
 export default {
   name: "about",
   components: {
     HeroHeader,
-    Specialities
+    Specialities,
+    Technologies
   },
   methods: {},
   data() {
