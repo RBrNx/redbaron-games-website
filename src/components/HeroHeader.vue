@@ -45,16 +45,11 @@ export default {
 @import "../assets/global.scss";
 
 .heroImage {
-  //background: url("../assets/HeroHeader2.jpg") no-repeat center;
   background-size: cover;
   position: relative;
+  transition: background 1s ease-in;
 
   &:before {
-    // background: linear-gradient(
-    //   to bottom,
-    //   rgba(0, 0, 0, 0.7),
-    //   rgba(0, 0, 0, 0.9)
-    // );
     background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0.85),

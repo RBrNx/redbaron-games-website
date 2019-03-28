@@ -4,7 +4,8 @@
       <Icon :icon="icon"></Icon>
     </div>
     <div class="parallaxBack">
-      <p>This is some text</p>
+      <div class="header">{{ title }}</div>
+      <div class="description">{{ description }}</div>
     </div>
   </div>
 </template>
@@ -14,7 +15,7 @@ import Icon from "./Icon";
 
 export default {
   name: "ParallaxCard",
-  props: ["backgroundColor", "icon", "index"],
+  props: ["backgroundColor", "icon", "index", "title", "description"],
   components: {
     Icon
   }
@@ -30,16 +31,9 @@ export default {
   transform: rotate(0deg);
   z-index: 99;
   position: relative;
-  height: 250px;
-  width: 250px;
+  width: 100%;
+  padding-top: 100%;
   transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
-
-  &:before {
-    content: "";
-    display: block;
-    padding-top: 100%;
-    position: absolute;
-  }
 
   &:hover {
     transform: rotateY(180deg);
@@ -52,6 +46,7 @@ export default {
     width: 100%;
     height: 100%;
     transform-style: preserve-3d;
+    top: 0;
   }
 
   .parallaxFront {
@@ -62,13 +57,34 @@ export default {
 
     .iconContainer {
       transform-style: preserve-3d;
-      transform: translateZ(75px);
+      transform: translateZ(80px);
     }
   }
 
   .parallaxBack {
     background: lighten($primaryGrey, 15%);
     transform: rotateY(180deg);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+
+    .header {
+      color: #fff;
+      font-size: 28px;
+      transform-style: preserve-3d;
+      transform: translateZ(80px);
+      padding-bottom: 20px;
+    }
+
+    .description {
+      font-size: 18px;
+      width: 100%;
+      transform-style: preserve-3d;
+      transform: translateZ(75px);
+    }
   }
 }
 </style>
