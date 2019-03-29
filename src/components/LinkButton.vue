@@ -1,5 +1,5 @@
 <template>
-  <span class="linkButton">
+  <a :href="href" target="_blank" class="linkButton">
     <div class="slot">
       <slot></slot>
     </div>
@@ -7,13 +7,13 @@
     <span class="line -top"></span>
     <span class="line -left"></span>
     <span class="line -bottom"></span>
-  </span>
+  </a>
 </template>
 
 <script>
 export default {
   name: "LinkButton",
-  components: {}
+  props: ["href"]
 };
 </script>
 

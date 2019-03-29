@@ -3,7 +3,13 @@
     <div id="title">{{ itemData.title }}</div>
     <div id="subtitle">{{ itemData.description }}</div>
     <div id="carousel">
-      <carousel :perPage="1" :navigationEnable="true" ref="carousel">
+      <carousel
+        :perPage="1"
+        :navigationEnable="true"
+        ref="carousel"
+        paginationActiveColor="#c32626"
+        paginationColor="#1d1d1d"
+      >
         <slide v-for="(image, index) in itemData.carouselImages" :key="index">
           <img class="carouselImage" :src="require(`@/assets/img/${image}`)">
         </slide>

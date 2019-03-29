@@ -84,6 +84,7 @@ export default {
     width: 100%;
     padding: 100px 15%;
     top: 15%;
+    pointer-events: none;
 
     @include desktop {
       font-size: 24px;
