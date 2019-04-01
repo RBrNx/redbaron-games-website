@@ -1,5 +1,5 @@
 <template>
-  <div class="specialitiesContainer">
+  <div id="specialitiesContainer">
     <h2 class="sectionTitle">My Specialities</h2>
     <div class="specialities">
       <div class="card">
@@ -60,7 +60,7 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import "../assets/global.scss";
 
-.specialitiesContainer {
+#specialitiesContainer {
   width: 100%;
   background: $primaryGrey;
   color: $bodytextGrey;

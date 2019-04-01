@@ -1,5 +1,5 @@
 <template>
-  <div class="portfolioContainer">
+  <div id="portfolioContainer">
     <h2 class="sectionTitle">Portfolio</h2>
     <p
       class="blurb"
@@ -111,7 +111,7 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import "../assets/global.scss";
 
-.portfolioContainer {
+#portfolioContainer {
   width: 100%;
   background: $primaryGrey;
   color: $bodytextGrey;

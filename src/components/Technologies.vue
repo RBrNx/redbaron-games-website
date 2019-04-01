@@ -1,5 +1,5 @@
 <template>
-  <div class="technologiesContainer">
+  <div id="technologiesContainer">
     <h2 class="sectionTitle">Tools and Technologies</h2>
     <div class="technologies">
       <parallax-card
@@ -207,7 +207,7 @@ export default {
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import "../assets/global.scss";
 
-.technologiesContainer {
+#technologiesContainer {
   width: 100%;
   background: $primaryGrey;
   color: $bodytextGrey;

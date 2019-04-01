@@ -28,14 +28,19 @@
         <slot name="subtitle"></slot>
       </div>
     </div>
-    <div class="heroButton"></div>
+    <hero-button></hero-button>
   </div>
 </template>
 
 <script>
+import HeroButton from "../components/HeroButton";
+
 export default {
   name: "HeroHeader",
-  props: ["backgroundImage"]
+  props: ["backgroundImage"],
+  components: {
+    HeroButton
+  }
 };
 </script>
 
@@ -69,6 +74,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
 
   @include desktop {
@@ -76,6 +82,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
 
   #particles-js {

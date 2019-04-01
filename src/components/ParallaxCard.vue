@@ -96,6 +96,16 @@ export default {
         font-size: 24px;
       }
     }
+
+    @include desktop {
+      .header {
+        font-size: 28px;
+      }
+
+      .description {
+        font-size: 18px;
+      }
+    }
   }
 }
 </style>
