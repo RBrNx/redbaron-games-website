@@ -68,6 +68,39 @@ export default {
   #preload {
     display: none;
   }
+
+  .heroImage {
+    .heroText {
+      font-size: 20px;
+
+      .title {
+        font-size: 35px;
+      }
+    }
+  }
+  @include tablet {
+    .heroImage {
+      .heroText {
+        font-size: 24px;
+
+        .title {
+          font-size: 45px;
+        }
+      }
+    }
+  }
+
+  @include desktop {
+    .heroImage {
+      .heroText {
+        font-size: 24px;
+
+        .title {
+          font-size: 45px;
+        }
+      }
+    }
+  }
 }
 </style>
 

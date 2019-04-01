@@ -55,6 +55,11 @@ export default {
     margin-top: 15px;
     position: relative;
     width: 100%;
+    margin-bottom: 100px;
+
+    @include desktop {
+      margin-bottom: 0;
+    }
 
     span {
       display: block;

@@ -1,7 +1,7 @@
 <template>
   <div class="parallaxCard">
     <div class="parallaxFront" :style="{ 'background-color' : backgroundColor }">
-      <Icon :icon="icon"></Icon>
+      <Icon :icon="icon" :isFile="isFile"></Icon>
     </div>
     <div class="parallaxBack">
       <div class="header">{{ title }}</div>
@@ -15,7 +15,7 @@ import Icon from "./Icon";
 
 export default {
   name: "ParallaxCard",
-  props: ["backgroundColor", "icon", "index", "title", "description"],
+  props: ["backgroundColor", "icon", "index", "title", "description", "isFile"],
   components: {
     Icon
   }
@@ -85,6 +85,16 @@ export default {
       width: 100%;
       transform-style: preserve-3d;
       transform: translateZ(75px);
+    }
+
+    @include tablet {
+      .header {
+        font-size: 36px;
+      }
+
+      .description {
+        font-size: 24px;
+      }
     }
   }
 }

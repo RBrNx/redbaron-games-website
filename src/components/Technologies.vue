@@ -9,6 +9,7 @@
         :backgroundColor="tech.color"
         :icon="tech.icon"
         :title="tech.title"
+        :isFile="tech.isFile"
         :description="tech.description"
       ></parallax-card>
     </div>
@@ -137,14 +138,63 @@ export default {
           title: "Sass / SCSS",
           description:
             "Sass is a preprocessor scripting language that is compiled into CSS. The newer syntax, SCSS, uses block formatting like that of CSS. Sass extends CSS by providing several mechanisms that are not available to CSS3 itself."
+        },
+        {
+          icon: "dotnet",
+          color: "#5c2d91",
+          isFile: true,
+          title: ".NET",
+          description:
+            ".NET Core is an open-source, general-purpose development platform. It's cross-platform and can be used to build device, cloud, and IoT applications."
+        },
+        {
+          icon: "cplusplus",
+          color: "#004482",
+          isFile: true,
+          title: "C++",
+          description:
+            "A general-purpose programming language that was developed as an extension of the C language. It has imperative, object-oriented and generic programming features, while also providing facilities for low-level memory manipulation."
+        },
+        {
+          icon: "csharp",
+          color: "#682876",
+          isFile: true,
+          title: "C#",
+          description:
+            "C# is a general-purpose, multi-paradigm programming language encompassing strong typing, lexically scoped, imperative, declarative, functional, generic, object-oriented, and component-oriented programming disciplines."
+        },
+        {
+          icon: "photoshop",
+          color: "#31c5f0",
+          isFile: true,
+          title: "Adobe Photoshop",
+          description:
+            "Adobe Photoshop is an industry standard raster graphics editor for digital art. Photoshop can edit and compose raster images in multiple layers and supports masks, alpha compositing, and several color models."
+        },
+        {
+          icon: "illustrator",
+          color: "#ff7d00",
+          isFile: true,
+          title: "Adobe Illustrator",
+          description:
+            "Adobe Illustrator is a program used by both artists and graphic designers to create vector images. These images are resizable without any loss in quality or sharpness."
+        },
+        {
+          icon: "mysql",
+          color: "#00618a",
+          isFile: true,
+          title: "MySQL",
+          description:
+            "MySQL is an open source relational database management system. It is based on the structure query language (SQL), which is used for adding, removing, and modifying information in the database."
+        },
+        {
+          icon: "mongodb",
+          color: "#69b23f",
+          isFile: true,
+          title: "MongoDB",
+          description:
+            "MongoDB is a cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schemata."
         }
-        // { icon: "dotnet", color: "#5c2d91" },
-        // { icon: "cplusplus", color: "#004482" },
-        // { icon: "csharp", color: "#682876" },
-        // { icon: "photoshop", color: "#31c5f0" },
-        // { icon: "illustrator", color: "#ff7d00" },
-        // { icon: "mysql", color: "#00618a" },
-        // { icon: "mongodb", color: "#69b23f " }
       ],
       delay: 0
     };
@@ -170,10 +220,10 @@ export default {
     position: relative;
 
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
 
     @include tablet {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
 
     @include desktop {

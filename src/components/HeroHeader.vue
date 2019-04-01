@@ -48,6 +48,7 @@ export default {
   background-size: cover;
   position: relative;
   transition: background 1s ease-in;
+  min-height: 100vh;
 
   &:before {
     background: linear-gradient(
@@ -63,8 +64,18 @@ export default {
     left: 0;
   }
 
+  @include tablet {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   @include desktop {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   #particles-js {
@@ -83,15 +94,15 @@ export default {
     font-size: 24px;
     width: 100%;
     padding: 100px 15%;
-    top: 15%;
     pointer-events: none;
+
+    @include tablet {
+      padding: 0 8%;
+    }
 
     @include desktop {
       font-size: 24px;
-      top: 50%;
-      transform: translateY(-50%);
       padding: 0 20%;
-      position: absolute;
     }
 
     .title {
