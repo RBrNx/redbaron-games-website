@@ -34,6 +34,7 @@ import Hydro from "../assets/Hydro.jpg";
 import HeroHeader from "../components/HeroHeader";
 import Specialities from "../components/Specialities";
 import Technologies from "../components/Technologies";
+import { clearInterval } from "timers";
 
 export default {
   name: "about",
@@ -46,15 +47,19 @@ export default {
   data() {
     return {
       imageIndex: 0,
-      backgroundImages: [ClydeArc, DukeOfWellington, GeorgeSquare, Hydro]
+      backgroundImages: [ClydeArc, DukeOfWellington, GeorgeSquare, Hydro],
+      timer: null
     };
   },
   mounted() {
-    window.setInterval(() => {
+    this.timer = window.setInterval(() => {
       if (this.imageIndex == this.backgroundImages.length - 1)
         this.imageIndex = 0;
       else this.imageIndex += 1;
     }, 6000);
+  },
+  beforeDestroy() {
+    window.clearInterval(this.timer);
   }
 };
 </script>

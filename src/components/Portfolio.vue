@@ -1,5 +1,5 @@
 <template>
-  <div id="portfolioContainer">
+  <section id="portfolioContainer">
     <h2 class="sectionTitle">Portfolio</h2>
     <p
       class="blurb"
@@ -7,9 +7,10 @@
     <div class="projects">
       <portfolio-item
         v-for="(item, index) in portfolioItems"
-        :key="index"
         ref="portfolioItems"
+        :key="index"
         :itemData="item"
+        :itemClass="`enter-${index}`"
         @buttonClick="openCardModal(index)"
       ></portfolio-item>
       <card-clone
@@ -26,7 +27,7 @@
         </template>
       </card-clone>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="parallaxCard">
+  <div :class="`parallaxCard  ${containerClass}`">
     <div class="parallaxFront" :style="{ 'background-color' : backgroundColor }">
       <Icon :icon="icon" :isFile="isFile"></Icon>
     </div>
@@ -15,7 +15,15 @@ import Icon from "./Icon";
 
 export default {
   name: "ParallaxCard",
-  props: ["backgroundColor", "icon", "index", "title", "description", "isFile"],
+  props: [
+    "backgroundColor",
+    "icon",
+    "index",
+    "title",
+    "description",
+    "isFile",
+    "containerClass"
+  ],
   components: {
     Icon
   }

@@ -1,5 +1,5 @@
 <template>
-  <div
+  <section
     class="heroImage"
     :style="{ 'background': `url(${backgroundImage}) no-repeat center/cover` }"
   >
@@ -21,15 +21,15 @@
       clickMode="push"
     ></vue-particles>
     <div class="heroText">
-      <div class="title">
+      <div class="title enter-1">
         <slot name="title"></slot>
       </div>
-      <div class="subtitle">
+      <div class="subtitle enter-2">
         <slot name="subtitle"></slot>
       </div>
     </div>
     <hero-button></hero-button>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -44,7 +44,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Fjalla+One");
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 @import "../assets/global.scss";

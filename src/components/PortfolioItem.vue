@@ -1,5 +1,5 @@
 <template>
-  <div class="portfolioItem">
+  <div :class="`portfolioItem  ${itemClass}`">
     <div class="header">
       <img :src="require(`../assets${imageLink}`)">
     </div>
@@ -17,7 +17,7 @@ import PrimaryButton from "./PrimaryButton";
 export default {
   name: "PortfolioItem",
   components: { PrimaryButton },
-  props: ["itemData", "bodySize"],
+  props: ["itemData", "bodySize", "itemClass"],
   computed: {
     title() {
       return this.itemData ? this.itemData.title : null;

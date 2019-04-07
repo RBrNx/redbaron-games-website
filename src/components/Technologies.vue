@@ -11,6 +11,7 @@
         :title="tech.title"
         :isFile="tech.isFile"
         :description="tech.description"
+        :class="`enter-${index}`"
       ></parallax-card>
     </div>
   </div>
