@@ -1,17 +1,26 @@
 <template>
   <div id="app">
     <navbar></navbar>
-    <router-view/>
+    <transition-page>
+      <router-view/>
+    </transition-page>
   </div>
 </template>
 
 <script>
 import Navbar from "./Navbar";
+import TransitionPage from "./components/TransitionPage";
 
 export default {
   name: "App",
   components: {
-    Navbar
+    Navbar,
+    TransitionPage
+  },
+  data() {
+    return {
+      transitionName: null
+    };
   }
 };
 </script>
@@ -22,6 +31,7 @@ export default {
 
 body {
   margin: 0;
+  background-color: #1d1d1d;
 
   &.overlayShown {
     overflow: hidden;
