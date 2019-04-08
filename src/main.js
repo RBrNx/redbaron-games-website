@@ -22,6 +22,8 @@ import {
   faNpm,
   faReact,
   faSass,
+  faStackOverflow,
+  faLinkedin,
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import AOS from 'aos';
@@ -45,6 +47,8 @@ library.add(
   faNpm,
   faReact,
   faSass,
+  faStackOverflow,
+  faLinkedin,
 );
 
 Vue.use(VueParticles);

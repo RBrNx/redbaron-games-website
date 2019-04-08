@@ -4,18 +4,21 @@
     <transition-page>
       <router-view/>
     </transition-page>
+    <web-footer></web-footer>
   </div>
 </template>
 
 <script>
 import Navbar from "./Navbar";
 import TransitionPage from "./components/TransitionPage";
+import WebFooter from "./components/Footer";
 
 export default {
   name: "App",
   components: {
     Navbar,
-    TransitionPage
+    TransitionPage,
+    WebFooter
   },
   data() {
     return {
@@ -50,5 +53,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+::selection {
+  background: $primaryRed; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: $primaryRed; /* Gecko Browsers */
 }
 </style>
