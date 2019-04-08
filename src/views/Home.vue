@@ -28,7 +28,6 @@
 // @ is an alias to /src
 import Portfolio from "../components/Portfolio";
 import HeroHeader from "../components/HeroHeader";
-import HeroImage from "../assets/HeroHeader2.jpg";
 
 export default {
   name: "home",

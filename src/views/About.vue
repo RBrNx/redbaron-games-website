@@ -18,19 +18,19 @@
     <specialities></specialities>
     <technologies></technologies>
     <div id="preload">
-      <img src="../assets/ClydeArc.jpg">
-      <img src="../assets/DukeOfWellington.jpg">
-      <img src="../assets/GeorgeSquare.jpg">
-      <img src="../assets/Hydro.jpg">
+      <img src="../assets/hero-header/ClydeArc.jpg">
+      <img src="../assets/hero-header/DukeOfWellington.jpg">
+      <img src="../assets/hero-header/GeorgeSquare.jpg">
+      <img src="../assets/hero-header/Hydro.jpg">
     </div>
   </div>
 </template>
 
 <script>
-import ClydeArc from "../assets/ClydeArc.jpg";
-import DukeOfWellington from "../assets/DukeOfWellington.jpg";
-import GeorgeSquare from "../assets/GeorgeSquare.jpg";
-import Hydro from "../assets/Hydro.jpg";
+import ClydeArc from "../assets/hero-header/ClydeArc.jpg";
+import DukeOfWellington from "../assets/hero-header/DukeOfWellington.jpg";
+import GeorgeSquare from "../assets/hero-header/GeorgeSquare.jpg";
+import Hydro from "../assets/hero-header/Hydro.jpg";
 import HeroHeader from "../components/HeroHeader";
 import Specialities from "../components/Specialities";
 import Technologies from "../components/Technologies";

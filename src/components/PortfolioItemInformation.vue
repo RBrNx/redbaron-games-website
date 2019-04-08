@@ -11,7 +11,7 @@
         paginationColor="#1d1d1d"
       >
         <slide v-for="(image, index) in itemData.carouselImages" :key="index">
-          <img class="carouselImage" :src="require(`@/assets/img/${image}`)">
+          <img class="carouselImage" :src="require(`../assets/project-images/${image}`)">
         </slide>
       </carousel>
     </div>
