@@ -1,5 +1,5 @@
 <template>
-  <div class="primaryButton" @click="buttonClick">
+  <div :class="`primaryButton ${customClass}`" @click="buttonClick">
     <slot></slot>
   </div>
 </template>
@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "PrimaryButton",
-  components: {},
+  props: ["customClass"],
   methods: {
     buttonClick() {
       this.$emit("buttonClick");

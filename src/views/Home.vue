@@ -1,13 +1,13 @@
 <template>
   <div class="home">
     <hero-header :backgroundImage="heroImage">
-      <div slot="title">
+      <div class="title enter-1" slot="title">
         <h2>The Name's Watson.</h2>
         <h2>
           <span class="highlight">Conor Watson.</span>
         </h2>
       </div>
-      <div slot="subtitle">
+      <div class="subtitle enter-2" slot="subtitle">
         <span>I am a Full Stack Developer with&nbsp;</span>
         <div class="subtitleWords">
           <span class="highlight">a passion for problem solving.</span>
@@ -21,6 +21,7 @@
       </div>
     </hero-header>
     <portfolio></portfolio>
+    <web-footer></web-footer>
   </div>
 </template>
 
@@ -28,16 +29,19 @@
 // @ is an alias to /src
 import Portfolio from "../components/Portfolio";
 import HeroHeader from "../components/HeroHeader";
+import HomeImage from "../assets/Home-Header.jpg";
+import WebFooter from "../components/Footer";
 
 export default {
   name: "home",
   components: {
     Portfolio,
-    HeroHeader
+    HeroHeader,
+    WebFooter
   },
   data() {
     return {
-      heroImage: HeroImage
+      heroImage: HomeImage
     };
   }
 };
@@ -49,6 +53,47 @@ export default {
 @import "../assets/global.scss";
 
 .home {
+  .title {
+    margin-top: 50px;
+    margin-bottom: 225px;
+
+    h2 {
+      font-size: 42px;
+      margin: 0;
+    }
+  }
+
+  .subtitle {
+    font-size: 20px;
+    font-family: Roboto;
+  }
+
+  @include tablet {
+    .title {
+      margin-bottom: 150px;
+
+      h2 {
+        font-size: 52px;
+      }
+    }
+
+    .subtitle {
+      font-size: 24px;
+    }
+  }
+
+  @include desktop {
+    .title {
+      h2 {
+        font-size: 68px;
+      }
+    }
+
+    .subtitle {
+      font-size: 24px;
+    }
+  }
+
   .subtitleWords {
     //height: 50px;
     margin-top: 15px;

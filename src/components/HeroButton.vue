@@ -40,12 +40,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/global.scss";
+
 .heroButton {
   position: absolute;
   width: 24px;
   height: 60px;
-  bottom: 10%;
+  bottom: 5%;
   cursor: pointer;
+
+  @include tablet {
+    bottom: 5%;
+  }
+
+  @include desktop {
+    bottom: 10%;
+  }
 
   .chevron {
     position: absolute;

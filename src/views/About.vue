@@ -1,11 +1,11 @@
 <template>
   <div class="about">
     <hero-header :backgroundImage="backgroundImages[imageIndex]">
-      <h2 slot="title">
+      <h2 class="title enter-1" slot="title">
         Elementary, my dear
         <span class="highlight">Watson.</span>
       </h2>
-      <span slot="subtitle">
+      <div class="subtitle enter-2" slot="subtitle">
         I am a Glaswegian dwelling Software Developer who is passionate about
         <span
           class="highlight"
@@ -13,10 +13,11 @@
         <span
           class="highlight"
         >balancing functionality and beauty</span> in the applications I develop.
-      </span>
+      </div>
     </hero-header>
     <specialities></specialities>
     <technologies></technologies>
+    <web-footer></web-footer>
     <div id="preload">
       <img src="../assets/hero-header/ClydeArc.jpg">
       <img src="../assets/hero-header/DukeOfWellington.jpg">
@@ -34,6 +35,7 @@ import Hydro from "../assets/hero-header/Hydro.jpg";
 import HeroHeader from "../components/HeroHeader";
 import Specialities from "../components/Specialities";
 import Technologies from "../components/Technologies";
+import WebFooter from "../components/Footer";
 import { clearInterval } from "timers";
 
 export default {
@@ -41,7 +43,8 @@ export default {
   components: {
     HeroHeader,
     Specialities,
-    Technologies
+    Technologies,
+    WebFooter
   },
   methods: {},
   data() {
@@ -76,20 +79,28 @@ export default {
 
   .heroImage {
     .heroText {
-      font-size: 20px;
-
       .title {
-        font-size: 35px;
+        font-size: 42px;
+        margin: 0;
+        margin-bottom: 100px;
+      }
+
+      .subtitle {
+        font-size: 20px;
+        font-family: Roboto;
       }
     }
   }
   @include tablet {
     .heroImage {
       .heroText {
-        font-size: 24px;
-
         .title {
-          font-size: 45px;
+          font-size: 52px;
+          margin-bottom: 150px;
+        }
+
+        .subtitle {
+          font-size: 24px;
         }
       }
     }
@@ -98,10 +109,12 @@ export default {
   @include desktop {
     .heroImage {
       .heroText {
-        font-size: 24px;
-
         .title {
-          font-size: 45px;
+          font-size: 68px;
+        }
+
+        .subtitle {
+          font-size: 24px;
         }
       }
     }

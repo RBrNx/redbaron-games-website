@@ -4,21 +4,18 @@
     <transition-page>
       <router-view/>
     </transition-page>
-    <web-footer></web-footer>
   </div>
 </template>
 
 <script>
 import Navbar from "./Navbar";
 import TransitionPage from "./components/TransitionPage";
-import WebFooter from "./components/Footer";
 
 export default {
   name: "App",
   components: {
     Navbar,
-    TransitionPage,
-    WebFooter
+    TransitionPage
   },
   data() {
     return {

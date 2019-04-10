@@ -21,14 +21,11 @@
       clickMode="push"
     ></vue-particles>
     <div class="heroText">
-      <div class="title enter-1">
-        <slot name="title"></slot>
-      </div>
-      <div class="subtitle enter-2">
-        <slot name="subtitle"></slot>
-      </div>
+      <slot name="title"></slot>
+      <slot name="subtitle"></slot>
     </div>
-    <hero-button></hero-button>
+    <slot></slot>
+    <hero-button v-if="!hideHeroButton"></hero-button>
   </section>
 </template>
 
@@ -37,7 +34,7 @@ import HeroButton from "../components/HeroButton";
 
 export default {
   name: "HeroHeader",
-  props: ["backgroundImage"],
+  props: ["backgroundImage", "hideHeroButton"],
   components: {
     HeroButton
   }
@@ -54,6 +51,8 @@ export default {
   position: relative;
   transition: background 1s ease-in;
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
 
   &:before {
     background: linear-gradient(
@@ -98,7 +97,6 @@ export default {
     color: #fff;
     position: relative;
     text-transform: uppercase;
-    font-size: 24px;
     width: 100%;
     padding: 100px 15%;
     pointer-events: none;
@@ -110,22 +108,6 @@ export default {
     @include desktop {
       font-size: 24px;
       padding: 0 20%;
-    }
-
-    .title {
-      margin-bottom: 150px;
-      font-size: 45px;
-
-      h2 {
-        margin: 0;
-      }
-    }
-
-    .subtitle {
-      display: flex;
-      align-items: center;
-      flex-direction: column;
-      font-family: Roboto;
     }
   }
 }
