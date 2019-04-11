@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { setTimeout } from "timers";
 export default {
   name: "HeroButton",
   methods: {
@@ -24,16 +25,18 @@ export default {
       });
     }
   },
-  created() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
   destroyed() {
     window.removeEventListener("scroll", this.handleScroll);
+  },
+  mounted() {
+    setTimeout(() => {
+      this.opacity = 1;
+      window.addEventListener("scroll", this.handleScroll);
+    }, 1000);
   },
   data() {
     return {
       opacity: 0
-      //OnClick
     };
   }
 };
@@ -48,6 +51,7 @@ export default {
   height: 60px;
   bottom: 5%;
   cursor: pointer;
+  transition: opacity 1s;
 
   @include tablet {
     bottom: 5%;
