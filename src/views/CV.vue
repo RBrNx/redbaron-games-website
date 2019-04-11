@@ -48,10 +48,28 @@ export default {
 .cv {
   .heroImage {
     overflow: hidden;
+    flex-direction: column;
+    align-items: center;
 
-    .title {
-      font-size: 68px;
-      margin-bottom: 100px;
+    .heroText {
+      padding: 0;
+
+      .title {
+        font-size: 60px;
+        margin: 0;
+        margin-bottom: 100px;
+      }
+    }
+  }
+
+  @include tablet {
+    .heroImage {
+      .heroText {
+        .title {
+          font-size: 68px;
+          margin-bottom: 100px;
+        }
+      }
     }
   }
 
