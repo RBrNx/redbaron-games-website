@@ -1,5 +1,6 @@
 <template>
   <section id="portfolioContainer">
+    <p v-if="$apollo.loading">Loading...</p>
     <h2 class="sectionTitle">Portfolio</h2>
     <p
       class="blurb"
@@ -36,12 +37,38 @@ import PortfolioItemInformation from "../components/PortfolioItemInformation";
 import CardClone from "../components/CardClone";
 import { setTimeout } from "timers";
 
+import gql from "graphql-tag";
+
+const portfolioItems = gql`
+  query portfolioItems {
+    portfolioItems {
+      status
+      updatedAt
+      createdAt
+      id
+      title
+      description
+      aboutProject
+      carouselImages
+      techSheet
+      links
+      visible
+      displayImage
+    }
+  }
+`;
+
 export default {
   name: "portfolio",
   components: {
     PortfolioItem,
     PortfolioItemInformation,
     CardClone
+  },
+  apollo: {
+    portfolioItems: {
+      query: portfolioItems
+    }
   },
   methods: {
     openCardModal(index) {
@@ -90,19 +117,12 @@ export default {
   },
   data() {
     return {
-      portfolioItems: [],
+      portfolioItems: null,
       clickedItem: null,
       cardCloneStyle: {},
       cardClass: null,
       gistID: process.env.VUE_APP_GIST_ID
     };
-  },
-  async mounted() {
-    const res = await fetch(`https://api.github.com/gists/${this.gistID}`);
-
-    const gist = await res.json();
-    const websiteconfig = JSON.parse(gist.files["websiteconfig.json"].content);
-    this.portfolioItems = websiteconfig.repositories;
   }
 };
 </script>

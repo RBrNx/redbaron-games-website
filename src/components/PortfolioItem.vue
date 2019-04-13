@@ -1,7 +1,7 @@
 <template>
   <div :class="`portfolioItem  ${itemClass}`">
     <div class="header">
-      <img :src="require(`../assets${imageLink}`)">
+      <img :src="require(`../assets/project-images/${imageLink}`)">
     </div>
     <div class="body" :style="{ 'height': bodyHeight }">
       <div class="title">{{ title }}</div>
@@ -26,7 +26,7 @@ export default {
       return this.itemData ? this.itemData.description : null;
     },
     imageLink() {
-      return this.itemData ? this.itemData.imageMain : null;
+      return this.itemData ? this.itemData.displayImage : null;
     },
     name() {
       return this.itemData ? this.itemData.name : null;
