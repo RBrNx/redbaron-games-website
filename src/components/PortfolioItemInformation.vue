@@ -18,7 +18,12 @@
     <div id="info">
       <div id="description">
         <div class="title">About this project</div>
-        <div class="text" v-html="itemData.aboutProject"></div>
+        <vue-markdown
+          class="text"
+          :source="itemData.aboutProject"
+          :anchorAttributes="{ target: '_blank' }"
+          :postrender="parseHTML"
+        ></vue-markdown>
       </div>
       <div id="techSheet">
         <div class="title">Technical Sheet</div>
@@ -40,6 +45,7 @@
 <script>
 import LinkButton from "./LinkButton";
 import { Carousel, Slide } from "vue-carousel";
+import VueMarkdown from "vue-markdown";
 
 export default {
   name: "PortfolioItemInformation",
@@ -47,7 +53,8 @@ export default {
   components: {
     LinkButton,
     Carousel,
-    Slide
+    Slide,
+    VueMarkdown
   },
   methods: {
     crossClicked() {
@@ -55,6 +62,20 @@ export default {
     },
     linkIcon(linkType) {
       return linkType ? ["fab", linkType] : "external-link-alt";
+    },
+    parseHTML(html) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
+      const aTags = doc.getElementsByTagName("a");
+
+      for (let aTag of aTags) {
+        const span = document.createElement("span");
+        span.classList.add("fancyLink");
+        aTag.parentNode.insertBefore(span, aTag);
+        span.appendChild(aTag);
+      }
+
+      return doc.body.innerHTML;
     }
   },
   mounted() {

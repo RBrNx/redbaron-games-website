@@ -62,8 +62,6 @@ Vue.use(VueApollo);
 Vue.use(VueParticles);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
-console.log(process.env);
-
 const apolloProvider = new VueApollo({
   defaultClient: new ApolloClient({
     link: new HttpLink({
