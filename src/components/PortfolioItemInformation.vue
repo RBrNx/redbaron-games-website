@@ -19,6 +19,7 @@
       <div id="description">
         <div class="title">About this project</div>
         <vue-markdown
+          v-if="itemData.aboutProject"
           class="text"
           :source="itemData.aboutProject"
           :anchorAttributes="{ target: '_blank' }"

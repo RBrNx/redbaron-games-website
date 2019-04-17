@@ -1,7 +1,7 @@
 <template>
   <div :class="`portfolioItem  ${itemClass}`">
     <div class="header">
-      <img :src="require(`../assets/project-images/${imageLink}`)">
+      <img v-if="imageLink" :src="require(`../assets/project-images/${imageLink}`)">
     </div>
     <div class="body" :style="{ 'height': bodyHeight }">
       <div class="title">{{ title }}</div>
