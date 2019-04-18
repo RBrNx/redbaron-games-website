@@ -41,7 +41,7 @@ import gql from "graphql-tag";
 
 const portfolioItems = gql`
   query portfolioItems {
-    portfolioItems {
+    portfolioItems(where: { visible: true, status: PUBLISHED }) {
       status
       updatedAt
       createdAt
