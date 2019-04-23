@@ -9,10 +9,10 @@
       <portfolio-item
         v-for="(item, index) in portfolioItems"
         ref="portfolioItems"
-        :key="index"
+        :key="item.id"
         :itemData="item"
         :itemClass="`enter-${index}`"
-        @buttonClick="openCardModal(index)"
+        @buttonClick="openCardModal(item.id)"
       ></portfolio-item>
       <card-clone
         v-if="clickedItem !== null"
@@ -39,12 +39,9 @@ import { setTimeout } from "timers";
 
 import gql from "graphql-tag";
 
-const portfolioItems = gql`
+const ALL_PORTFOLIO_ITEMS_QUERY = gql`
   query portfolioItems {
     portfolioItems(where: { visible: true, status: PUBLISHED }) {
-      status
-      updatedAt
-      createdAt
       id
       title
       description
@@ -67,17 +64,18 @@ export default {
   },
   apollo: {
     portfolioItems: {
-      query: portfolioItems
+      query: ALL_PORTFOLIO_ITEMS_QUERY
     }
   },
   methods: {
-    openCardModal(index) {
+    openCardModal(id) {
       if (this.clickedItem !== null) return;
-      const ref = this.$refs.portfolioItems[index].$el;
+
+      const ref = this.$refs.portfolioItems.find(p => p.id === id).$el;
       const viewportOffset = ref.getBoundingClientRect();
 
       this.clickedItem = {
-        item: this.portfolioItems[index],
+        item: this.portfolioItems.find(p => p.id === id),
         ref: ref,
         bodyHeight: ref.getElementsByClassName("body")[0].clientHeight
       };
