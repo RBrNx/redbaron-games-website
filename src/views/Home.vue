@@ -53,44 +53,50 @@ export default {
 @import "../assets/global.scss";
 
 .home {
-  .title {
-    margin-top: 50px;
-    margin-bottom: 225px;
-
-    h2 {
-      font-size: 42px;
-      margin: 0;
-    }
-  }
-
-  .subtitle {
-    font-size: 20px;
-    font-family: Roboto;
-  }
-
-  @include tablet {
+  .heroImage{
     .title {
-      margin-bottom: 150px;
+      margin-top: 50px;
+      margin-bottom: 225px;
 
       h2 {
-        font-size: 52px;
+        font-size: 42px;
+        margin: 0;
       }
     }
 
     .subtitle {
-      font-size: 24px;
+      font-size: 20px;
+      font-family: Roboto;
+    }
+  }
+
+  @include tablet {
+    .heroImage{
+      .title {
+        margin-bottom: 150px;
+
+        h2 {
+          font-size: 52px;
+        }
+      }
+
+      .subtitle {
+        font-size: 24px;
+      }
     }
   }
 
   @include desktop {
-    .title {
-      h2 {
-        font-size: 68px;
+    .heroImage{
+      .title {
+        h2 {
+          font-size: 68px;
+        }
       }
-    }
 
-    .subtitle {
-      font-size: 24px;
+      .subtitle {
+        font-size: 24px;
+      }
     }
   }
 

@@ -19,6 +19,7 @@
     "dotenv": "^7.0.0",
     "graphql": "^14.2.1",
     "vue-carousel": "^0.18.0-alpha",
+    "vue-content-loader": "^0.2.1",
     "vue-markdown": "^2.2.4",
     "vue-perfect-scrollbar": "^0.1.0",
     "vue-router": "^3.0.1",

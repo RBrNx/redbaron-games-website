@@ -6,6 +6,21 @@
       class="blurb"
     >From Minigolf Games to Christmas Puzzle Events, Check out some of my personal projects!</p>
     <div class="projects">
+      <content-loader
+        v-if="$apollo.loading"
+        class="portfolioLoader"
+        v-for="i in 4"
+        :height="400"
+        :width="400"
+        :speed="2"
+        primaryColor="#131313"
+        secondaryColor="#1d1d1d"
+      >
+        <rect x="0" y="0" rx="0" ry="0" width="400" height="250" /> 
+        <rect x="15" y="265" rx="5" ry="5" width="170" height="25" /> 
+        <rect x="15" y="300" rx="5" ry="5" width="370" height="20" /> 
+        <rect x="15" y="350" rx="5" ry="5" width="370" height="50" />
+      </content-loader>
       <portfolio-item
         v-for="(item, index) in portfolioItems"
         ref="portfolioItems"
@@ -36,6 +51,7 @@ import PortfolioItem from "../components/PortfolioItem";
 import PortfolioItemInformation from "../components/PortfolioItemInformation";
 import CardClone from "../components/CardClone";
 import { setTimeout } from "timers";
+import { ContentLoader } from "vue-content-loader";
 
 import gql from "graphql-tag";
 
@@ -60,7 +76,8 @@ export default {
   components: {
     PortfolioItem,
     PortfolioItemInformation,
-    CardClone
+    CardClone,
+    ContentLoader
   },
   apollo: {
     portfolioItems: {
@@ -152,6 +169,12 @@ export default {
 
     @include desktop {
       grid-template-columns: repeat(4, 2fr);
+    }
+
+    .portfolioLoader{
+      background-color: #2a2a2a;
+      border-radius: 5px;
+      padding-bottom: 15px;
     }
   }
 }
