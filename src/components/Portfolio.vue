@@ -6,29 +6,33 @@
       class="blurb"
     >From Minigolf Games to Christmas Puzzle Events, Check out some of my personal projects!</p>
     <div class="projects">
-      <content-loader
-        v-if="$apollo.loading"
-        class="portfolioLoader"
-        v-for="i in 4"
-        :height="400"
-        :width="400"
-        :speed="2"
-        primaryColor="#131313"
-        secondaryColor="#1d1d1d"
-      >
-        <rect x="0" y="0" rx="0" ry="0" width="400" height="250" /> 
-        <rect x="15" y="265" rx="5" ry="5" width="170" height="25" /> 
-        <rect x="15" y="300" rx="5" ry="5" width="370" height="20" /> 
-        <rect x="15" y="350" rx="5" ry="5" width="370" height="50" />
-      </content-loader>
-      <portfolio-item
-        v-for="(item, index) in portfolioItems"
-        ref="portfolioItems"
-        :key="item.id"
-        :itemData="item"
-        :itemClass="`enter-${index}`"
-        @buttonClick="openCardModal(item.id)"
-      ></portfolio-item>
+      <div class="loaders" v-if="$apollo.loading">
+        <content-loader
+          class="portfolioLoader"
+          v-for="i in 8"
+          :key="i"
+          :height="400"
+          :width="400"
+          :speed="2"
+          primaryColor="#141414"
+          secondaryColor="#101010"
+        >
+          <rect x="0" y="0" rx="0" ry="0" width="400" height="250"/>
+          <rect x="15" y="265" rx="5" ry="5" width="170" height="25"/>
+          <rect x="15" y="300" rx="5" ry="5" width="370" height="20"/>
+          <rect x="15" y="350" rx="5" ry="5" width="370" height="50"/>
+        </content-loader>
+      </div>
+      <div class="items">
+        <portfolio-item
+          v-for="(item, index) in portfolioItems"
+          ref="portfolioItems"
+          :key="item.id"
+          :itemData="item"
+          :itemClass="`enter-${index}`"
+          @buttonClick="openCardModal(item.id)"
+        ></portfolio-item>
+      </div>
       <card-clone
         v-if="clickedItem !== null"
         :customStyle="cardCloneStyle"
@@ -156,25 +160,28 @@ export default {
   padding-bottom: 50px;
 
   .projects {
-    padding: 0 25px;
-    position: relative;
+    .loaders,
+    .items {
+      padding: 0 25px;
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      grid-gap: 30px;
 
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 30px;
+      @include tablet {
+        grid-template-columns: repeat(2, 2fr);
+      }
 
-    @include tablet {
-      grid-template-columns: repeat(2, 2fr);
+      @include desktop {
+        grid-template-columns: repeat(4, 2fr);
+      }
     }
 
-    @include desktop {
-      grid-template-columns: repeat(4, 2fr);
-    }
-
-    .portfolioLoader{
+    .portfolioLoader {
       background-color: #2a2a2a;
       border-radius: 5px;
       padding-bottom: 15px;
+      margin-bottom: 30px;
     }
   }
 }
