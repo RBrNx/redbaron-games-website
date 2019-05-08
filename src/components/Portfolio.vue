@@ -1,6 +1,5 @@
 <template>
   <section id="portfolioContainer">
-    <p v-if="$apollo.loading">Loading...</p>
     <h2 class="sectionTitle">Portfolio</h2>
     <p
       class="blurb"
@@ -23,6 +22,7 @@
           <rect x="15" y="350" rx="5" ry="5" width="370" height="50"/>
         </content-loader>
       </div>
+      <div v-if="$apollo.error">There has been an error loading the portfolio.</div>
       <div class="items">
         <portfolio-item
           v-for="(item, index) in portfolioItems"
