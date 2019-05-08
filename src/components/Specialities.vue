@@ -2,14 +2,34 @@
   <div id="specialitiesContainer">
     <h2 class="sectionTitle">My Specialities</h2>
     <div class="specialities">
-      <div
-        v-for="(speciality, index) in specialities"
-        :class="`card enter-${index}`"
-        :key="speciality.id"
-      >
-        <div v-html="require(`!html-loader!../assets/specialities/${speciality.iconPath}`)"></div>
-        <div class="title">{{ speciality.title }}</div>
-        <div class="description">{{ speciality.description }}</div>
+      <div class="loaders" v-if="$apollo.loading">
+        <content-loader
+          class="specialityLoader"
+          v-for="i in 6"
+          :key="i"
+          :height="200"
+          :width="400"
+          :speed="2"
+          primaryColor="#141414"
+          secondaryColor="#101010"
+        >
+          <rect x="162.5" y="25" rx="5" ry="5" width="75" height="75"/>
+          <rect x="150" y="115" rx="5" ry="5" width="100" height="15"/>
+          <rect x="50" y="150" rx="2.5" ry="2.5" width="300" height="10"/>
+          <rect x="50" y="165" rx="2.5" ry="2.5" width="300" height="10"/>
+        </content-loader>
+      </div>
+      <div v-if="$apollo.error">There has been an error loading my specialities.</div>
+      <div class="specialityGrid">
+        <div
+          v-for="(speciality, index) in specialities"
+          :class="`card enter-${index}`"
+          :key="speciality.id"
+        >
+          <div v-html="require(`!html-loader!../assets/specialities/${speciality.iconPath}`)"></div>
+          <div class="title">{{ speciality.title }}</div>
+          <div class="description">{{ speciality.description }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -17,6 +37,7 @@
 
 <script>
 import gql from "graphql-tag";
+import { ContentLoader } from "vue-content-loader";
 
 const ALL_SPECIALITIES_QUERY = gql`
   query specialities {
@@ -31,6 +52,9 @@ const ALL_SPECIALITIES_QUERY = gql`
 
 export default {
   name: "Specialities",
+  components: {
+    ContentLoader
+  },
   apollo: {
     specialities: {
       query: ALL_SPECIALITIES_QUERY
@@ -58,19 +82,38 @@ export default {
   padding-bottom: 50px;
 
   .specialities {
-    padding: 0 25px;
-    position: relative;
+    .loaders,
+    .specialityGrid {
+      padding: 0 25px;
+      position: relative;
 
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-gap: 30px;
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      grid-gap: 30px;
 
-    @include tablet {
-      grid-template-columns: repeat(2, 2fr);
+      @include tablet {
+        grid-template-columns: repeat(2, 2fr);
+      }
+
+      @include desktop {
+        grid-template-columns: repeat(3, 2fr);
+      }
+
+      .specialityLoader {
+        background: lighten($primaryGrey, 5%);
+        border-radius: 5px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        //padding-left: 10%;
+        //padding-right: 10%;
+        //padding-top: 5%;
+        //padding-bottom: 5%;
+        //padding-bottom: 15px;
+        //margin-bottom: 30px;
+      }
     }
 
-    @include desktop {
-      grid-template-columns: repeat(3, 2fr);
+    .loaders {
+      margin-bottom: 30px;
     }
 
     .card {

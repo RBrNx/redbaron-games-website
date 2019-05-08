@@ -22,7 +22,7 @@
           <rect x="15" y="350" rx="5" ry="5" width="370" height="50"/>
         </content-loader>
       </div>
-      <div v-if="$apollo.error">There has been an error loading the portfolio.</div>
+      <div v-if="$apollo.error">There has been an error loading my portfolio.</div>
       <div class="items">
         <portfolio-item
           v-for="(item, index) in portfolioItems"
@@ -178,7 +178,7 @@ export default {
     }
 
     .portfolioLoader {
-      background-color: #2a2a2a;
+      background: lighten($primaryGrey, 5%);
       border-radius: 5px;
       padding-bottom: 15px;
       margin-bottom: 30px;
