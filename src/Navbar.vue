@@ -52,7 +52,7 @@ export default {
 nav {
   position: fixed;
   z-index: 99;
-  width: 100%;
+  width: 100vw;
   font-family: "Fjalla One", sans-serif;
   background: $primaryGrey;
   transition: transform 200ms linear, background 200ms linear;
