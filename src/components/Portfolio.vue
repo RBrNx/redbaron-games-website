@@ -169,11 +169,18 @@ export default {
       grid-gap: 30px;
 
       @include tablet {
+        padding: 0 45px;
         grid-template-columns: repeat(2, 2fr);
       }
 
+      @include laptop {
+        padding: 0 100px;
+        grid-template-columns: repeat(3, 2fr);
+      }
+
       @include desktop {
-        grid-template-columns: repeat(4, 2fr);
+        padding: 0 175px;
+        grid-template-columns: repeat(3, 2fr);
       }
     }
 

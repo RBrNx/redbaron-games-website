@@ -202,17 +202,24 @@ export default {
   .blogs {
     .loaders,
     .items {
-      padding: 0 175px;
+      padding: 0 25px;
       position: relative;
       display: grid;
       grid-template-columns: repeat(1, 1fr);
-      grid-gap: 100px;
+      grid-gap: 30px;
 
       @include tablet {
+        padding: 0 45px;
         grid-template-columns: repeat(2, 2fr);
       }
 
+      @include laptop {
+        padding: 0 100px;
+        grid-template-columns: repeat(3, 2fr);
+      }
+
       @include desktop {
+        padding: 0 175px;
         grid-template-columns: repeat(3, 2fr);
       }
     }

@@ -72,10 +72,17 @@ export default {
     grid-template-columns: repeat(1, 1fr);
 
     @include tablet {
+      padding: 0 45px;
       grid-template-columns: repeat(2, 1fr);
     }
 
+    @include laptop {
+      padding: 0 75px;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
     @include desktop {
+      padding: 0 100px;
       grid-template-columns: repeat(5, 1fr);
     }
   }

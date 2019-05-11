@@ -3,40 +3,13 @@ $primaryRed: #c32626;
 $headingGrey: #cacaca;
 $bodytextGrey: #8a8a8a;
 
-.highlight {
-  color: $primaryRed;
-}
-
-.sectionTitle {
-  margin: 0;
-  margin-bottom: 30px;
-  padding: 75px 0 0 175px;
-  font-family: 'Fjalla One', sans-serif;
-  font-size: 32px;
-  text-transform: uppercase;
-  color: $headingGrey;
-  position: relative;
-  display: inline-block;
-
-  &:after {
-    content: ' ';
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 175px;
-    height: 1px;
-    width: calc(100% - 175px);
-    background: $headingGrey;
+@mixin desktop {
+  @media (min-width: 1440px) {
+    @content;
   }
 }
 
-.blurb {
-  margin: 0;
-  padding: 0 175px;
-  font-size: 18px;
-  margin-bottom: 20px;
-}
-
-@mixin desktop {
+@mixin laptop {
   @media (min-width: 1024px) {
     @content;
   }
@@ -45,5 +18,77 @@ $bodytextGrey: #8a8a8a;
 @mixin tablet {
   @media (min-width: 768px) {
     @content;
+  }
+}
+
+.highlight {
+  color: $primaryRed;
+}
+
+.sectionTitle {
+  margin: 0;
+  margin-bottom: 30px;
+  padding: 35px 0 0 25px;
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 32px;
+  text-transform: uppercase;
+  color: $headingGrey;
+  position: relative;
+  display: inline-block;
+
+  @include tablet() {
+    padding: 35px 0 0 40px;
+  }
+
+  @include laptop() {
+    padding: 50px 0 0 100px;
+  }
+
+  @include desktop() {
+    padding: 75px 0 0 175px;
+  }
+
+  &:after {
+    content: ' ';
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 25px;
+    height: 1px;
+    width: calc(100% - 25px);
+    background: $headingGrey;
+
+    @include tablet() {
+      left: 45px;
+      width: calc(100% - 45px);
+    }
+
+    @include laptop() {
+      left: 100px;
+      width: calc(100% - 100px);
+    }
+
+    @include desktop() {
+      left: 175px;
+      width: calc(100% - 175px);
+    }
+  }
+}
+
+.blurb {
+  margin: 0;
+  padding: 0 25px;
+  font-size: 18px;
+  margin-bottom: 20px;
+
+  @include tablet() {
+    padding: 0 45px;
+  }
+
+  @include laptop() {
+    padding: 0 100px;
+  }
+
+  @include desktop() {
+    padding: 0 175px;
   }
 }
