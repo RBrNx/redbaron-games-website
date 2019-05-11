@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import { constants } from "crypto";
 import { setTimeout } from "timers";
 export default {
   name: "TransitionPage",

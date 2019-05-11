@@ -29,7 +29,7 @@
 // @ is an alias to /src
 import Portfolio from "../components/Portfolio";
 import HeroHeader from "../components/HeroHeader";
-import HomeImage from "../assets/Home-Header.jpg";
+import HomeImage from "../assets/hero-header/Home-Header.jpg";
 import WebFooter from "../components/Footer";
 
 export default {
@@ -53,7 +53,7 @@ export default {
 @import "../assets/global.scss";
 
 .home {
-  .heroImage{
+  .heroImage {
     .title {
       margin-top: 50px;
       margin-bottom: 225px;
@@ -71,7 +71,7 @@ export default {
   }
 
   @include tablet {
-    .heroImage{
+    .heroImage {
       .title {
         margin-bottom: 150px;
 
@@ -87,7 +87,7 @@ export default {
   }
 
   @include desktop {
-    .heroImage{
+    .heroImage {
       .title {
         h2 {
           font-size: 68px;
