@@ -12,21 +12,21 @@
         <span>A place for my Coding Laboratory, Programming guides and thoughts on Tech.</span>
       </div>
     </hero-header>
+    <blog-list></blog-list>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import Portfolio from "../components/Portfolio";
 import HeroHeader from "../components/HeroHeader";
 import BlogImage from "../assets/hero-header/Blog-Header.jpg";
+import BlogList from "../components/BlogList";
 import WebFooter from "../components/Footer";
 
 export default {
   name: "blog",
   components: {
-    Portfolio,
     HeroHeader,
+    BlogList,
     WebFooter
   },
   data() {
