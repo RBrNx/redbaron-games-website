@@ -92,7 +92,7 @@ export default {
     openCardModal(id) {
       if (this.clickedItem !== null) return;
 
-      const ref = this.$refs.portfolioItems.find(p => p.id === id).$el;
+      const ref = this.$refs.portfolioItems.find(p => p.$vnode.key === id).$el;
       const viewportOffset = ref.getBoundingClientRect();
 
       this.clickedItem = {
