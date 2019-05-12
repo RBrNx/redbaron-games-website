@@ -52,7 +52,6 @@ export default {
   },
   mounted() {
     setTimeout(() => {
-      const ref = this.$el;
       const isOverHalfway =
         parseFloat(this.customStyle.left) +
           parseFloat(this.customStyle.width) / 2 >
@@ -112,6 +111,24 @@ export default {
       left: 50vw !important;
       top: 50vh !important;
       transform: translate(-50%, -50%) !important;
+    }
+
+    &.fullscreen {
+      @include tablet {
+        height: 100% !important;
+        width: 100% !important;
+        left: 0 !important;
+        top: 0 !important;
+        transform: none !important;
+      }
+
+      @include desktop {
+        height: 100% !important;
+        width: 100% !important;
+        left: 0 !important;
+        top: 0 !important;
+        transform: none !important;
+      }
     }
 
     #cardBack {

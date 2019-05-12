@@ -6,10 +6,10 @@
     <div class="body">
       <div class="title">{{ title }}</div>
       <div class="description">{{ description }}</div>
+      <primary-button @buttonClick="buttonClick">Read</primary-button>
       <div class="categories">
         <span v-for="(cat, index) in categories" :key="index">{{ cat }}</span>
       </div>
-      <!-- <primary-button @buttonClick="buttonClick">Learn More</primary-button> -->
     </div>
     <card-ribbon :label="enums[type].label" :fill="enums[type].color"></card-ribbon>
   </div>
@@ -101,6 +101,7 @@ export default {
     }
 
     .categories {
+      margin-top: 25px;
       margin-bottom: 10px;
 
       span {

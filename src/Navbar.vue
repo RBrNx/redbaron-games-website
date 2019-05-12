@@ -51,7 +51,7 @@ export default {
 
 nav {
   position: fixed;
-  z-index: 99;
+  z-index: 99999;
   width: 100vw;
   font-family: "Fjalla One", sans-serif;
   background: $primaryGrey;

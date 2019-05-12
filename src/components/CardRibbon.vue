@@ -28,13 +28,13 @@ export default {
   top: 0;
 
   .ribbon {
-    z-index: 1001;
+    //z-index: 1001;
     position: relative;
     top: 0;
   }
 
   .label {
-    z-index: 1002;
+    //z-index: 1002;
     position: absolute;
     color: #fff;
     top: 38%;
