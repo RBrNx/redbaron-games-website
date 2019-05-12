@@ -140,42 +140,48 @@ export default {
           description:
             "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
           categories: ["Tutorial", "Javascript"],
-          displayImage: "puttered_3.png"
+          displayImage: "puttered_3.png",
+          type: "Blog"
         },
         {
           title: "Google's 3D Card Flip Tutorial",
           description:
             "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
           categories: ["Tutorial", "Javascript"],
-          displayImage: "puttered_3.png"
+          displayImage: "puttered_3.png",
+          type: "Tutorial"
         },
         {
           title: "Google's 3D Card Flip Tutorial",
           description:
             "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
           categories: ["Tutorial", "Javascript"],
-          displayImage: "puttered_3.png"
+          displayImage: "puttered_3.png",
+          type: "Lab"
         },
         {
           title: "Google's 3D Card Flip Tutorial",
           description:
             "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
           categories: ["Tutorial", "Javascript"],
-          displayImage: "puttered_3.png"
+          displayImage: "puttered_3.png",
+          type: "Tutorial"
         },
         {
           title: "Google's 3D Card Flip Tutorial",
           description:
             "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
           categories: ["Tutorial", "Javascript"],
-          displayImage: "puttered_3.png"
+          displayImage: "puttered_3.png",
+          type: "Lab"
         },
         {
           title: "Google's 3D Card Flip Tutorial",
           description:
             "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
           categories: ["Tutorial", "Javascript"],
-          displayImage: "puttered_3.png"
+          displayImage: "puttered_3.png",
+          type: "Blog"
         }
       ],
       clickedItem: null,

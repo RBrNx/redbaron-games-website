@@ -11,15 +11,17 @@
       </div>
       <!-- <primary-button @buttonClick="buttonClick">Learn More</primary-button> -->
     </div>
+    <card-ribbon :label="enums[type].label" :fill="enums[type].color"></card-ribbon>
   </div>
 </template>
 
 <script>
 import PrimaryButton from "./PrimaryButton";
+import CardRibbon from "./CardRibbon";
 
 export default {
   name: "BlogCard",
-  components: { PrimaryButton },
+  components: { PrimaryButton, CardRibbon },
   props: ["itemData", "bodySize", "itemClass"],
   computed: {
     title() {
@@ -34,8 +36,8 @@ export default {
     imageLink() {
       return this.itemData ? this.itemData.displayImage : null;
     },
-    name() {
-      return this.itemData ? this.itemData.name : null;
+    type() {
+      return this.itemData ? this.itemData.type : null;
     },
     bodyHeight() {
       return this.bodySize ? this.bodySize + "px" : null;
@@ -45,6 +47,15 @@ export default {
     buttonClick() {
       this.$emit("buttonClick");
     }
+  },
+  data() {
+    return {
+      enums: {
+        Blog: { label: "Blog", color: "#1D79FF" },
+        Tutorial: { label: "Tutorial", color: "#E25D03" },
+        Lab: { label: "Lab", color: "#c32626" }
+      }
+    };
   }
 };
 </script>
@@ -58,6 +69,7 @@ export default {
   background: lighten($primaryGrey, 5%);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+  position: relative;
 
   .header {
     overflow: hidden;
@@ -90,7 +102,15 @@ export default {
 
     .categories {
       margin-bottom: 10px;
+
+      span {
+        background-color: lighten($primaryGrey, 10%);
+        border-radius: 5px;
+        margin-right: 10px;
+        padding: 5px;
+      }
     }
   }
 }
 </style>
+
