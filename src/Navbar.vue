@@ -11,6 +11,7 @@
 export default {
   name: "Navbar",
   components: {},
+  props: ["hideNavbarProp"],
   methods: {
     handleScroll() {
       if (
@@ -27,6 +28,11 @@ export default {
       this.lastPosition = window.scrollY;
 
       this.scrollTop = this.lastPosition == 0 ? true : false;
+    }
+  },
+  watch: {
+    hideNavbarProp(newValue) {
+      if (newValue) this.hideNavbar = newValue;
     }
   },
   created() {

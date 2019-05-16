@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <navbar></navbar>
+    <navbar :hideNavbarProp="hideNavbar"></navbar>
     <transition-page>
-      <router-view/>
+      <router-view @modalOpened="modalOpened" @modalClosed="modalClosed"/>
     </transition-page>
   </div>
 </template>
@@ -17,9 +17,18 @@ export default {
     Navbar,
     TransitionPage
   },
+  methods: {
+    modalOpened() {
+      this.hideNavbar = true;
+    },
+    modalClosed() {
+      this.hideNavbar = null;
+    }
+  },
   data() {
     return {
-      transitionName: null
+      transitionName: null,
+      hideNavbar: false
     };
   }
 };

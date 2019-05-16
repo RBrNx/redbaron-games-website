@@ -106,6 +106,8 @@ export default {
 
       ref.style.opacity = 0;
 
+      this.$emit("modalOpened");
+
       setTimeout(() => {
         this.cardClass = "shown fullscreen";
       }, 100);
@@ -122,11 +124,14 @@ export default {
         transform: null
       };
 
+      this.$emit("modalClosed");
+
       setTimeout(() => {
         for (let i = 0; i < this.$refs.blogItems.length; i++) {
           this.$refs.blogItems[i].$el.style.opacity = 1;
         }
         this.clickedItem = null;
+        this.cardClass = null;
       }, 600);
     }
   },
