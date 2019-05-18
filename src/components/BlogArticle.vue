@@ -4,9 +4,9 @@
     <div id="subtitle">{{ itemData.description }}</div>
     <div id="article">
       <vue-markdown
-        v-if="itemData.aboutProject"
+        v-if="itemData.blog"
         class="text"
-        :source="itemData.aboutProject"
+        :source="itemData.blog"
         :anchorAttributes="{ target: '_blank' }"
         :postrender="parseHTML"
       ></vue-markdown>

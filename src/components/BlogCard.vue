@@ -1,7 +1,7 @@
 <template>
   <div :class="`blogCard  ${itemClass}`">
     <div class="header">
-      <img v-if="imageLink" :src="require(`../assets/blog-images/${imageLink}`)">
+      <img v-if="imageLink" :src="imageLink">
     </div>
     <div class="body">
       <div class="title">{{ title }}</div>
@@ -34,10 +34,10 @@ export default {
       return this.itemData ? this.itemData.categories : null;
     },
     imageLink() {
-      return this.itemData ? this.itemData.displayImage : null;
+      return this.itemData ? this.itemData.blogImage.url : null;
     },
     type() {
-      return this.itemData ? this.itemData.type : null;
+      return this.itemData ? this.itemData.blogType : null;
     },
     bodyHeight() {
       return this.bodySize ? this.bodySize + "px" : null;

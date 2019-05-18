@@ -23,8 +23,8 @@
       <div v-if="$apollo.error">There has been an error loading my portfolio.</div>-->
       <div class="items">
         <blog-card
-          v-for="(item, index) in blogItems"
-          ref="blogItems"
+          v-for="(item, index) in blogs"
+          ref="blogs"
           :key="item.id"
           :itemData="item"
           :itemClass="`enter-${index}`"
@@ -41,7 +41,7 @@
           <blog-card :itemData="clickedItem.item" :bodySize="clickedItem.bodyHeight"></blog-card>
         </template>
         <template v-slot:cardBack>
-          <div></div>
+          <blog-article :itemData="clickedItem.item"></blog-article>
         </template>
       </card-clone>
     </div>
@@ -50,24 +50,29 @@
 
 <script>
 import BlogCard from "./BlogCard";
+import BlogArticle from "./BlogArticle";
 import CardClone from "../components/CardClone";
 import { setTimeout } from "timers";
 import { ContentLoader } from "vue-content-loader";
 
 import gql from "graphql-tag";
 
-const ALL_PORTFOLIO_ITEMS_QUERY = gql`
-  query portfolioItems {
-    portfolioItems(where: { visible: true, status: PUBLISHED }) {
+const ALL_BLOGS_QUERY = gql`
+  query blogs {
+    blogs(where: { status: PUBLISHED }) {
+      status
+      updatedAt
+      createdAt
       id
       title
       description
-      aboutProject
-      carouselImages
-      techSheet
-      links
-      visible
-      displayImage
+      blogImage {
+        id
+        url
+      }
+      blog
+      blogType
+      categories
     }
   }
 `;
@@ -76,23 +81,24 @@ export default {
   name: "BlogList",
   components: {
     BlogCard,
+    BlogArticle,
     CardClone,
     ContentLoader
   },
   apollo: {
-    portfolioItems: {
-      query: ALL_PORTFOLIO_ITEMS_QUERY
+    blogs: {
+      query: ALL_BLOGS_QUERY
     }
   },
   methods: {
     openCardModal(id) {
       if (this.clickedItem !== null) return;
 
-      const ref = this.$refs.blogItems.find(p => p.$vnode.key === id).$el;
+      const ref = this.$refs.blogs.find(p => p.$vnode.key === id).$el;
       const viewportOffset = ref.getBoundingClientRect();
 
       this.clickedItem = {
-        item: this.blogItems.find(p => p.id === id),
+        item: this.blogs.find(p => p.id === id),
         ref: ref,
         bodyHeight: ref.getElementsByClassName("body")[0].clientHeight
       };
@@ -127,8 +133,8 @@ export default {
       this.$emit("modalClosed");
 
       setTimeout(() => {
-        for (let i = 0; i < this.$refs.blogItems.length; i++) {
-          this.$refs.blogItems[i].$el.style.opacity = 1;
+        for (let i = 0; i < this.$refs.blogs.length; i++) {
+          this.$refs.blogs[i].$el.style.opacity = 1;
         }
         this.clickedItem = null;
         this.cardClass = null;
@@ -137,62 +143,63 @@ export default {
   },
   data() {
     return {
-      blogItems: [
-        {
-          id: 0,
-          title: "Google's 3D Card Flip Tutorial",
-          description:
-            "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
-          categories: ["Tutorial", "Javascript"],
-          displayImage: "puttered_3.png",
-          type: "Blog"
-        },
-        {
-          id: 1,
-          title: "Tutorial 1",
-          description:
-            "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
-          categories: ["Tutorial", "Javascript"],
-          displayImage: "puttered_3.png",
-          type: "Tutorial"
-        },
-        {
-          id: 2,
-          title: "Lab 1",
-          description:
-            "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
-          categories: ["Tutorial", "Javascript"],
-          displayImage: "puttered_3.png",
-          type: "Lab"
-        },
-        {
-          id: 3,
-          title: "Tutorial 2",
-          description:
-            "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
-          categories: ["Tutorial", "Javascript"],
-          displayImage: "puttered_3.png",
-          type: "Tutorial"
-        },
-        {
-          id: 4,
-          title: "Lab 2",
-          description:
-            "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
-          categories: ["Tutorial", "Javascript"],
-          displayImage: "puttered_3.png",
-          type: "Lab"
-        },
-        {
-          id: 5,
-          title: "Blog 2",
-          description:
-            "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
-          categories: ["Tutorial", "Javascript"],
-          displayImage: "puttered_3.png",
-          type: "Blog"
-        }
-      ],
+      blogs: null,
+      // blogs: [
+      //   {
+      //     id: 0,
+      //     title: "Google's 3D Card Flip Tutorial",
+      //     description:
+      //       "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
+      //     categories: ["Tutorial", "Javascript"],
+      //     displayImage: "puttered_3.png",
+      //     type: "Blog"
+      //   },
+      //   {
+      //     id: 1,
+      //     title: "Tutorial 1",
+      //     description:
+      //       "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
+      //     categories: ["Tutorial", "Javascript"],
+      //     displayImage: "puttered_3.png",
+      //     type: "Tutorial"
+      //   },
+      //   {
+      //     id: 2,
+      //     title: "Lab 1",
+      //     description:
+      //       "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
+      //     categories: ["Tutorial", "Javascript"],
+      //     displayImage: "puttered_3.png",
+      //     type: "Lab"
+      //   },
+      //   {
+      //     id: 3,
+      //     title: "Tutorial 2",
+      //     description:
+      //       "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
+      //     categories: ["Tutorial", "Javascript"],
+      //     displayImage: "puttered_3.png",
+      //     type: "Tutorial"
+      //   },
+      //   {
+      //     id: 4,
+      //     title: "Lab 2",
+      //     description:
+      //       "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
+      //     categories: ["Tutorial", "Javascript"],
+      //     displayImage: "puttered_3.png",
+      //     type: "Lab"
+      //   },
+      //   {
+      //     id: 5,
+      //     title: "Blog 2",
+      //     description:
+      //       "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
+      //     categories: ["Tutorial", "Javascript"],
+      //     displayImage: "puttered_3.png",
+      //     type: "Blog"
+      //   }
+      // ],
       clickedItem: null,
       cardCloneStyle: {},
       cardClass: null
