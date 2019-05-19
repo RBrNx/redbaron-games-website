@@ -126,6 +126,8 @@ export default {
         transform: null
       };
 
+      this.cardClass = null;
+
       setTimeout(() => {
         for (let i = 0; i < this.$refs.portfolioItems.length; i++) {
           this.$refs.portfolioItems[i].$el.style.opacity = 1;

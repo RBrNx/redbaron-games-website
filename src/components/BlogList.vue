@@ -132,12 +132,13 @@ export default {
 
       this.$emit("modalClosed");
 
+      this.cardClass = null;
+
       setTimeout(() => {
         for (let i = 0; i < this.$refs.blogs.length; i++) {
           this.$refs.blogs[i].$el.style.opacity = 1;
         }
         this.clickedItem = null;
-        this.cardClass = null;
       }, 600);
     }
   },

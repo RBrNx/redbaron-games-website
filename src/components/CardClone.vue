@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div id="cardCloneOverlay" :class="cloneClass" @click="closeCardClone"></div>
-    <div id="cardClone" :style="cardStyle" :class="cloneClass">
+    <div id="cardCloneOverlay" :class="cardClass" @click="closeCardClone"></div>
+    <div id="cardClone" :style="cardStyle" :class="cardClass">
       <div id="cardFlip" :style="{ transform: cardTransform }">
         <div id="cardFront">
           <slot name="cardFront"></slot>
@@ -33,20 +33,13 @@ export default {
   },
   data() {
     return {
-      cloneClass: null,
       cardTransform: "rotateY(0deg)"
     };
-  },
-  watch: {
-    cardClass(val) {
-      this.cloneClass = val;
-    }
   },
   methods: {
     closeCardClone() {
       this.$emit("closeCardClone");
       this.cardTransform = "rotateY(0deg)";
-      this.cloneClass = null;
       document.body.classList.remove("overlayShown");
     }
   },

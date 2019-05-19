@@ -9,6 +9,7 @@
         :source="itemData.blog"
         :anchorAttributes="{ target: '_blank' }"
         :postrender="parseHTML"
+        @rendered="handleRenderedEvent"
       ></vue-markdown>
     </div>
   </div>
@@ -16,6 +17,8 @@
 
 <script>
 import VueMarkdown from "vue-markdown";
+import Prism from "prismjs";
+import "prismjs/themes/prism-okaidia.css";
 
 export default {
   name: "PortfolioItemInformation",
@@ -40,6 +43,9 @@ export default {
       }
 
       return doc.body.innerHTML;
+    },
+    handleRenderedEvent() {
+      this.$nextTick(() => Prism.highlightAll());
     }
   }
 };
@@ -71,9 +77,30 @@ export default {
 
   #article {
     .text {
-      line-height: 1.3em;
+      line-height: 1.4em;
       color: $bodytextGrey;
       font-size: 18px;
+
+      h2 {
+        color: $headingGrey;
+      }
+
+      img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      pre[class*="language-"] {
+        background: darken($primaryGrey, 0.25%);
+      }
+
+      code {
+        background: darken($primaryGrey, 0.25%);
+        padding: 3px;
+        border-radius: 3px;
+        color: $headingGrey;
+      }
 
       .fancyLink {
         position: relative;
@@ -110,6 +137,7 @@ export default {
           top: 0;
           width: 0%;
           transition: width 0.325s cubic-bezier(0.65, 0.2, 0, 1);
+          border-radius: 3px 3px 0px 0px;
         }
 
         &:after {
@@ -123,6 +151,7 @@ export default {
           right: 0;
           width: 0%;
           transition: width 0.325s cubic-bezier(0.65, 0.2, 0, 1);
+          border-radius: 0px 0px 3px 3px;
         }
       }
     }
