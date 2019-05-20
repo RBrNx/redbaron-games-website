@@ -6,6 +6,7 @@
     >
       <div id="title">{{ itemData.title }}</div>
       <div id="subtitle">{{ itemData.description }}</div>
+      <hero-button></hero-button>
     </div>
     <div id="article">
       <vue-markdown
@@ -24,12 +25,14 @@
 import VueMarkdown from "vue-markdown";
 import Prism from "prismjs";
 import "prismjs/themes/prism-okaidia.css";
+import HeroButton from "./HeroButton";
 
 export default {
   name: "PortfolioItemInformation",
   props: ["itemData"],
   components: {
-    VueMarkdown
+    VueMarkdown,
+    HeroButton
   },
   methods: {
     crossClicked() {
@@ -61,7 +64,6 @@ export default {
 
 .blogArticle {
   background: lighten($primaryGrey, 5%);
-  height: 100%;
   width: 100%;
 
   #blogHeader {
@@ -69,6 +71,7 @@ export default {
     height: 100vh;
     display: flex;
     justify-content: center;
+    align-items: center;
     flex-direction: column;
     margin-bottom: 50px;
 
