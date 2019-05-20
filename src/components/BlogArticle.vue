@@ -4,8 +4,10 @@
       id="blogHeader"
       :style="{ 'background': `url(${itemData.blogImage.url}) no-repeat center/cover` }"
     >
-      <div id="title">{{ itemData.title }}</div>
-      <div id="subtitle">{{ itemData.description }}</div>
+      <div class="headerText">
+        <div id="title">{{ itemData.title }}</div>
+        <div id="subtitle">{{ itemData.description }}</div>
+      </div>
       <hero-button></hero-button>
     </div>
     <div id="article">
@@ -75,24 +77,52 @@ export default {
     flex-direction: column;
     margin-bottom: 50px;
 
-    #title {
-      font-family: "Fjalla One", sans-serif;
-      font-size: 45px;
-      text-transform: uppercase;
-      color: #fff;
-      position: relative;
-      text-align: center;
-      margin-top: 50px;
-      margin-bottom: 225px;
-    }
+    .headerText {
+      padding: 50px 15%;
 
-    #subtitle {
-      font-family: Roboto;
-      font-size: 20px;
-      color: $headingGrey;
-      font-style: italic;
-      position: relative;
-      text-align: center;
+      #title {
+        font-family: "Fjalla One", sans-serif;
+        font-size: 42px;
+        text-transform: uppercase;
+        color: #fff;
+        position: relative;
+        text-align: center;
+        margin-top: 50px;
+        margin-bottom: 125px;
+      }
+
+      #subtitle {
+        font-family: Roboto;
+        font-size: 20px;
+        color: $headingGrey;
+        font-style: italic;
+        position: relative;
+        text-align: center;
+      }
+
+      @include tablet {
+        padding: 0 8%;
+
+        #title {
+          font-size: 52px;
+        }
+
+        #subtitle {
+          font-size: 24px;
+        }
+      }
+
+      @include desktop {
+        padding: 0 20%;
+
+        #title {
+          font-size: 68px;
+        }
+
+        #subtitle {
+          font-size: 24px;
+        }
+      }
     }
 
     &:before {
