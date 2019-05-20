@@ -10,14 +10,14 @@
 import { setTimeout } from "timers";
 export default {
   name: "HeroButton",
+  props: ["scrollTo"],
   methods: {
     handleScroll() {
       this.opacity = 1 - window.scrollY / 300;
     },
     scrollDown() {
-      const topContainer =
-        document.getElementById("specialitiesContainer") ||
-        document.getElementById("portfolioContainer");
+      if (!this.scrollTo) return;
+      const topContainer = document.querySelector(this.scrollTo);
 
       topContainer.scrollIntoView({
         behavior: "smooth",

@@ -1,6 +1,6 @@
 <template>
   <div class="blog">
-    <hero-header :backgroundImage="heroImage">
+    <hero-header :backgroundImage="heroImage" heroButtonScrollTo="#blogListContainer">
       <div class="title enter-1" slot="title">
         <h2>
           Technology.

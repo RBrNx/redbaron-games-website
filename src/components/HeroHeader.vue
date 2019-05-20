@@ -25,7 +25,7 @@
       <slot name="subtitle"></slot>
     </div>
     <slot></slot>
-    <hero-button v-if="!hideHeroButton"></hero-button>
+    <hero-button v-if="!hideHeroButton" :scrollTo="heroButtonScrollTo"></hero-button>
   </section>
 </template>
 
@@ -34,7 +34,7 @@ import HeroButton from "../components/HeroButton";
 
 export default {
   name: "HeroHeader",
-  props: ["backgroundImage", "hideHeroButton"],
+  props: ["backgroundImage", "hideHeroButton", "heroButtonScrollTo"],
   components: {
     HeroButton
   }

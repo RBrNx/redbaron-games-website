@@ -1,6 +1,9 @@
 <template>
   <div class="about">
-    <hero-header :backgroundImage="backgroundImages[imageIndex]">
+    <hero-header
+      :backgroundImage="backgroundImages[imageIndex]"
+      heroButtonScrollTo="#specialitiesContainer"
+    >
       <h2 class="title enter-1" slot="title">
         Elementary, my dear
         <span class="highlight">Watson.</span>
@@ -36,7 +39,6 @@ import HeroHeader from "../components/HeroHeader";
 import Specialities from "../components/Specialities";
 import Technologies from "../components/Technologies";
 import WebFooter from "../components/Footer";
-import { clearInterval } from "timers";
 
 export default {
   name: "about",

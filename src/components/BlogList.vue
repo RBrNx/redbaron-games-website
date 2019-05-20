@@ -145,62 +145,6 @@ export default {
   data() {
     return {
       blogs: null,
-      // blogs: [
-      //   {
-      //     id: 0,
-      //     title: "Google's 3D Card Flip Tutorial",
-      //     description:
-      //       "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
-      //     categories: ["Tutorial", "Javascript"],
-      //     displayImage: "puttered_3.png",
-      //     type: "Blog"
-      //   },
-      //   {
-      //     id: 1,
-      //     title: "Tutorial 1",
-      //     description:
-      //       "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
-      //     categories: ["Tutorial", "Javascript"],
-      //     displayImage: "puttered_3.png",
-      //     type: "Tutorial"
-      //   },
-      //   {
-      //     id: 2,
-      //     title: "Lab 1",
-      //     description:
-      //       "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
-      //     categories: ["Tutorial", "Javascript"],
-      //     displayImage: "puttered_3.png",
-      //     type: "Lab"
-      //   },
-      //   {
-      //     id: 3,
-      //     title: "Tutorial 2",
-      //     description:
-      //       "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
-      //     categories: ["Tutorial", "Javascript"],
-      //     displayImage: "puttered_3.png",
-      //     type: "Tutorial"
-      //   },
-      //   {
-      //     id: 4,
-      //     title: "Lab 2",
-      //     description:
-      //       "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
-      //     categories: ["Tutorial", "Javascript"],
-      //     displayImage: "puttered_3.png",
-      //     type: "Lab"
-      //   },
-      //   {
-      //     id: 5,
-      //     title: "Blog 2",
-      //     description:
-      //       "A quick tutorial on how to implement the 3D Card Flip animation found in some google products.",
-      //     categories: ["Tutorial", "Javascript"],
-      //     displayImage: "puttered_3.png",
-      //     type: "Blog"
-      //   }
-      // ],
       clickedItem: null,
       cardCloneStyle: {},
       cardClass: null

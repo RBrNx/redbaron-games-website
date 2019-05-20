@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <hero-header :backgroundImage="heroImage">
+    <hero-header :backgroundImage="heroImage" heroButtonScrollTo="#portfolioContainer">
       <div class="title enter-1" slot="title">
         <h2>The Name's Watson.</h2>
         <h2>
