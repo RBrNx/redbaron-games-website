@@ -63,8 +63,6 @@ export default {
   background: lighten($primaryGrey, 5%);
   height: 100%;
   width: 100%;
-  padding-left: 25px;
-  padding-right: 25px;
 
   #blogHeader {
     position: relative;
@@ -72,12 +70,13 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    margin-bottom: 50px;
 
     #title {
       font-family: "Fjalla One", sans-serif;
       font-size: 45px;
       text-transform: uppercase;
-      color: $headingGrey;
+      color: #fff;
       position: relative;
       text-align: center;
       margin-top: 50px;
@@ -87,7 +86,7 @@ export default {
     #subtitle {
       font-family: Roboto;
       font-size: 20px;
-      color: $bodytextGrey;
+      color: $headingGrey;
       font-style: italic;
       position: relative;
       text-align: center;
@@ -119,6 +118,9 @@ export default {
   }
 
   #article {
+    padding-left: 25px;
+    padding-right: 25px;
+
     .text {
       line-height: 1.4em;
       color: $bodytextGrey;

@@ -7,7 +7,9 @@
           <slot name="cardFront"></slot>
         </div>
         <div id="cardBack">
-          <font-awesome-icon id="closeIcon" icon="times" @click="closeCardClone"></font-awesome-icon>
+          <span id="closeButton" @click="closeCardClone">
+            <font-awesome-icon id="closeIcon" icon="times"></font-awesome-icon>
+          </span>
           <VuePerfectScrollbar class="scrollContainer">
             <slot name="cardBack"></slot>
           </VuePerfectScrollbar>
@@ -122,6 +124,10 @@ export default {
         top: 0 !important;
         transform: none !important;
       }
+
+      #cardBack {
+        padding: 1px;
+      }
     }
 
     #cardBack {
@@ -157,26 +163,35 @@ export default {
     z-index: 101;
     transform: rotateY(180deg);
     background: lighten($primaryGrey, 5%);
-    //padding: 50px;
     overflow: hidden;
     border-radius: 5px;
 
     .scrollContainer {
-      //overflow-y: auto;
       height: 100%;
     }
 
-    #closeIcon {
+    #closeButton {
       position: absolute;
-      top: 15px;
+      top: 25px;
       right: 20px;
-      font-size: 30px;
-      color: lighten($primaryGrey, 15%);
-      cursor: pointer;
       z-index: 99;
+      background-color: transparent;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      transition: background 0.4s ease-out;
 
       &:hover {
-        color: lighten($headingGrey, 5%);
+        background-color: lighten($primaryGrey, 15%);
+      }
+
+      #closeIcon {
+        font-size: 24px;
+        color: $bodytextGrey;
       }
     }
   }
