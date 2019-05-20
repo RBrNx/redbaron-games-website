@@ -1,7 +1,12 @@
 <template>
   <div class="blogArticle">
-    <div id="title">{{ itemData.title }}</div>
-    <div id="subtitle">{{ itemData.description }}</div>
+    <div
+      id="blogHeader"
+      :style="{ 'background': `url(${itemData.blogImage.url}) no-repeat center/cover` }"
+    >
+      <div id="title">{{ itemData.title }}</div>
+      <div id="subtitle">{{ itemData.description }}</div>
+    </div>
     <div id="article">
       <vue-markdown
         v-if="itemData.blog"
@@ -61,18 +66,56 @@ export default {
   padding-left: 25px;
   padding-right: 25px;
 
-  #title {
-    font-family: "Fjalla One", sans-serif;
-    font-size: 45px;
-    text-transform: uppercase;
-    color: $headingGrey;
-  }
+  #blogHeader {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
-  #subtitle {
-    font-family: Roboto;
-    font-size: 20px;
-    color: $bodytextGrey;
-    font-style: italic;
+    #title {
+      font-family: "Fjalla One", sans-serif;
+      font-size: 45px;
+      text-transform: uppercase;
+      color: $headingGrey;
+      position: relative;
+      text-align: center;
+      margin-top: 50px;
+      margin-bottom: 225px;
+    }
+
+    #subtitle {
+      font-family: Roboto;
+      font-size: 20px;
+      color: $bodytextGrey;
+      font-style: italic;
+      position: relative;
+      text-align: center;
+    }
+
+    &:before {
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.85),
+        rgba(0, 0, 0, 0.7)
+      );
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    @include tablet {
+      #title {
+        margin-bottom: 100px;
+      }
+
+      #subtitle {
+        font-size: 24px;
+      }
+    }
   }
 
   #article {
