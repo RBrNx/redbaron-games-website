@@ -86,14 +86,6 @@ export default {
       });
 
       return;
-
-      // if (this.clickedItem !== null) return;
-
-      // ref.style.opacity = 0;
-
-      // setTimeout(() => {
-      //   this.cardClass = "shown";
-      // }, 100);
     },
     closeCardModal() {
       const ref = this.clickedItem.ref;
