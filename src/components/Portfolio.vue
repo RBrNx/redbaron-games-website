@@ -58,24 +58,7 @@ import PortfolioItemInformation from "../components/PortfolioItemInformation";
 import CardClone from "../components/CardClone";
 import { setTimeout } from "timers";
 import { ContentLoader } from "vue-content-loader";
-
-import gql from "graphql-tag";
-
-const ALL_PORTFOLIO_ITEMS_QUERY = gql`
-  query portfolioItems {
-    portfolioItems(where: { visible: true, status: PUBLISHED }) {
-      id
-      title
-      description
-      aboutProject
-      carouselImages
-      techSheet
-      links
-      visible
-      displayImage
-    }
-  }
-`;
+import { ALL_PORTFOLIO_ITEMS_QUERY } from "../library/Queries";
 
 export default {
   name: "portfolio",
