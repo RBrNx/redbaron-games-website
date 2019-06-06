@@ -23,17 +23,19 @@
         </content-loader>
       </div>
       <div v-if="$apollo.error">There has been an error loading my portfolio.</div>
-      <div class="items">
+      <div class="items" v-if="!$apollo.loading && !$apollo.error">
         <portfolio-item
           v-for="(item, index) in portfolioItems"
           ref="portfolioItems"
+          :id="item.id"
           :key="item.id"
           :itemData="item"
           :itemClass="`enter-${index}`"
           @buttonClick="openCardModal(item.id)"
         ></portfolio-item>
       </div>
-      <card-clone
+      <router-view v-if="!$apollo.loading && !$apollo.error"/>
+      <!-- <card-clone
         v-if="clickedItem !== null"
         :customStyle="cardCloneStyle"
         :cardClass="cardClass"
@@ -45,7 +47,7 @@
         <template v-slot:cardBack>
           <portfolio-item-information :itemData="clickedItem.item"></portfolio-item-information>
         </template>
-      </card-clone>
+      </card-clone>-->
     </div>
   </section>
 </template>
