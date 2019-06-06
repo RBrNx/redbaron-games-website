@@ -48,17 +48,26 @@ export default {
     }
   },
   mounted() {
+    const cardElement = document.getElementById(this.$route.params.id);
+    const viewportOffset = cardElement.getBoundingClientRect();
+
+    this.customStyle = {
+      height: `${cardElement.clientHeight}px`,
+      width: `${cardElement.clientWidth}px`,
+      left: `${viewportOffset.left}px`,
+      top: `${viewportOffset.top}px`
+    };
+
     setTimeout(() => {
       const isOverHalfway =
         parseFloat(this.customStyle.left) +
           parseFloat(this.customStyle.width) / 2 >
         window.innerWidth / 2;
       const transform = isOverHalfway ? "rotateY(-180deg)" : "rotateY(180deg)";
-
       this.cardTransform = transform;
-      this.cloneClass = "shown";
+      this.cardClass = "shown";
       document.body.classList.add("overlayShown");
-    }, 50);
+    }, 150);
   }
 };
 </script>
