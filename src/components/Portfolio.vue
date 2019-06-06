@@ -75,29 +75,25 @@ export default {
   },
   methods: {
     openCardModal(id) {
-      if (this.clickedItem !== null) return;
+      const itemData = this.portfolioItems.find(p => p.id === id);
 
-      const ref = this.$refs.portfolioItems.find(p => p.$vnode.key === id).$el;
-      const viewportOffset = ref.getBoundingClientRect();
+      this.$router.push({
+        name: "portfolioItem",
+        params: {
+          id,
+          itemData
+        }
+      });
 
-      this.clickedItem = {
-        item: this.portfolioItems.find(p => p.id === id),
-        ref: ref,
-        bodyHeight: ref.getElementsByClassName("body")[0].clientHeight
-      };
-      this.cardCloneStyle = {
-        height: `${ref.clientHeight}px`,
-        width: `${ref.clientWidth}px`,
-        left: `${viewportOffset.left}px`,
-        top: `${viewportOffset.top}px`,
-        transform: null
-      };
+      return;
 
-      ref.style.opacity = 0;
+      // if (this.clickedItem !== null) return;
 
-      setTimeout(() => {
-        this.cardClass = "shown";
-      }, 100);
+      // ref.style.opacity = 0;
+
+      // setTimeout(() => {
+      //   this.cardClass = "shown";
+      // }, 100);
     },
     closeCardModal() {
       const ref = this.clickedItem.ref;
