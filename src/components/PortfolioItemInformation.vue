@@ -1,8 +1,8 @@
 <template>
-  <div class="portfolioItemInformation">
-    <div id="title">{{ itemData.title }}</div>
-    <div id="subtitle">{{ itemData.description }}</div>
-    <div id="carousel">
+  <div class="portfolioItemInformation" v-if="!loading">
+    <div id="title">{{ portfolioItem.title }}</div>
+    <div id="subtitle">{{ portfolioItem.description }}</div>
+    <div id="carousel" v-resize="resizeCarousel">
       <carousel
         :perPage="1"
         :navigationEnable="true"
@@ -10,7 +10,7 @@
         paginationActiveColor="#c32626"
         paginationColor="#1d1d1d"
       >
-        <slide v-for="(image, index) in itemData.carouselImages" :key="index">
+        <slide v-for="(image, index) in portfolioItem.carouselImages" :key="index">
           <img class="carouselImage" :src="require(`../assets/project-images/${image}`)">
         </slide>
       </carousel>
@@ -19,9 +19,9 @@
       <div id="description">
         <div class="title">About this project</div>
         <vue-markdown
-          v-if="itemData.aboutProject"
+          v-if="portfolioItem.aboutProject"
           class="text"
-          :source="itemData.aboutProject"
+          :source="portfolioItem.aboutProject"
           :anchorAttributes="{ target: '_blank' }"
           :postrender="parseHTML"
         ></vue-markdown>
@@ -30,11 +30,11 @@
         <div class="title">Technical Sheet</div>
         <div class="subtitle">Code technologies and Skills used in this project</div>
         <ul class="list">
-          <li v-for="(tech, index) in itemData.techSheet" :key="index">{{ tech }}</li>
+          <li v-for="(tech, index) in portfolioItem.techSheet" :key="index">{{ tech }}</li>
         </ul>
       </div>
       <div id="links">
-        <link-button v-for="(link, index) in itemData.links" :key="index" :href="link.link">
+        <link-button v-for="(link, index) in portfolioItem.links" :key="index" :href="link.link">
           <font-awesome-icon :icon="linkIcon(link.linkType)"></font-awesome-icon>
           {{ link.linkText }}
         </link-button>
@@ -47,6 +47,8 @@
 import LinkButton from "./LinkButton";
 import { Carousel, Slide } from "vue-carousel";
 import VueMarkdown from "vue-markdown";
+import { PORTFOLIO_ITEM } from "../library/Queries";
+import resize from "vue-resize-directive";
 
 export default {
   name: "PortfolioItemInformation",
@@ -56,6 +58,9 @@ export default {
     Carousel,
     Slide,
     VueMarkdown
+  },
+  directives: {
+    resize
   },
   methods: {
     crossClicked() {
@@ -77,12 +82,29 @@ export default {
       }
 
       return doc.body.innerHTML;
+    },
+    resizeCarousel() {
+      this.$refs.carousel.onResize();
     }
   },
   mounted() {
-    for (let i = 0; i <= 7; i++) {
-      setTimeout(() => this.$refs.carousel.onResize(), i * 100);
-    }
+    const { id } = this.$route.params;
+
+    this.$apollo
+      .query({
+        query: PORTFOLIO_ITEM,
+        variables: { id }
+      })
+      .then(({ data }) => {
+        this.portfolioItem = data.portfolioItem;
+        this.loading = false;
+      });
+  },
+  data() {
+    return {
+      loading: true,
+      portfolioItem: null
+    };
   }
 };
 </script>

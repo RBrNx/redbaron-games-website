@@ -1,17 +1,17 @@
 <template>
   <div>
     <div id="cardCloneOverlay" :class="cardClass" @click="closeCardClone"></div>
-    <div id="cardClone" :style="cardStyle" :class="cardClass">
+    <div id="cardClone" :style="customStyle" :class="cardClass">
       <div id="cardFlip" :style="{ transform: cardTransform }">
         <div id="cardFront">
-          <slot name="cardFront"></slot>
+          <component :is="cardFrontComponent" v-bind="{ itemData }"></component>
         </div>
         <div id="cardBack">
           <span id="closeButton" @click="closeCardClone">
             <font-awesome-icon id="closeIcon" icon="times"></font-awesome-icon>
           </span>
           <VuePerfectScrollbar class="scrollContainer">
-            <slot name="cardBack"></slot>
+            <component :is="cardBackComponent"></component>
           </VuePerfectScrollbar>
         </div>
       </div>
@@ -24,39 +24,79 @@ import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "CardClone",
-  props: ["customStyle", "cardClass"],
+  props: ["cardFrontComponent", "cardBackComponent"],
   components: {
     VuePerfectScrollbar
   },
-  computed: {
-    cardStyle() {
-      return this.customStyle ? this.customStyle : {};
-    }
-  },
   data() {
     return {
-      cardTransform: "rotateY(0deg)"
+      cardTransform: "rotateY(0deg)",
+      customStyle: null,
+      cardClass: null,
+      clonedElement: null
     };
+  },
+  computed: {
+    itemData() {
+      return this.$route.params.itemData;
+    }
   },
   methods: {
     closeCardClone() {
       this.$emit("closeCardClone");
+      this.$el.addEventListener("transitionend", () => {
+        if (this.$route.params.id) {
+          this.onClosed();
+        }
+      });
       this.cardTransform = "rotateY(0deg)";
       document.body.classList.remove("overlayShown");
+
+      const cardElement = this.clonedElement;
+      const viewportOffset = cardElement.getBoundingClientRect();
+
+      this.cardClass = null;
+
+      this.customStyle = {
+        height: `${cardElement.clientHeight}px`,
+        width: `${cardElement.clientWidth}px`,
+        left: `${viewportOffset.left}px`,
+        top: `${viewportOffset.top}px`
+      };
+    },
+    onClosed() {
+      this.clonedElement.style.opacity = 1;
+
+      const currPath = this.$route.path;
+      const id = this.$route.params.id;
+      const newPath = currPath.replace(`/${id}`, "");
+      this.$router.replace({ path: newPath });
     }
   },
   mounted() {
+    const cardElement = document.getElementById(this.$route.params.id);
+    const viewportOffset = cardElement.getBoundingClientRect();
+    this.clonedElement = cardElement;
+
+    this.customStyle = {
+      height: `${cardElement.clientHeight}px`,
+      width: `${cardElement.clientWidth}px`,
+      left: `${viewportOffset.left}px`,
+      top: `${viewportOffset.top}px`
+    };
+
+    cardElement.style.opacity = 0;
+
     setTimeout(() => {
       const isOverHalfway =
         parseFloat(this.customStyle.left) +
           parseFloat(this.customStyle.width) / 2 >
         window.innerWidth / 2;
       const transform = isOverHalfway ? "rotateY(-180deg)" : "rotateY(180deg)";
-
       this.cardTransform = transform;
-      this.cloneClass = "shown";
+      this.cardClass = "shown";
       document.body.classList.add("overlayShown");
-    }, 50);
+    }, 150);
   }
 };
 </script>
