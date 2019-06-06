@@ -1,6 +1,6 @@
 <template>
   <nav :class="{ 'hidden': hideNavbar, 'scrollTop': scrollTop }">
-    <router-link to="/">Portfolio</router-link>
+    <router-link to="/portfolio">Portfolio</router-link>
     <router-link to="/about">About</router-link>
     <router-link to="/blog">Blog</router-link>
     <router-link to="/CV">CV</router-link>
