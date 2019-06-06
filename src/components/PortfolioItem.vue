@@ -1,11 +1,11 @@
 <template>
-  <div :class="`portfolioItem  ${itemClass}`">
+  <div :class="`portfolioItem  ${itemClass}`" v-if="portfolioData">
     <div class="header">
-      <img v-if="imageLink" :src="require(`../assets/project-images/${imageLink}`)">
+      <img :src="require(`../assets/project-images/${portfolioData.displayImage}`)">
     </div>
     <div class="body">
-      <div class="title">{{ title }}</div>
-      <div class="description">{{ description }}</div>
+      <div class="title">{{ portfolioData.title }}</div>
+      <div class="description">{{ portfolioData.description }}</div>
       <primary-button @buttonClick="buttonClick">Learn More</primary-button>
     </div>
   </div>
@@ -13,31 +13,39 @@
 
 <script>
 import PrimaryButton from "./PrimaryButton";
+import { PORTFOLIO_ITEM } from "../library/Queries";
 
 export default {
   name: "PortfolioItem",
   components: { PrimaryButton },
   props: ["itemData", "itemClass"],
   computed: {
-    title() {
-      return this.itemData ? this.itemData.title : null;
-    },
-    description() {
-      return this.itemData ? this.itemData.description : null;
-    },
-    imageLink() {
-      return this.itemData ? this.itemData.displayImage : null;
-    },
-    name() {
-      return this.itemData ? this.itemData.name : null;
-    },
-    bodyHeight() {
-      return this.bodySize ? this.bodySize + "px" : null;
+    portfolioData() {
+      return this.itemData || this.portfolioItem;
     }
+  },
+  data() {
+    return {
+      portfolioItem: null
+    };
   },
   methods: {
     buttonClick() {
       this.$emit("buttonClick");
+    }
+  },
+  mounted() {
+    if (!this.itemData && this.$route.params.id) {
+      const { id } = this.$route.params;
+
+      this.$apollo
+        .query({
+          query: PORTFOLIO_ITEM,
+          variables: { id }
+        })
+        .then(({ data }) => {
+          this.portfolioItem = data.portfolioItem;
+        });
     }
   }
 };
