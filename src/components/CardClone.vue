@@ -32,7 +32,8 @@ export default {
     return {
       cardTransform: "rotateY(0deg)",
       customStyle: null,
-      cardClass: null
+      cardClass: null,
+      clonedElement: null
     };
   },
   computed: {
@@ -43,13 +44,39 @@ export default {
   methods: {
     closeCardClone() {
       this.$emit("closeCardClone");
+      this.$el.addEventListener("transitionend", () => {
+        if (this.$route.params.id) {
+          this.onClosed();
+        }
+      });
       this.cardTransform = "rotateY(0deg)";
       document.body.classList.remove("overlayShown");
+
+      const cardElement = this.clonedElement;
+      const viewportOffset = cardElement.getBoundingClientRect();
+
+      this.cardClass = null;
+
+      this.customStyle = {
+        height: `${cardElement.clientHeight}px`,
+        width: `${cardElement.clientWidth}px`,
+        left: `${viewportOffset.left}px`,
+        top: `${viewportOffset.top}px`
+      };
+    },
+    onClosed() {
+      this.clonedElement.style.opacity = 1;
+
+      const currPath = this.$route.path;
+      const id = this.$route.params.id;
+      const newPath = currPath.replace(`/${id}`, "");
+      this.$router.replace({ path: newPath });
     }
   },
   mounted() {
     const cardElement = document.getElementById(this.$route.params.id);
     const viewportOffset = cardElement.getBoundingClientRect();
+    this.clonedElement = cardElement;
 
     this.customStyle = {
       height: `${cardElement.clientHeight}px`,
@@ -57,6 +84,8 @@ export default {
       left: `${viewportOffset.left}px`,
       top: `${viewportOffset.top}px`
     };
+
+    cardElement.style.opacity = 0;
 
     setTimeout(() => {
       const isOverHalfway =
