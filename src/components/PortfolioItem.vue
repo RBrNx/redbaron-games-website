@@ -3,7 +3,7 @@
     <div class="header">
       <img v-if="imageLink" :src="require(`../assets/project-images/${imageLink}`)">
     </div>
-    <div class="body" :style="{ 'height': bodyHeight }">
+    <div class="body">
       <div class="title">{{ title }}</div>
       <div class="description">{{ description }}</div>
       <primary-button @buttonClick="buttonClick">Learn More</primary-button>
@@ -17,7 +17,7 @@ import PrimaryButton from "./PrimaryButton";
 export default {
   name: "PortfolioItem",
   components: { PrimaryButton },
-  props: ["itemData", "bodySize", "itemClass"],
+  props: ["itemData", "itemClass"],
   computed: {
     title() {
       return this.itemData ? this.itemData.title : null;
@@ -52,6 +52,7 @@ export default {
   background: lighten($primaryGrey, 5%);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
+  height: 100%;
 
   .header {
     overflow: hidden;
