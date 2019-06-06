@@ -48,6 +48,7 @@ import LinkButton from "./LinkButton";
 import { Carousel, Slide } from "vue-carousel";
 import VueMarkdown from "vue-markdown";
 import { PORTFOLIO_ITEM } from "../library/Queries";
+import resize from "vue-resize-directive";
 
 export default {
   name: "PortfolioItemInformation",
@@ -57,6 +58,9 @@ export default {
     Carousel,
     Slide,
     VueMarkdown
+  },
+  directives: {
+    resize
   },
   methods: {
     crossClicked() {
@@ -78,12 +82,15 @@ export default {
       }
 
       return doc.body.innerHTML;
+    },
+    resizeCarousel() {
+      this.$refs.carousel.onResize();
     }
   },
   mounted() {
-    for (let i = 0; i <= 7; i++) {
-      setTimeout(() => this.$refs.carousel.onResize(), i * 100);
-    }
+    const { id } = this.$route.params;
+
+    this.$apollo
       .query({
         query: PORTFOLIO_ITEM,
         variables: { id }
