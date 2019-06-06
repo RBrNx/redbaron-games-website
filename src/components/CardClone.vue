@@ -1,17 +1,17 @@
 <template>
   <div>
     <div id="cardCloneOverlay" :class="cardClass" @click="closeCardClone"></div>
-    <div id="cardClone" :style="cardStyle" :class="cardClass">
+    <div id="cardClone" :style="customStyle" :class="cardClass">
       <div id="cardFlip" :style="{ transform: cardTransform }">
         <div id="cardFront">
-          <slot name="cardFront"></slot>
+          <component :is="cardFrontComponent" v-bind="{ itemData }"></component>
         </div>
         <div id="cardBack">
           <span id="closeButton" @click="closeCardClone">
             <font-awesome-icon id="closeIcon" icon="times"></font-awesome-icon>
           </span>
           <VuePerfectScrollbar class="scrollContainer">
-            <slot name="cardBack"></slot>
+            <component :is="cardBackComponent"></component>
           </VuePerfectScrollbar>
         </div>
       </div>
@@ -24,19 +24,21 @@ import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "CardClone",
-  props: ["customStyle", "cardClass"],
+  props: ["cardFrontComponent", "cardBackComponent"],
   components: {
     VuePerfectScrollbar
   },
-  computed: {
-    cardStyle() {
-      return this.customStyle ? this.customStyle : {};
-    }
-  },
   data() {
     return {
-      cardTransform: "rotateY(0deg)"
+      cardTransform: "rotateY(0deg)",
+      customStyle: null,
+      cardClass: null
     };
+  },
+  computed: {
+    itemData() {
+      return this.$route.params.itemData;
+    }
   },
   methods: {
     closeCardClone() {
