@@ -25,6 +25,7 @@
         <blog-card
           v-for="(item, index) in blogs"
           ref="blogs"
+          :id="item.id"
           :key="item.id"
           :itemData="item"
           :itemClass="`enter-${index}`"
