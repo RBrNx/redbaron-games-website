@@ -1,17 +1,17 @@
 <template>
-  <div :class="`blogCard  ${itemClass}`">
+  <div :class="`blogCard ${itemClass}`" v-if="blogData">
     <div class="header">
-      <img v-if="imageLink" :src="imageLink">
+      <img :src="blogData.blogImage.url">
     </div>
     <div class="body">
-      <div class="title">{{ title }}</div>
-      <div class="description">{{ description }}</div>
+      <div class="title">{{ blogData.title }}</div>
+      <div class="description">{{ blogData.description }}</div>
       <primary-button @buttonClick="buttonClick">Read</primary-button>
       <div class="categories">
-        <span v-for="(cat, index) in categories" :key="index">{{ cat }}</span>
+        <span v-for="(cat, index) in blogData.categories" :key="index">{{ cat }}</span>
       </div>
     </div>
-    <card-ribbon :label="enums[type].label" :fill="enums[type].color"></card-ribbon>
+    <card-ribbon :label="enums[blogData.type].label" :fill="enums[blogData.type].color"></card-ribbon>
   </div>
 </template>
 
@@ -24,20 +24,8 @@ export default {
   components: { PrimaryButton, CardRibbon },
   props: ["itemData", "itemClass"],
   computed: {
-    title() {
-      return this.itemData ? this.itemData.title : null;
-    },
-    description() {
-      return this.itemData ? this.itemData.description : null;
-    },
-    categories() {
-      return this.itemData ? this.itemData.categories : null;
-    },
-    imageLink() {
-      return this.itemData ? this.itemData.blogImage.url : null;
-    },
-    type() {
-      return this.itemData ? this.itemData.blogType : null;
+    blogData() {
+      return this.itemData || this.blogItem;
     }
   },
   methods: {
