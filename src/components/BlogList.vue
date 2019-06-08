@@ -71,31 +71,40 @@ export default {
   },
   methods: {
     openCardModal(id) {
-      if (this.clickedItem !== null) return;
+      const itemData = this.blogs.find(b => b.id === id);
 
-      const ref = this.$refs.blogs.find(p => p.$vnode.key === id).$el;
-      const viewportOffset = ref.getBoundingClientRect();
+      this.$router.push({
+        name: "blogPost",
+        params: {
+          id,
+          itemData
+        }
+      });
+      // if (this.clickedItem !== null) return;
 
-      this.clickedItem = {
-        item: this.blogs.find(p => p.id === id),
-        ref: ref,
-        bodyHeight: ref.getElementsByClassName("body")[0].clientHeight
-      };
-      this.cardCloneStyle = {
-        height: `${ref.clientHeight}px`,
-        width: `${ref.clientWidth}px`,
-        left: `${viewportOffset.left}px`,
-        top: `${viewportOffset.top}px`,
-        transform: null
-      };
+      // const ref = this.$refs.blogs.find(p => p.$vnode.key === id).$el;
+      // const viewportOffset = ref.getBoundingClientRect();
 
-      ref.style.opacity = 0;
+      // this.clickedItem = {
+      //   item: this.blogs.find(p => p.id === id),
+      //   ref: ref,
+      //   bodyHeight: ref.getElementsByClassName("body")[0].clientHeight
+      // };
+      // this.cardCloneStyle = {
+      //   height: `${ref.clientHeight}px`,
+      //   width: `${ref.clientWidth}px`,
+      //   left: `${viewportOffset.left}px`,
+      //   top: `${viewportOffset.top}px`,
+      //   transform: null
+      // };
 
-      this.$emit("modalOpened");
+      // ref.style.opacity = 0;
 
-      setTimeout(() => {
-        this.cardClass = "shown fullscreen";
-      }, 100);
+      // this.$emit("modalOpened");
+
+      // setTimeout(() => {
+      //   this.cardClass = "shown fullscreen";
+      // }, 100);
     },
     closeCardModal() {
       const ref = this.clickedItem.ref;
@@ -123,10 +132,10 @@ export default {
   },
   data() {
     return {
-      blogs: null,
-      clickedItem: null,
-      cardCloneStyle: {},
-      cardClass: null
+      blogs: null
+      // clickedItem: null,
+      // cardCloneStyle: {},
+      // cardClass: null
     };
   }
 };
