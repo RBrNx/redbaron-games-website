@@ -22,7 +22,7 @@ import CardRibbon from "./CardRibbon";
 export default {
   name: "BlogCard",
   components: { PrimaryButton, CardRibbon },
-  props: ["itemData", "bodySize", "itemClass"],
+  props: ["itemData", "itemClass"],
   computed: {
     title() {
       return this.itemData ? this.itemData.title : null;
@@ -38,9 +38,6 @@ export default {
     },
     type() {
       return this.itemData ? this.itemData.blogType : null;
-    },
-    bodyHeight() {
-      return this.bodySize ? this.bodySize + "px" : null;
     }
   },
   methods: {
@@ -70,6 +67,7 @@ export default {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   position: relative;
+  height: 100%;
 
   .header {
     overflow: hidden;
