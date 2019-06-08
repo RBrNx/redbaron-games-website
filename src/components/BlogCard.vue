@@ -18,6 +18,7 @@
 <script>
 import PrimaryButton from "./PrimaryButton";
 import CardRibbon from "./CardRibbon";
+import { BLOG_POST } from "../library/Queries";
 
 export default {
   name: "BlogCard",
@@ -33,13 +34,28 @@ export default {
       this.$emit("buttonClick");
     }
   },
+  mounted() {
+    if (!this.itemData && this.$route.params.id) {
+      const { id } = this.$route.params;
+
+      this.$apollo
+        .query({
+          query: BLOG_POST,
+          variables: { id }
+        })
+        .then(({ data }) => {
+          this.blogPost = data.blog;
+        });
+    }
+  },
   data() {
     return {
       enums: {
         Blog: { label: "Blog", color: "#1D79FF" },
         Tutorial: { label: "Tutorial", color: "#E25D03" },
         Lab: { label: "Lab", color: "#c32626" }
-      }
+      },
+      blogPost: null
     };
   }
 };
