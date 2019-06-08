@@ -54,28 +54,7 @@ import BlogArticle from "./BlogArticle";
 import CardClone from "../components/CardClone";
 import { setTimeout } from "timers";
 import { ContentLoader } from "vue-content-loader";
-
-import gql from "graphql-tag";
-
-const ALL_BLOGS_QUERY = gql`
-  query blogs {
-    blogs(where: { status: PUBLISHED }) {
-      status
-      updatedAt
-      createdAt
-      id
-      title
-      description
-      blogImage {
-        id
-        url
-      }
-      blog
-      blogType
-      categories
-    }
-  }
-`;
+import { ALL_BLOGS_QUERY } from "../library/Queries";
 
 export default {
   name: "BlogList",

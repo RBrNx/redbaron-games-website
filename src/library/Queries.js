@@ -27,4 +27,24 @@ const PORTFOLIO_ITEM = gql`
   }
 `;
 
-export { ALL_PORTFOLIO_ITEMS_QUERY, PORTFOLIO_ITEM };
+const ALL_BLOGS_QUERY = gql`
+  query blogs {
+    blogs(where: { status: PUBLISHED }) {
+      status
+      updatedAt
+      createdAt
+      id
+      title
+      description
+      blogImage {
+        id
+        url
+      }
+      blog
+      blogType
+      categories
+    }
+  }
+`;
+
+export { ALL_PORTFOLIO_ITEMS_QUERY, PORTFOLIO_ITEM, ALL_BLOGS_QUERY };
