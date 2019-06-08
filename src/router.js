@@ -54,6 +54,7 @@ export default new Router({
           props: {
             cardFrontComponent: BlogCard,
             cardBackComponent: BlogArticle,
+            fullscreen: true,
           },
         },
       ],

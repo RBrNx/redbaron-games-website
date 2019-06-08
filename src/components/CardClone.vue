@@ -24,7 +24,7 @@ import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 export default {
   name: "CardClone",
-  props: ["cardFrontComponent", "cardBackComponent"],
+  props: ["cardFrontComponent", "cardBackComponent", "fullscreen"],
   components: {
     VuePerfectScrollbar
   },
@@ -94,7 +94,7 @@ export default {
         window.innerWidth / 2;
       const transform = isOverHalfway ? "rotateY(-180deg)" : "rotateY(180deg)";
       this.cardTransform = transform;
-      this.cardClass = "shown";
+      this.cardClass = "shown" + (this.fullscreen ? " fullscreen" : "");
       document.body.classList.add("overlayShown");
     }, 150);
   }
