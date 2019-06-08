@@ -30,6 +30,22 @@ const PORTFOLIO_ITEM = gql`
 const ALL_BLOGS_QUERY = gql`
   query blogs {
     blogs(where: { status: PUBLISHED }) {
+      id
+      title
+      description
+      blogImage {
+        id
+        url
+      }
+      blogType
+      categories
+    }
+  }
+`;
+
+const BLOG_POST = gql`
+  query blogs($id: ID) {
+    blog(where: { id: $id }) {
       status
       updatedAt
       createdAt
@@ -47,4 +63,9 @@ const ALL_BLOGS_QUERY = gql`
   }
 `;
 
-export { ALL_PORTFOLIO_ITEMS_QUERY, PORTFOLIO_ITEM, ALL_BLOGS_QUERY };
+export {
+  ALL_PORTFOLIO_ITEMS_QUERY,
+  PORTFOLIO_ITEM,
+  ALL_BLOGS_QUERY,
+  BLOG_POST,
+};
