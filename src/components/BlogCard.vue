@@ -11,7 +11,7 @@
         <span v-for="(cat, index) in blogData.categories" :key="index">{{ cat }}</span>
       </div>
     </div>
-    <card-ribbon :label="enums[blogData.type].label" :fill="enums[blogData.type].color"></card-ribbon>
+    <card-ribbon :label="enums[blogData.blogType].label" :fill="enums[blogData.blogType].color"></card-ribbon>
   </div>
 </template>
 
@@ -26,7 +26,7 @@ export default {
   props: ["itemData", "itemClass"],
   computed: {
     blogData() {
-      return this.itemData || this.blogItem;
+      return this.itemData || this.blogPost;
     }
   },
   methods: {
