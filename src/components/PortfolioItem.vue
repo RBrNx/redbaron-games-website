@@ -1,5 +1,5 @@
 <template>
-  <div :class="`portfolioItem  ${itemClass}`" v-if="portfolioData">
+  <div :class="`portfolioItem ${itemClass}`" v-if="portfolioData">
     <div class="header">
       <img :src="require(`../assets/project-images/${portfolioData.displayImage}`)">
     </div>

@@ -52,7 +52,6 @@ import resize from "vue-resize-directive";
 
 export default {
   name: "PortfolioItemInformation",
-  props: ["itemData"],
   components: {
     LinkButton,
     Carousel,

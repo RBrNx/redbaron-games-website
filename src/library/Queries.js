@@ -27,4 +27,45 @@ const PORTFOLIO_ITEM = gql`
   }
 `;
 
-export { ALL_PORTFOLIO_ITEMS_QUERY, PORTFOLIO_ITEM };
+const ALL_BLOGS_QUERY = gql`
+  query blogs {
+    blogs(where: { status: PUBLISHED }) {
+      id
+      title
+      description
+      blogImage {
+        id
+        url
+      }
+      blogType
+      categories
+    }
+  }
+`;
+
+const BLOG_POST = gql`
+  query blogs($id: ID) {
+    blog(where: { id: $id }) {
+      status
+      updatedAt
+      createdAt
+      id
+      title
+      description
+      blogImage {
+        id
+        url
+      }
+      blog
+      blogType
+      categories
+    }
+  }
+`;
+
+export {
+  ALL_PORTFOLIO_ITEMS_QUERY,
+  PORTFOLIO_ITEM,
+  ALL_BLOGS_QUERY,
+  BLOG_POST,
+};

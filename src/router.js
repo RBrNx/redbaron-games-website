@@ -8,6 +8,8 @@ import CV from './views/CV.vue';
 import CardClone from './components/CardClone.vue';
 import PortfolioItem from './components/PortfolioItem.vue';
 import PortfolioItemInformation from './components/PortfolioItemInformation.vue';
+import BlogCard from './components/BlogCard.vue';
+import BlogArticle from './components/BlogArticle.vue';
 
 Vue.use(Router);
 
@@ -44,6 +46,18 @@ export default new Router({
       path: '/blog',
       name: 'blog',
       component: Blog,
+      children: [
+        {
+          path: ':id',
+          component: CardClone,
+          name: 'blogPost',
+          props: {
+            cardFrontComponent: BlogCard,
+            cardBackComponent: BlogArticle,
+            fullscreen: true,
+          },
+        },
+      ],
     },
     {
       path: '/cv',

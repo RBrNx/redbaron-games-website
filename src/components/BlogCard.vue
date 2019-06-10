@@ -1,51 +1,51 @@
 <template>
-  <div :class="`blogCard  ${itemClass}`">
+  <div :class="`blogCard ${itemClass}`" v-if="blogData">
     <div class="header">
-      <img v-if="imageLink" :src="imageLink">
+      <img :src="blogData.blogImage.url">
     </div>
     <div class="body">
-      <div class="title">{{ title }}</div>
-      <div class="description">{{ description }}</div>
+      <div class="title">{{ blogData.title }}</div>
+      <div class="description">{{ blogData.description }}</div>
       <primary-button @buttonClick="buttonClick">Read</primary-button>
       <div class="categories">
-        <span v-for="(cat, index) in categories" :key="index">{{ cat }}</span>
+        <span v-for="(cat, index) in blogData.categories" :key="index">{{ cat }}</span>
       </div>
     </div>
-    <card-ribbon :label="enums[type].label" :fill="enums[type].color"></card-ribbon>
+    <card-ribbon :label="enums[blogData.blogType].label" :fill="enums[blogData.blogType].color"></card-ribbon>
   </div>
 </template>
 
 <script>
 import PrimaryButton from "./PrimaryButton";
 import CardRibbon from "./CardRibbon";
+import { BLOG_POST } from "../library/Queries";
 
 export default {
   name: "BlogCard",
   components: { PrimaryButton, CardRibbon },
-  props: ["itemData", "bodySize", "itemClass"],
+  props: ["itemData", "itemClass"],
   computed: {
-    title() {
-      return this.itemData ? this.itemData.title : null;
-    },
-    description() {
-      return this.itemData ? this.itemData.description : null;
-    },
-    categories() {
-      return this.itemData ? this.itemData.categories : null;
-    },
-    imageLink() {
-      return this.itemData ? this.itemData.blogImage.url : null;
-    },
-    type() {
-      return this.itemData ? this.itemData.blogType : null;
-    },
-    bodyHeight() {
-      return this.bodySize ? this.bodySize + "px" : null;
+    blogData() {
+      return this.itemData || this.blogPost;
     }
   },
   methods: {
     buttonClick() {
       this.$emit("buttonClick");
+    }
+  },
+  mounted() {
+    if (!this.itemData && this.$route.params.id) {
+      const { id } = this.$route.params;
+
+      this.$apollo
+        .query({
+          query: BLOG_POST,
+          variables: { id }
+        })
+        .then(({ data }) => {
+          this.blogPost = data.blog;
+        });
     }
   },
   data() {
@@ -54,7 +54,8 @@ export default {
         Blog: { label: "Blog", color: "#1D79FF" },
         Tutorial: { label: "Tutorial", color: "#E25D03" },
         Lab: { label: "Lab", color: "#c32626" }
-      }
+      },
+      blogPost: null
     };
   }
 };
@@ -70,6 +71,7 @@ export default {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   position: relative;
+  height: 100%;
 
   .header {
     overflow: hidden;

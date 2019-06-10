@@ -21,29 +21,18 @@
         </content-loader>
       </div>
       <div v-if="$apollo.error">There has been an error loading my portfolio.</div>-->
-      <div class="items">
+      <div class="items" v-if="!$apollo.loading && !$apollo.error">
         <blog-card
           v-for="(item, index) in blogs"
           ref="blogs"
+          :id="item.id"
           :key="item.id"
           :itemData="item"
           :itemClass="`enter-${index}`"
           @buttonClick="openCardModal(item.id)"
         ></blog-card>
       </div>
-      <card-clone
-        v-if="clickedItem !== null"
-        :customStyle="cardCloneStyle"
-        :cardClass="cardClass"
-        @closeCardClone="closeCardModal"
-      >
-        <template v-slot:cardFront>
-          <blog-card :itemData="clickedItem.item" :bodySize="clickedItem.bodyHeight"></blog-card>
-        </template>
-        <template v-slot:cardBack>
-          <blog-article :itemData="clickedItem.item"></blog-article>
-        </template>
-      </card-clone>
+      <router-view v-if="!$apollo.loading && !$apollo.error"></router-view>
     </div>
   </section>
 </template>
@@ -52,30 +41,8 @@
 import BlogCard from "./BlogCard";
 import BlogArticle from "./BlogArticle";
 import CardClone from "../components/CardClone";
-import { setTimeout } from "timers";
 import { ContentLoader } from "vue-content-loader";
-
-import gql from "graphql-tag";
-
-const ALL_BLOGS_QUERY = gql`
-  query blogs {
-    blogs(where: { status: PUBLISHED }) {
-      status
-      updatedAt
-      createdAt
-      id
-      title
-      description
-      blogImage {
-        id
-        url
-      }
-      blog
-      blogType
-      categories
-    }
-  }
-`;
+import { ALL_BLOGS_QUERY } from "../library/Queries";
 
 export default {
   name: "BlogList",
@@ -92,62 +59,22 @@ export default {
   },
   methods: {
     openCardModal(id) {
-      if (this.clickedItem !== null) return;
+      const itemData = this.blogs.find(b => b.id === id);
 
-      const ref = this.$refs.blogs.find(p => p.$vnode.key === id).$el;
-      const viewportOffset = ref.getBoundingClientRect();
-
-      this.clickedItem = {
-        item: this.blogs.find(p => p.id === id),
-        ref: ref,
-        bodyHeight: ref.getElementsByClassName("body")[0].clientHeight
-      };
-      this.cardCloneStyle = {
-        height: `${ref.clientHeight}px`,
-        width: `${ref.clientWidth}px`,
-        left: `${viewportOffset.left}px`,
-        top: `${viewportOffset.top}px`,
-        transform: null
-      };
-
-      ref.style.opacity = 0;
+      this.$router.push({
+        name: "blogPost",
+        params: {
+          id,
+          itemData
+        }
+      });
 
       this.$emit("modalOpened");
-
-      setTimeout(() => {
-        this.cardClass = "shown fullscreen";
-      }, 100);
-    },
-    closeCardModal() {
-      const ref = this.clickedItem.ref;
-      const viewportOffset = ref.getBoundingClientRect();
-
-      this.cardCloneStyle = {
-        height: `${ref.clientHeight}px`,
-        width: `${ref.clientWidth}px`,
-        left: `${viewportOffset.left}px`,
-        top: `${viewportOffset.top}px`,
-        transform: null
-      };
-
-      this.$emit("modalClosed");
-
-      this.cardClass = null;
-
-      setTimeout(() => {
-        for (let i = 0; i < this.$refs.blogs.length; i++) {
-          this.$refs.blogs[i].$el.style.opacity = 1;
-        }
-        this.clickedItem = null;
-      }, 600);
     }
   },
   data() {
     return {
-      blogs: null,
-      clickedItem: null,
-      cardCloneStyle: {},
-      cardClass: null
+      blogs: null
     };
   }
 };

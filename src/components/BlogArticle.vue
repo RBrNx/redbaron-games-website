@@ -1,20 +1,19 @@
 <template>
-  <div class="blogArticle">
+  <div class="blogArticle" v-if="!loading">
     <div
       id="blogHeader"
-      :style="{ 'background': `url(${itemData.blogImage.url}) no-repeat center/cover` }"
+      :style="{ 'background': `url(${blog.blogImage.url}) no-repeat center/cover` }"
     >
       <div class="headerText">
-        <div id="title">{{ itemData.title }}</div>
-        <div id="subtitle">{{ itemData.description }}</div>
+        <div id="title">{{ blog.title }}</div>
+        <div id="subtitle">{{ blog.description }}</div>
       </div>
       <hero-button></hero-button>
     </div>
     <div id="article">
       <vue-markdown
-        v-if="itemData.blog"
         class="text"
-        :source="itemData.blog"
+        :source="blog.blog"
         :anchorAttributes="{ target: '_blank' }"
         :postrender="parseHTML"
         @rendered="handleRenderedEvent"
@@ -28,10 +27,10 @@ import VueMarkdown from "vue-markdown";
 import Prism from "prismjs";
 import "prismjs/themes/prism-okaidia.css";
 import HeroButton from "./HeroButton";
+import { BLOG_POST } from "../library/Queries";
 
 export default {
   name: "PortfolioItemInformation",
-  props: ["itemData"],
   components: {
     VueMarkdown,
     HeroButton
@@ -57,6 +56,25 @@ export default {
     handleRenderedEvent() {
       this.$nextTick(() => Prism.highlightAll());
     }
+  },
+  mounted() {
+    const { id } = this.$route.params;
+
+    this.$apollo
+      .query({
+        query: BLOG_POST,
+        variables: { id }
+      })
+      .then(({ data }) => {
+        this.blog = data.blog;
+        this.loading = false;
+      });
+  },
+  data() {
+    return {
+      loading: true,
+      blog: null
+    };
   }
 };
 </script>
