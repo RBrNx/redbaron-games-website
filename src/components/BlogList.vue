@@ -33,19 +33,6 @@
         ></blog-card>
       </div>
       <router-view v-if="!$apollo.loading && !$apollo.error"></router-view>
-      <!-- <card-clone
-        v-if="clickedItem !== null"
-        :customStyle="cardCloneStyle"
-        :cardClass="cardClass"
-        @closeCardClone="closeCardModal"
-      >
-        <template v-slot:cardFront>
-          <blog-card :itemData="clickedItem.item" :bodySize="clickedItem.bodyHeight"></blog-card>
-        </template>
-        <template v-slot:cardBack>
-          <blog-article :itemData="clickedItem.item"></blog-article>
-        </template>
-      </card-clone>-->
     </div>
   </section>
 </template>
@@ -54,7 +41,6 @@
 import BlogCard from "./BlogCard";
 import BlogArticle from "./BlogArticle";
 import CardClone from "../components/CardClone";
-import { setTimeout } from "timers";
 import { ContentLoader } from "vue-content-loader";
 import { ALL_BLOGS_QUERY } from "../library/Queries";
 
@@ -82,62 +68,13 @@ export default {
           itemData
         }
       });
-      // if (this.clickedItem !== null) return;
 
-      // const ref = this.$refs.blogs.find(p => p.$vnode.key === id).$el;
-      // const viewportOffset = ref.getBoundingClientRect();
-
-      // this.clickedItem = {
-      //   item: this.blogs.find(p => p.id === id),
-      //   ref: ref,
-      //   bodyHeight: ref.getElementsByClassName("body")[0].clientHeight
-      // };
-      // this.cardCloneStyle = {
-      //   height: `${ref.clientHeight}px`,
-      //   width: `${ref.clientWidth}px`,
-      //   left: `${viewportOffset.left}px`,
-      //   top: `${viewportOffset.top}px`,
-      //   transform: null
-      // };
-
-      // ref.style.opacity = 0;
-
-      // this.$emit("modalOpened");
-
-      // setTimeout(() => {
-      //   this.cardClass = "shown fullscreen";
-      // }, 100);
-    },
-    closeCardModal() {
-      const ref = this.clickedItem.ref;
-      const viewportOffset = ref.getBoundingClientRect();
-
-      this.cardCloneStyle = {
-        height: `${ref.clientHeight}px`,
-        width: `${ref.clientWidth}px`,
-        left: `${viewportOffset.left}px`,
-        top: `${viewportOffset.top}px`,
-        transform: null
-      };
-
-      this.$emit("modalClosed");
-
-      this.cardClass = null;
-
-      setTimeout(() => {
-        for (let i = 0; i < this.$refs.blogs.length; i++) {
-          this.$refs.blogs[i].$el.style.opacity = 1;
-        }
-        this.clickedItem = null;
-      }, 600);
+      this.$emit("modalOpened");
     }
   },
   data() {
     return {
       blogs: null
-      // clickedItem: null,
-      // cardCloneStyle: {},
-      // cardClass: null
     };
   }
 };
