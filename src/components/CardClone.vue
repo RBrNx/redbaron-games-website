@@ -44,11 +44,9 @@ export default {
   methods: {
     closeCardClone() {
       this.$emit("closeCardClone");
-      this.$el.addEventListener("transitionend", () => {
-        if (this.$route.params.id) {
-          this.onClosed();
-        }
-      });
+      this.$el
+        .querySelector("#cardClone")
+        .addEventListener("transitionend", this.onTransitionEnd);
       this.cardTransform = "rotateY(0deg)";
       document.body.classList.remove("overlayShown");
 
@@ -64,7 +62,13 @@ export default {
         top: `${viewportOffset.top}px`
       };
     },
+    onTransitionEnd(e) {
+      if (e.propertyName === "transform") {
+        this.onClosed();
+      }
+    },
     onClosed() {
+      this.$el.removeEventListener("transitionend", this.onTransitionEnd);
       this.clonedElement.style.opacity = 1;
 
       const currPath = this.$route.path;
