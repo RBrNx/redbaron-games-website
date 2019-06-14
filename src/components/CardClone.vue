@@ -7,9 +7,7 @@
           <component :is="cardFrontComponent" v-bind="{ itemData }"></component>
         </div>
         <div id="cardBack">
-          <span id="closeButton" @click="closeCardClone">
-            <font-awesome-icon id="closeIcon" icon="times"></font-awesome-icon>
-          </span>
+          <close-button @click="closeCardClone"></close-button>
           <VuePerfectScrollbar class="scrollContainer">
             <component :is="cardBackComponent"></component>
           </VuePerfectScrollbar>
@@ -21,12 +19,14 @@
 
 <script>
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import CloseButton from "../components/CloseButton";
 
 export default {
   name: "CardClone",
   props: ["cardFrontComponent", "cardBackComponent", "fullscreen"],
   components: {
-    VuePerfectScrollbar
+    VuePerfectScrollbar,
+    CloseButton
   },
   data() {
     return {
