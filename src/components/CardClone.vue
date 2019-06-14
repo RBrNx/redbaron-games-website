@@ -7,9 +7,7 @@
           <component :is="cardFrontComponent" v-bind="{ itemData }"></component>
         </div>
         <div id="cardBack">
-          <span id="closeButton" @click="closeCardClone">
-            <font-awesome-icon id="closeIcon" icon="times"></font-awesome-icon>
-          </span>
+          <close-button @click="closeCardClone"></close-button>
           <VuePerfectScrollbar class="scrollContainer">
             <component :is="cardBackComponent"></component>
           </VuePerfectScrollbar>
@@ -21,12 +19,14 @@
 
 <script>
 import VuePerfectScrollbar from "vue-perfect-scrollbar";
+import CloseButton from "../components/CloseButton";
 
 export default {
   name: "CardClone",
   props: ["cardFrontComponent", "cardBackComponent", "fullscreen"],
   components: {
-    VuePerfectScrollbar
+    VuePerfectScrollbar,
+    CloseButton
   },
   data() {
     return {
@@ -63,7 +63,7 @@ export default {
       };
     },
     onTransitionEnd(e) {
-      if (e.propertyName === "transform") {
+      if (e.propertyName === "transform" && e.target.id === "cardFlip") {
         this.onClosed();
       }
     },
@@ -212,31 +212,6 @@ export default {
 
     .scrollContainer {
       height: 100%;
-    }
-
-    #closeButton {
-      position: absolute;
-      top: 25px;
-      right: 20px;
-      z-index: 99;
-      background-color: transparent;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      transition: background 0.4s ease-out;
-
-      &:hover {
-        background-color: lighten($primaryGrey, 15%);
-      }
-
-      #closeIcon {
-        font-size: 24px;
-        color: $bodytextGrey;
-      }
     }
   }
 }
