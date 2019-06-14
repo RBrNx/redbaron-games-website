@@ -63,7 +63,7 @@ export default {
       };
     },
     onTransitionEnd(e) {
-      if (e.propertyName === "transform") {
+      if (e.propertyName === "transform" && e.target.id === "cardFlip") {
         this.onClosed();
       }
     },
