@@ -70,15 +70,15 @@ export default {
         this.blog = data.blog;
         this.loading = false;
 
-        setTimeout(
-          () =>
-            new TypeIt("#title", {
-              strings: data.blog.title,
-              cursor: true,
-              speed: 80
-            }).go(),
-          500
-        );
+        setTimeout(() => {
+          new TypeIt("#title", {
+            strings: data.blog.title,
+            cursor: true,
+            speed: 80
+          }).go();
+
+          document.getElementById("subtitle").style.opacity = 1;
+        }, 500);
       });
   },
   data() {
@@ -127,6 +127,8 @@ export default {
         font-style: italic;
         position: relative;
         text-align: center;
+        opacity: 0;
+        transition: opacity 1s 1s;
       }
 
       @include tablet {
