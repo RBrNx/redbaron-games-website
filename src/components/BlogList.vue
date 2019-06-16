@@ -3,9 +3,9 @@
     <h2 class="sectionTitle">Blogs, Tutorials and Labs.</h2>
     <p class="blurb">Filter the list using the following categories</p>
     <div class="blogs">
-      <!-- <div class="loaders" v-if="$apollo.loading">
+      <div class="loaders" v-if="$apollo.loading">
         <content-loader
-          class="portfolioLoader"
+          class="blogLoader"
           v-for="i in 8"
           :key="i"
           :height="400"
@@ -20,7 +20,7 @@
           <rect x="15" y="350" rx="5" ry="5" width="370" height="50"/>
         </content-loader>
       </div>
-      <div v-if="$apollo.error">There has been an error loading my portfolio.</div>-->
+      <div v-if="$apollo.error">There has been an error loading my portfolio.</div>
       <div class="items" v-if="!$apollo.loading && !$apollo.error">
         <blog-card
           v-for="(item, index) in blogs"
@@ -118,7 +118,7 @@ export default {
       }
     }
 
-    .portfolioLoader {
+    .blogLoader {
       background: lighten($primaryGrey, 5%);
       border-radius: 5px;
       padding-bottom: 15px;
