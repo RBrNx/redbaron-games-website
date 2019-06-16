@@ -20,6 +20,7 @@
     "dotenv": "^7.0.0",
     "graphql": "^14.2.1",
     "prismjs": "^1.16.0",
+    "typeit": "^6.0.3",
     "vue-carousel": "^0.18.0-alpha",
     "vue-content-loader": "^0.2.1",
     "vue-markdown": "^2.2.4",

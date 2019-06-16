@@ -5,7 +5,7 @@
       :style="{ 'background': `url(${blog.blogImage.url}) no-repeat center/cover` }"
     >
       <div class="headerText">
-        <div id="title">{{ blog.title }}</div>
+        <div id="title"></div>
         <div id="subtitle">{{ blog.description }}</div>
       </div>
       <hero-button></hero-button>
@@ -28,6 +28,7 @@ import Prism from "prismjs";
 import "prismjs/themes/prism-okaidia.css";
 import HeroButton from "./HeroButton";
 import { BLOG_POST } from "../library/Queries";
+import TypeIt from "typeit";
 
 export default {
   name: "PortfolioItemInformation",
@@ -68,6 +69,16 @@ export default {
       .then(({ data }) => {
         this.blog = data.blog;
         this.loading = false;
+
+        setTimeout(
+          () =>
+            new TypeIt("#title", {
+              strings: data.blog.title,
+              cursor: true,
+              speed: 80
+            }).go(),
+          500
+        );
       });
   },
   data() {
