@@ -38,7 +38,14 @@ const ALL_BLOGS_QUERY = gql`
         url
       }
       blogType
-      categories
+      categories {
+        id
+        name
+      }
+    }
+    categories {
+      id
+      name
     }
   }
 `;
