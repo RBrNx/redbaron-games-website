@@ -2,6 +2,7 @@
   <section id="blogListContainer">
     <h2 class="sectionTitle">Blogs, Tutorials and Labs.</h2>
     <p class="blurb">Filter the list using the following categories</p>
+    <category-selector :categories="categories"></category-selector>
     <div class="blogs">
       <div class="loaders" v-if="$apollo.loading">
         <content-loader
@@ -43,6 +44,7 @@ import BlogArticle from "./BlogArticle";
 import CardClone from "../components/CardClone";
 import { ContentLoader } from "vue-content-loader";
 import { ALL_BLOGS_QUERY } from "../library/Queries";
+import CategorySelector from "./CategorySelector";
 
 export default {
   name: "BlogList",
@@ -50,11 +52,15 @@ export default {
     BlogCard,
     BlogArticle,
     CardClone,
-    ContentLoader
+    ContentLoader,
+    CategorySelector
   },
   apollo: {
     blogs: {
-      query: ALL_BLOGS_QUERY
+      query: ALL_BLOGS_QUERY,
+      result({ data }) {
+        this.categories = data.categories;
+      }
     }
   },
   methods: {
@@ -74,7 +80,8 @@ export default {
   },
   data() {
     return {
-      blogs: null
+      blogs: null,
+      categories: null
     };
   }
 };
