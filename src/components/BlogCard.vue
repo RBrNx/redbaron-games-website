@@ -8,7 +8,7 @@
       <div class="description">{{ blogData.description }}</div>
       <primary-button @buttonClick="buttonClick">Read</primary-button>
       <div class="categories">
-        <span v-for="(cat, index) in blogData.categories" :key="index">{{ cat }}</span>
+        <span v-for="(cat, index) in blogData.categories" :key="index">{{ cat.name }}</span>
       </div>
     </div>
     <card-ribbon :label="enums[blogData.blogType].label" :fill="enums[blogData.blogType].color"></card-ribbon>
