@@ -1,24 +1,37 @@
 <template>
   <div id="technologiesContainer">
     <h2 class="sectionTitle">Tools and Technologies</h2>
-    <div class="technologies">
-      <parallax-card
-        v-for="(tech, index) in technologies"
-        :key="tech.id"
-        :backgroundColor="tech.color"
-        :icon="tech.icon"
-        :title="tech.title"
-        :isFile="tech.isFile"
-        :description="tech.description"
-        :class="`enter-${index}`"
-      ></parallax-card>
+    <div class="content" v-if="!$apollo.loading && !$apollo.error">
+      <div class="technologies" v-if="technologies.length">
+        <parallax-card
+          v-for="(tech, index) in technologies"
+          :key="tech.id"
+          :backgroundColor="tech.color"
+          :icon="tech.icon"
+          :title="tech.title"
+          :isFile="tech.isFile"
+          :description="tech.description"
+          :class="`enter-${index}`"
+        ></parallax-card>
+      </div>
+      <feedback-message
+        v-if="!technologies.length"
+        type="missing"
+        message="Sorry, there doesn't seem to be anything in my Portfolio at the minute."
+      ></feedback-message>
     </div>
+    <feedback-message
+      v-if="$apollo.error"
+      type="error"
+      message="Sorry, there has been an error loading my Portfolio."
+    ></feedback-message>
   </div>
 </template>
 
 <script>
 import ParallaxCard from "./ParallaxCard";
 import gql from "graphql-tag";
+import FeedbackMessage from "./FeedbackMessage";
 
 const ALL_TECHNOLOGIES_QUERY = gql`
   query technologies {
@@ -36,7 +49,8 @@ const ALL_TECHNOLOGIES_QUERY = gql`
 export default {
   name: "Technologies",
   components: {
-    ParallaxCard
+    ParallaxCard,
+    FeedbackMessage
   },
   apollo: {
     technologies: {
