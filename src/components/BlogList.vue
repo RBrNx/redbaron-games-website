@@ -2,11 +2,12 @@
   <section id="blogListContainer">
     <h2 class="sectionTitle">Blogs, Tutorials and Labs.</h2>
     <p class="blurb">Filter the list using the following categories</p>
+    <category-selector :categories="categories" @categoryClicked="toggleCategoryFilter"></category-selector>
     <div class="blogs">
-      <div class="loaders" v-if="$apollo.loading">
+      <div class="loaders" v-if="loading">
         <content-loader
           class="blogLoader"
-          v-for="i in 8"
+          v-for="i in 3"
           :key="i"
           :height="400"
           :width="400"
@@ -21,7 +22,7 @@
         </content-loader>
       </div>
       <div v-if="$apollo.error">There has been an error loading my portfolio.</div>
-      <div class="items" v-if="!$apollo.loading && !$apollo.error">
+      <div class="items" v-if="!loading && !$apollo.error">
         <blog-card
           v-for="(item, index) in blogs"
           ref="blogs"
@@ -32,7 +33,7 @@
           @buttonClick="openCardModal(item.id)"
         ></blog-card>
       </div>
-      <router-view v-if="!$apollo.loading && !$apollo.error"></router-view>
+      <router-view v-if="!loading && !$apollo.error"></router-view>
     </div>
   </section>
 </template>
@@ -43,6 +44,7 @@ import BlogArticle from "./BlogArticle";
 import CardClone from "../components/CardClone";
 import { ContentLoader } from "vue-content-loader";
 import { ALL_BLOGS_QUERY } from "../library/Queries";
+import CategorySelector from "./CategorySelector";
 
 export default {
   name: "BlogList",
@@ -50,11 +52,22 @@ export default {
     BlogCard,
     BlogArticle,
     CardClone,
-    ContentLoader
+    ContentLoader,
+    CategorySelector
   },
   apollo: {
     blogs: {
-      query: ALL_BLOGS_QUERY
+      query: ALL_BLOGS_QUERY,
+      variables() {
+        return {
+          where: { AND: this.categoryFilter }
+        };
+      },
+      result({ data }) {
+        clearTimeout(this.timer);
+        this.categories = data.categories;
+        this.loading = false;
+      }
     }
   },
   methods: {
@@ -70,11 +83,28 @@ export default {
       });
 
       this.$emit("modalOpened");
+    },
+    toggleCategoryFilter(categoryID) {
+      const catIndex = this.categoryFilter.findIndex(
+        c => c.categories_some.id === categoryID
+      );
+
+      this.timer = setTimeout(() => (this.loading = true), 200);
+
+      if (catIndex > -1) {
+        this.$delete(this.categoryFilter, catIndex);
+      } else {
+        this.categoryFilter.push({ categories_some: { id: categoryID } });
+      }
     }
   },
   data() {
     return {
-      blogs: null
+      blogs: null,
+      categories: null,
+      categoryFilter: [],
+      loading: true,
+      timer: null
     };
   }
 };

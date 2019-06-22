@@ -14,6 +14,11 @@ export default {
   props: ["hideNavbarProp"],
   methods: {
     handleScroll() {
+      if (document.body.clientHeight !== this.lastBodyHeight) {
+        this.lastBodyHeight = document.body.clientHeight;
+        return;
+      }
+
       if (
         this.lastPosition < window.scrollY &&
         this.limitPosition < window.scrollY
@@ -26,6 +31,7 @@ export default {
       }
 
       this.lastPosition = window.scrollY;
+      this.lastBodyHeight = document.body.clientHeight;
 
       this.scrollTop = this.lastPosition == 0 ? true : false;
     }
@@ -45,6 +51,7 @@ export default {
     return {
       limitPosition: 20,
       lastPosition: 0,
+      lastBodyHeight: 0,
       hideNavbar: false,
       scrollTop: true
     };

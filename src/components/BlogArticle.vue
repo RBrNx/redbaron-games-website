@@ -74,7 +74,7 @@ export default {
           new TypeIt("#title", {
             strings: data.blog.title,
             cursor: true,
-            speed: 80
+            speed: 70
           }).go();
 
           document.getElementById("subtitle").style.opacity = 1;
