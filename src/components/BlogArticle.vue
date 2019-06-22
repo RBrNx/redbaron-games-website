@@ -10,7 +10,7 @@
       </div>
       <hero-button></hero-button>
     </div>
-    <div id="article">
+    <div id="article" v-if="blog.blog">
       <vue-markdown
         class="text"
         :source="blog.blog"

@@ -38,8 +38,8 @@
           type="empty"
           message="Sorry, I couldn't find any Blogs for you to read."
         ></feedback-message>
+        <router-view></router-view>
       </div>
-      <router-view v-if="!loading && !$apollo.error"></router-view>
       <feedback-message
         v-if="$apollo.error"
         type="error"

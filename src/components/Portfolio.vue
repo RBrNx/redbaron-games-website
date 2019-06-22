@@ -39,8 +39,8 @@
           type="empty"
           message="Sorry, there doesn't seem to be anything in my Portfolio at the minute."
         ></feedback-message>
+        <router-view/>
       </div>
-      <router-view v-if="!$apollo.loading && !$apollo.error"/>
       <feedback-message
         v-if="$apollo.error"
         type="error"
