@@ -22,16 +22,23 @@
         </content-loader>
       </div>
       <div v-if="$apollo.error">There has been an error loading my portfolio.</div>
-      <div class="items" v-if="!loading && !$apollo.error">
-        <blog-card
-          v-for="(item, index) in blogs"
-          ref="blogs"
-          :id="item.id"
-          :key="item.id"
-          :itemData="item"
-          :itemClass="`enter-${index}`"
-          @buttonClick="openCardModal(item.id)"
-        ></blog-card>
+      <div class="content" v-if="!loading && !$apollo.error">
+        <div class="items" v-if="blogs.length">
+          <blog-card
+            v-for="(item, index) in blogs"
+            ref="blogs"
+            :id="item.id"
+            :key="item.id"
+            :itemData="item"
+            :itemClass="`enter-${index}`"
+            @buttonClick="openCardModal(item.id)"
+          ></blog-card>
+        </div>
+        <feedback-message
+          v-if="!blogs.length"
+          type="empty"
+          message="Sorry, we couldn't find any blogs for you to read."
+        ></feedback-message>
       </div>
       <router-view v-if="!loading && !$apollo.error"></router-view>
     </div>
@@ -45,6 +52,7 @@ import CardClone from "../components/CardClone";
 import { ContentLoader } from "vue-content-loader";
 import { ALL_BLOGS_QUERY } from "../library/Queries";
 import CategorySelector from "./CategorySelector";
+import FeedbackMessage from "./FeedbackMessage";
 
 export default {
   name: "BlogList",
@@ -53,7 +61,8 @@ export default {
     BlogArticle,
     CardClone,
     ContentLoader,
-    CategorySelector
+    CategorySelector,
+    FeedbackMessage
   },
   apollo: {
     blogs: {
