@@ -65,7 +65,6 @@ const BLOG_POST = gql`
       }
       blog
       blogType
-      categories
     }
   }
 `;
