@@ -102,7 +102,7 @@ export default {
         c => c.categories_some.id === categoryID
       );
 
-      this.timer = setTimeout(() => (this.loading = true), 200);
+      this.timer = setTimeout(() => (this.loading = true), 500);
 
       if (catIndex > -1) {
         this.$delete(this.categoryFilter, catIndex);
