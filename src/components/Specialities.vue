@@ -110,12 +110,6 @@ export default {
         background: lighten($primaryGrey, 5%);
         border-radius: 5px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        //padding-left: 10%;
-        //padding-right: 10%;
-        //padding-top: 5%;
-        //padding-bottom: 5%;
-        //padding-bottom: 15px;
-        //margin-bottom: 30px;
       }
     }
 
@@ -137,7 +131,7 @@ export default {
       transition: all 0.3s;
 
       &:hover {
-        transform: scale(1.02);
+        transform: scale(1.04);
       }
 
       img,
