@@ -28,8 +28,8 @@ const PORTFOLIO_ITEM = gql`
 `;
 
 const ALL_BLOGS_QUERY = gql`
-  query blogs {
-    blogs(where: { status: PUBLISHED }) {
+  query blogs($where: BlogWhereInput) {
+    blogs(where: $where) {
       id
       title
       description
