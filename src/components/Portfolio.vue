@@ -8,7 +8,7 @@
       <div class="loaders" v-if="$apollo.loading">
         <content-loader
           class="portfolioLoader"
-          v-for="i in 8"
+          v-for="i in 3"
           :key="i"
           :height="400"
           :width="400"
@@ -22,19 +22,30 @@
           <rect x="15" y="350" rx="5" ry="5" width="370" height="50"/>
         </content-loader>
       </div>
-      <div v-if="$apollo.error">There has been an error loading my portfolio.</div>
-      <div class="items" v-if="!$apollo.loading && !$apollo.error">
-        <portfolio-item
-          v-for="(item, index) in portfolioItems"
-          ref="portfolioItems"
-          :id="item.id"
-          :key="item.id"
-          :itemData="item"
-          :itemClass="`enter-${index}`"
-          @buttonClick="openCardModal(item.id)"
-        ></portfolio-item>
+      <div class="content" v-if="!$apollo.loading && !$apollo.error">
+        <div class="items" v-if="portfolioItems.length">
+          <portfolio-item
+            v-for="(item, index) in portfolioItems"
+            ref="portfolioItems"
+            :id="item.id"
+            :key="item.id"
+            :itemData="item"
+            :itemClass="`enter-${index}`"
+            @buttonClick="openCardModal(item.id)"
+          ></portfolio-item>
+        </div>
+        <feedback-message
+          v-if="!portfolioItems.length"
+          type="empty"
+          message="Sorry, there doesn't seem to be anything in my Portfolio at the minute."
+        ></feedback-message>
       </div>
       <router-view v-if="!$apollo.loading && !$apollo.error"/>
+      <feedback-message
+        v-if="$apollo.error"
+        type="error"
+        message="Sorry, there has been an error loading my Portfolio."
+      ></feedback-message>
     </div>
   </section>
 </template>
@@ -45,6 +56,7 @@ import PortfolioItemInformation from "../components/PortfolioItemInformation";
 import CardClone from "../components/CardClone";
 import { ContentLoader } from "vue-content-loader";
 import { ALL_PORTFOLIO_ITEMS_QUERY } from "../library/Queries";
+import FeedbackMessage from "./FeedbackMessage";
 
 export default {
   name: "portfolio",
@@ -52,7 +64,8 @@ export default {
     PortfolioItem,
     PortfolioItemInformation,
     CardClone,
-    ContentLoader
+    ContentLoader,
+    FeedbackMessage
   },
   apollo: {
     portfolioItems: {
