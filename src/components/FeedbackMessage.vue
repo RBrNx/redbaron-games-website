@@ -6,6 +6,11 @@
       class="svg"
       v-html="require(`!html-loader!../assets/undraw_empty.svg`)"
     ></span>
+    <span
+      v-if="type === 'error'"
+      class="svg"
+      v-html="require(`!html-loader!../assets/undraw_error.svg`)"
+    ></span>
   </div>
 </template>
 
