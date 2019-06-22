@@ -19,18 +19,29 @@
           <rect x="50" y="165" rx="2.5" ry="2.5" width="300" height="10"/>
         </content-loader>
       </div>
-      <div v-if="$apollo.error">There has been an error loading my specialities.</div>
-      <div class="specialityGrid">
-        <div
-          v-for="(speciality, index) in specialities"
-          :class="`card enter-${index}`"
-          :key="speciality.id"
-        >
-          <div v-html="require(`!html-loader!../assets/specialities/${speciality.iconPath}`)"></div>
-          <div class="title">{{ speciality.title }}</div>
-          <div class="description">{{ speciality.description }}</div>
+      <div class="content" v-if="!$apollo.loading && !$apollo.error">
+        <div class="specialityGrid" v-if="specialities.length">
+          <div
+            v-for="(speciality, index) in specialities"
+            :class="`card enter-${index}`"
+            :key="speciality.id"
+          >
+            <div v-html="require(`!html-loader!../assets/specialities/${speciality.iconPath}`)"></div>
+            <div class="title">{{ speciality.title }}</div>
+            <vue-markdown class="description" :source="speciality.description"></vue-markdown>
+          </div>
         </div>
+        <feedback-message
+          v-if="!specialities.length"
+          type="empty"
+          message="Sorry, I seem to be missing some specialities at the moment..."
+        ></feedback-message>
       </div>
+      <feedback-message
+        v-if="$apollo.error"
+        type="error"
+        message="Sorry, there has been an error loading my Specialities."
+      ></feedback-message>
     </div>
   </div>
 </template>
@@ -38,6 +49,8 @@
 <script>
 import gql from "graphql-tag";
 import { ContentLoader } from "vue-content-loader";
+import VueMarkdown from "vue-markdown";
+import FeedbackMessage from "./FeedbackMessage";
 
 const ALL_SPECIALITIES_QUERY = gql`
   query specialities {
@@ -53,7 +66,9 @@ const ALL_SPECIALITIES_QUERY = gql`
 export default {
   name: "Specialities",
   components: {
-    ContentLoader
+    ContentLoader,
+    VueMarkdown,
+    FeedbackMessage
   },
   apollo: {
     specialities: {
