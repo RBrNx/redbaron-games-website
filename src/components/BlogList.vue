@@ -4,10 +4,10 @@
     <p class="blurb">Filter the list using the following categories</p>
     <category-selector :categories="categories" @categoryClicked="toggleCategoryFilter"></category-selector>
     <div class="blogs">
-      <div class="loaders" v-if="$apollo.loading">
+      <div class="loaders" v-if="loading">
         <content-loader
           class="blogLoader"
-          v-for="i in 8"
+          v-for="i in 3"
           :key="i"
           :height="400"
           :width="400"
@@ -22,7 +22,7 @@
         </content-loader>
       </div>
       <div v-if="$apollo.error">There has been an error loading my portfolio.</div>
-      <div class="items" v-if="!$apollo.loading && !$apollo.error">
+      <div class="items" v-if="!loading && !$apollo.error">
         <blog-card
           v-for="(item, index) in blogs"
           ref="blogs"
@@ -33,7 +33,7 @@
           @buttonClick="openCardModal(item.id)"
         ></blog-card>
       </div>
-      <router-view v-if="!$apollo.loading && !$apollo.error"></router-view>
+      <router-view v-if="!loading && !$apollo.error"></router-view>
     </div>
   </section>
 </template>
@@ -64,7 +64,9 @@ export default {
         };
       },
       result({ data }) {
+        clearTimeout(this.timer);
         this.categories = data.categories;
+        this.loading = false;
       }
     }
   },
@@ -99,8 +101,10 @@ export default {
   data() {
     return {
       blogs: null,
-      categories: null
+      categories: null,
       categoryFilter: [],
+      loading: true,
+      timer: null
     };
   }
 };
