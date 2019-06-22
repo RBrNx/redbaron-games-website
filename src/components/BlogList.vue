@@ -2,7 +2,7 @@
   <section id="blogListContainer">
     <h2 class="sectionTitle">Blogs, Tutorials and Labs.</h2>
     <p class="blurb">Filter the list using the following categories</p>
-    <category-selector :categories="categories"></category-selector>
+    <category-selector :categories="categories" @categoryClicked="toggleCategoryFilter"></category-selector>
     <div class="blogs">
       <div class="loaders" v-if="$apollo.loading">
         <content-loader
@@ -58,6 +58,11 @@ export default {
   apollo: {
     blogs: {
       query: ALL_BLOGS_QUERY,
+      variables() {
+        return {
+          where: { AND: this.categoryFilter }
+        };
+      },
       result({ data }) {
         this.categories = data.categories;
       }
@@ -76,12 +81,26 @@ export default {
       });
 
       this.$emit("modalOpened");
+    },
+    toggleCategoryFilter(categoryID) {
+      const catIndex = this.categoryFilter.findIndex(
+        c => c.categories_some.id === categoryID
+      );
+
+      this.timer = setTimeout(() => (this.loading = true), 200);
+
+      if (catIndex > -1) {
+        this.$delete(this.categoryFilter, catIndex);
+      } else {
+        this.categoryFilter.push({ categories_some: { id: categoryID } });
+      }
     }
   },
   data() {
     return {
       blogs: null,
       categories: null
+      categoryFilter: [],
     };
   }
 };
