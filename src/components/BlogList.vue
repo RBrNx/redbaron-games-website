@@ -36,7 +36,7 @@
         <feedback-message
           v-if="!blogs.length"
           type="empty"
-          message="Sorry, I couldn't find any blogs for you to read."
+          message="Sorry, I couldn't find any Blogs for you to read."
         ></feedback-message>
       </div>
       <router-view v-if="!loading && !$apollo.error"></router-view>

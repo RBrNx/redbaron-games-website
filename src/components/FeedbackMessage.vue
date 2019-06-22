@@ -34,7 +34,6 @@ export default {
   p {
     color: $bodytextGrey;
     font-family: "Fjalla One", sans-serif;
-    text-transform: capitalize;
     font-size: 26px;
     margin-bottom: 50px;
   }
