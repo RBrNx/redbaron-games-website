@@ -21,7 +21,6 @@
           <rect x="15" y="350" rx="5" ry="5" width="370" height="50"/>
         </content-loader>
       </div>
-      <div v-if="$apollo.error">There has been an error loading my portfolio.</div>
       <div class="content" v-if="!loading && !$apollo.error">
         <div class="items" v-if="blogs.length">
           <blog-card
@@ -37,10 +36,15 @@
         <feedback-message
           v-if="!blogs.length"
           type="empty"
-          message="Sorry, we couldn't find any blogs for you to read."
+          message="Sorry, I couldn't find any blogs for you to read."
         ></feedback-message>
       </div>
       <router-view v-if="!loading && !$apollo.error"></router-view>
+      <feedback-message
+        v-if="$apollo.error"
+        type="error"
+        message="Sorry, there has been an error loading my Blog posts."
+      ></feedback-message>
     </div>
   </section>
 </template>
