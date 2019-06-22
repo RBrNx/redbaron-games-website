@@ -7,6 +7,11 @@
       v-html="require(`!html-loader!../assets/undraw_empty.svg`)"
     ></span>
     <span
+      v-if="type === 'missing'"
+      class="svg"
+      v-html="require(`!html-loader!../assets/undraw_tree.svg`)"
+    ></span>
+    <span
       v-if="type === 'error'"
       class="svg"
       v-html="require(`!html-loader!../assets/undraw_error.svg`)"
