@@ -5,12 +5,13 @@
     </div>
     <div class="parallaxBack">
       <div class="header">{{ title }}</div>
-      <div class="description">{{ description }}</div>
+      <vue-markdown class="description" :source="description"></vue-markdown>
     </div>
   </div>
 </template>
 
 <script>
+import VueMarkdown from "vue-markdown";
 import Icon from "./Icon";
 
 export default {
@@ -25,7 +26,8 @@ export default {
     "containerClass"
   ],
   components: {
-    Icon
+    Icon,
+    VueMarkdown
   }
 };
 </script>

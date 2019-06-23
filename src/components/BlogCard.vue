@@ -5,7 +5,7 @@
     </div>
     <div class="body">
       <div class="title">{{ blogData.title }}</div>
-      <div class="description">{{ blogData.description }}</div>
+      <vue-markdown class="description" :source="blogData.description"></vue-markdown>
       <primary-button @buttonClick="buttonClick">Read</primary-button>
       <div class="categories">
         <span v-for="(cat, index) in blogData.categories" :key="index">{{ cat.name }}</span>
@@ -16,13 +16,14 @@
 </template>
 
 <script>
+import VueMarkdown from "vue-markdown";
 import PrimaryButton from "./PrimaryButton";
 import CardRibbon from "./CardRibbon";
 import { BLOG_POST } from "../library/Queries";
 
 export default {
   name: "BlogCard",
-  components: { PrimaryButton, CardRibbon },
+  components: { PrimaryButton, CardRibbon, VueMarkdown },
   props: ["itemData", "itemClass"],
   computed: {
     blogData() {
