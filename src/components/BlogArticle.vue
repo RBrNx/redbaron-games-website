@@ -185,6 +185,11 @@ export default {
     padding-left: 25px;
     padding-right: 25px;
 
+    @include desktop {
+      padding-left: 250px;
+      padding-right: 250px;
+    }
+
     .text {
       line-height: 1.4em;
       color: $bodytextGrey;
@@ -192,12 +197,14 @@ export default {
 
       h2 {
         color: $headingGrey;
+        font-size: 30px;
       }
 
       img {
         display: block;
         margin-left: auto;
         margin-right: auto;
+        max-width: 90%;
       }
 
       pre[class*="language-"] {
