@@ -21,19 +21,30 @@
           <rect x="15" y="350" rx="5" ry="5" width="370" height="50"/>
         </content-loader>
       </div>
-      <div v-if="$apollo.error">There has been an error loading my portfolio.</div>
-      <div class="items" v-if="!loading && !$apollo.error">
-        <blog-card
-          v-for="(item, index) in blogs"
-          ref="blogs"
-          :id="item.id"
-          :key="item.id"
-          :itemData="item"
-          :itemClass="`enter-${index}`"
-          @buttonClick="openCardModal(item.id)"
-        ></blog-card>
+      <div class="content" v-if="!loading && !$apollo.error">
+        <div class="items" v-if="blogs.length">
+          <blog-card
+            v-for="(item, index) in blogs"
+            ref="blogs"
+            :id="item.id"
+            :key="item.id"
+            :itemData="item"
+            :itemClass="`enter-${index}`"
+            @buttonClick="openCardModal(item.id)"
+          ></blog-card>
+        </div>
+        <feedback-message
+          v-if="!blogs.length"
+          type="empty"
+          message="Sorry, I couldn't find any Blogs for you to read."
+        ></feedback-message>
+        <router-view></router-view>
       </div>
-      <router-view v-if="!loading && !$apollo.error"></router-view>
+      <feedback-message
+        v-if="$apollo.error"
+        type="error"
+        message="Sorry, there has been an error loading my Blog posts."
+      ></feedback-message>
     </div>
   </section>
 </template>
@@ -45,6 +56,7 @@ import CardClone from "../components/CardClone";
 import { ContentLoader } from "vue-content-loader";
 import { ALL_BLOGS_QUERY } from "../library/Queries";
 import CategorySelector from "./CategorySelector";
+import FeedbackMessage from "./FeedbackMessage";
 
 export default {
   name: "BlogList",
@@ -53,7 +65,8 @@ export default {
     BlogArticle,
     CardClone,
     ContentLoader,
-    CategorySelector
+    CategorySelector,
+    FeedbackMessage
   },
   apollo: {
     blogs: {
@@ -89,7 +102,7 @@ export default {
         c => c.categories_some.id === categoryID
       );
 
-      this.timer = setTimeout(() => (this.loading = true), 200);
+      this.timer = setTimeout(() => (this.loading = true), 500);
 
       if (catIndex > -1) {
         this.$delete(this.categoryFilter, catIndex);
