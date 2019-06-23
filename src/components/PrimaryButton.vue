@@ -31,7 +31,7 @@ export default {
   display: inline-block;
   text-align: center;
   font-weight: bold;
-  padding: 14px 0px;
+  padding: 14px 50px;
   border: 3px solid $primaryRed;
   border-radius: 5px;
   position: relative;

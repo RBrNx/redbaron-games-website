@@ -35,7 +35,6 @@ $color: $primaryRed;
   cursor: pointer;
   letter-spacing: 0.07em;
   width: auto;
-  align-self: flex-start;
 
   .slot {
     transform: translate3d(0, $pad, 0);
