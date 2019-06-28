@@ -17,6 +17,44 @@
           <span class="name">Conor Watson</span>
           <span class="metadata">{{ `${publishedDate} · ${readingTime} min read`}}</span>
         </div>
+        <div class="social">
+          <span class="text">Share this</span>
+          <social-sharing
+            :url="currentURL"
+            :title="blog.title"
+            :description="blog.description"
+            :quote="blog.description"
+            inline-template
+            class="socialSharing"
+          >
+            <div>
+              <network network="email">
+                <font-awesome-icon icon="envelope-square"></font-awesome-icon>
+              </network>
+              <network network="facebook">
+                <font-awesome-icon :icon="['fab', 'facebook-square']"></font-awesome-icon>
+              </network>
+              <network network="twitter">
+                <font-awesome-icon :icon="['fab', 'twitter-square']"></font-awesome-icon>
+              </network>
+              <network network="linkedin">
+                <font-awesome-icon :icon="['fab', 'linkedin']"></font-awesome-icon>
+              </network>
+              <network network="pinterest">
+                <font-awesome-icon :icon="['fab', 'pinterest-square']"></font-awesome-icon>
+              </network>
+              <network network="reddit">
+                <font-awesome-icon :icon="['fab', 'reddit-square']"></font-awesome-icon>
+              </network>
+              <network network="whatsapp">
+                <font-awesome-icon :icon="['fab', 'whatsapp-square']"></font-awesome-icon>
+              </network>
+              <network network="telegram">
+                <font-awesome-icon :icon="['fab', 'telegram']"></font-awesome-icon>
+              </network>
+            </div>
+          </social-sharing>
+        </div>
       </div>
       <vue-markdown
         class="text"
@@ -88,6 +126,9 @@ export default {
       const wordCount = this.blog ? this.blog.blog.split(" ").length : 0;
       const avgWordsPerMinute = 225;
       return Math.ceil(wordCount / avgWordsPerMinute);
+    },
+    currentURL() {
+      return window.location.href;
     }
   },
   mounted() {
@@ -240,11 +281,42 @@ export default {
         flex-direction: column;
         justify-content: center;
         padding-left: 25px;
+        flex: 1;
 
         .name {
           margin-bottom: 10px;
           color: $headingGrey;
           font-size: 18px;
+        }
+      }
+
+      .social {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 25px;
+        align-items: flex-start;
+      }
+
+      .socialSharing {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+
+        .text {
+          margin-right: 10px;
+        }
+
+        svg {
+          width: 30px;
+          height: 30px;
+          margin-right: 10px;
+          cursor: pointer;
+
+          &:hover {
+            color: $headingGrey;
+          }
         }
       }
     }
