@@ -85,7 +85,9 @@ export default {
       });
     },
     readingTime() {
-      return 5;
+      const wordCount = this.blog ? this.blog.blog.split(" ").length : 0;
+      const avgWordsPerMinute = 225;
+      return Math.ceil(wordCount / avgWordsPerMinute);
     }
   },
   mounted() {
