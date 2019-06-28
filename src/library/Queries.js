@@ -42,6 +42,7 @@ const ALL_BLOGS_QUERY = gql`
         id
         name
       }
+      publishedDate
     }
     categories {
       id
@@ -65,6 +66,7 @@ const BLOG_POST = gql`
       }
       blog
       blogType
+      publishedDate
     }
   }
 `;

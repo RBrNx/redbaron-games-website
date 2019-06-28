@@ -11,6 +11,51 @@
       <hero-button></hero-button>
     </div>
     <div id="article" v-if="blog.blog">
+      <div class="blogInfo">
+        <img :src="require('../assets/ConorWatson.png')">
+        <div class="info">
+          <span class="name">Conor Watson</span>
+          <span class="metadata">{{ `${publishedDate} · ${readingTime} min read`}}</span>
+        </div>
+        <div class="social">
+          <span class="text">Share this</span>
+          <social-sharing
+            :url="currentURL"
+            :title="blog.title"
+            :description="blog.description"
+            :quote="blog.description"
+            inline-template
+            class="socialSharing"
+          >
+            <div>
+              <network network="email">
+                <font-awesome-icon icon="envelope-square"></font-awesome-icon>
+              </network>
+              <network network="facebook">
+                <font-awesome-icon :icon="['fab', 'facebook-square']"></font-awesome-icon>
+              </network>
+              <network network="twitter">
+                <font-awesome-icon :icon="['fab', 'twitter-square']"></font-awesome-icon>
+              </network>
+              <network network="linkedin">
+                <font-awesome-icon :icon="['fab', 'linkedin']"></font-awesome-icon>
+              </network>
+              <network network="pinterest">
+                <font-awesome-icon :icon="['fab', 'pinterest-square']"></font-awesome-icon>
+              </network>
+              <network network="reddit">
+                <font-awesome-icon :icon="['fab', 'reddit-square']"></font-awesome-icon>
+              </network>
+              <network network="whatsapp">
+                <font-awesome-icon :icon="['fab', 'whatsapp-square']"></font-awesome-icon>
+              </network>
+              <network network="telegram">
+                <font-awesome-icon :icon="['fab', 'telegram']"></font-awesome-icon>
+              </network>
+            </div>
+          </social-sharing>
+        </div>
+      </div>
       <vue-markdown
         class="text"
         :source="blog.blog"
@@ -29,12 +74,14 @@ import "prismjs/themes/prism-okaidia.css";
 import HeroButton from "./HeroButton";
 import { BLOG_POST } from "../library/Queries";
 import TypeIt from "typeit";
+import moment from "moment";
 
 export default {
-  name: "PortfolioItemInformation",
+  name: "BlogArticle",
   components: {
     VueMarkdown,
-    HeroButton
+    HeroButton,
+    moment
   },
   methods: {
     crossClicked() {
@@ -56,6 +103,32 @@ export default {
     },
     handleRenderedEvent() {
       this.$nextTick(() => Prism.highlightAll());
+    }
+  },
+  computed: {
+    publishedDate() {
+      return moment(this.blog.publishedDate).calendar(null, {
+        sameDay: "[Today]",
+        nextDay: "[Tomorrow]",
+        nextWeek: "[Next] dddd",
+        lastDay: "[Yesterday]",
+        lastWeek: "dddd",
+        sameElse: function(now) {
+          if (this.isSame(now, "year")) {
+            return "MMM D";
+          } else {
+            return "MMM YYYY";
+          }
+        }
+      });
+    },
+    readingTime() {
+      const wordCount = this.blog ? this.blog.blog.split(" ").length : 0;
+      const avgWordsPerMinute = 225;
+      return Math.ceil(wordCount / avgWordsPerMinute);
+    },
+    currentURL() {
+      return window.location.href;
     }
   },
   mounted() {
@@ -188,6 +261,64 @@ export default {
     @include desktop {
       padding-left: 250px;
       padding-right: 250px;
+    }
+
+    .blogInfo {
+      background-color: lighten($primaryGrey, 10%);
+      display: flex;
+      flex-direction: row;
+      padding: 20px;
+      border-radius: 5px;
+
+      img {
+        max-height: 75px;
+        max-width: 75px;
+        border-radius: 50%;
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 25px;
+        flex: 1;
+
+        .name {
+          margin-bottom: 10px;
+          color: $headingGrey;
+          font-size: 18px;
+        }
+      }
+
+      .social {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-left: 25px;
+        align-items: flex-start;
+      }
+
+      .socialSharing {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+
+        .text {
+          margin-right: 10px;
+        }
+
+        svg {
+          width: 30px;
+          height: 30px;
+          margin-right: 10px;
+          cursor: pointer;
+
+          &:hover {
+            color: $headingGrey;
+          }
+        }
+      }
     }
 
     .text {

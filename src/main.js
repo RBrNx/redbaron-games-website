@@ -6,7 +6,11 @@ import store from './store';
 import dotenv from 'dotenv';
 import VueParticles from 'vue-particles';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faExternalLinkAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
+import {
+  faExternalLinkAlt,
+  faTimes,
+  faEnvelopeSquare,
+} from '@fortawesome/free-solid-svg-icons';
 import {
   faGithub,
   faYoutube,
@@ -25,6 +29,12 @@ import {
   faSass,
   faStackOverflow,
   faLinkedin,
+  faFacebookSquare,
+  faPinterestSquare,
+  faRedditSquare,
+  faTelegram,
+  faTwitterSquare,
+  faWhatsappSquare,
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import AOS from 'aos';
@@ -33,6 +43,7 @@ import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import VueApollo from 'vue-apollo';
+import SocialSharing from 'vue-social-sharing';
 
 dotenv.config();
 
@@ -56,10 +67,19 @@ library.add(
   faSass,
   faStackOverflow,
   faLinkedin,
+  faEnvelopeSquare,
+  faFacebookSquare,
+  faLinkedin,
+  faPinterestSquare,
+  faRedditSquare,
+  faTelegram,
+  faTwitterSquare,
+  faWhatsappSquare,
 );
 
 Vue.use(VueApollo);
 Vue.use(VueParticles);
+Vue.use(SocialSharing);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 const apolloProvider = new VueApollo({
