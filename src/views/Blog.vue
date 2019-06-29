@@ -12,7 +12,10 @@
         <span>A place for my Coding Laboratory, Programming guides and thoughts on Tech.</span>
       </div>
     </hero-header>
-    <blog-list @modalOpened="modalOpened" @modalClosed="modalClosed"></blog-list>
+    <blog-list
+      @cardCloneOpened="$emit('cardCloneOpened')"
+      @cardCloneClosed="$emit('cardCloneClosed')"
+    ></blog-list>
   </div>
 </template>
 
@@ -28,14 +31,6 @@ export default {
     HeroHeader,
     BlogList,
     WebFooter
-  },
-  methods: {
-    modalOpened() {
-      this.$emit("modalOpened");
-    },
-    modalClosed() {
-      this.$emit("modalClosed");
-    }
   },
   data() {
     return {
