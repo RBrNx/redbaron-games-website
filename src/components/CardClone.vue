@@ -100,6 +100,7 @@ export default {
       this.cardTransform = transform;
       this.cardClass = "shown" + (this.fullscreen ? " fullscreen" : "");
       document.body.classList.add("overlayShown");
+      this.$emit("cardCloneOpened");
     }, 150);
   }
 };
