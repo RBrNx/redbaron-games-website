@@ -38,7 +38,10 @@
           type="empty"
           message="Sorry, I couldn't find any Blogs for you to read."
         ></feedback-message>
-        <router-view></router-view>
+        <router-view
+          @cardCloneOpened="$emit('cardCloneOpened')"
+          @cardCloneClosed="$emit('cardCloneClosed')"
+        ></router-view>
       </div>
       <feedback-message
         v-if="$apollo.error"

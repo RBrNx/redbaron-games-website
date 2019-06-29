@@ -2,7 +2,7 @@
   <div id="app">
     <navbar :hideNavbarProp="hideNavbar"></navbar>
     <transition-page>
-      <router-view @modalOpened="modalOpened" @modalClosed="modalClosed"/>
+      <router-view @cardCloneOpened="cardCloneOpened" @cardCloneClosed="cardCloneClosed"/>
     </transition-page>
   </div>
 </template>
@@ -18,10 +18,10 @@ export default {
     TransitionPage
   },
   methods: {
-    modalOpened() {
+    cardCloneOpened() {
       this.hideNavbar = true;
     },
-    modalClosed() {
+    cardCloneClosed() {
       this.hideNavbar = null;
     }
   },
