@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     closeCardClone() {
-      this.$emit("closeCardClone");
       this.$el
         .querySelector("#cardClone")
         .addEventListener("transitionend", this.onTransitionEnd);
@@ -61,6 +60,8 @@ export default {
         left: `${viewportOffset.left}px`,
         top: `${viewportOffset.top}px`
       };
+
+      this.$emit("cardCloneClosed");
     },
     onTransitionEnd(e) {
       if (e.propertyName === "transform" && e.target.id === "cardFlip") {
