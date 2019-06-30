@@ -57,10 +57,9 @@
         </div>
       </div>
       <vue-markdown
-        class="text"
+        class="blogText"
         :source="blog.blog"
         :anchorAttributes="{ target: '_blank' }"
-        :postrender="parseHTML"
         @rendered="handleRenderedEvent"
       ></vue-markdown>
     </div>
@@ -87,21 +86,32 @@ export default {
     crossClicked() {
       this.$parent.overlayClicked();
     },
-    parseHTML(html) {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, "text/html");
-      const aTags = doc.getElementsByTagName("a");
+    // parseHTML(html) {
+    //   const parser = new DOMParser();
+    //   const doc = parser.parseFromString(html, "text/html");
+    //   const aTags = doc.getElementsByTagName("a");
 
-      for (let aTag of aTags) {
-        const span = document.createElement("span");
-        span.classList.add("fancyLink");
-        aTag.parentNode.insertBefore(span, aTag);
-        span.appendChild(aTag);
-      }
+    //   for (let aTag of aTags) {
+    //     const span = document.createElement("span");
+    //     span.classList.add("fancyLink");
+    //     aTag.parentNode.insertBefore(span, aTag);
+    //     span.appendChild(aTag);
+    //   }
 
-      return doc.body.innerHTML;
-    },
+    //   return doc.body.innerHTML;
+    // },
     handleRenderedEvent() {
+      // const text = document.querySelector("#article .blogText");
+      // if (text) {
+      //   const aTags = text.querySelectorAll("a");
+      //   for (let aTag of aTags) {
+      //     const span = document.createElement("span");
+      //     span.classList.add("fancyLink");
+      //     aTag.parentNode.insertBefore(span, aTag);
+      //     span.appendChild(aTag);
+      //   }
+      //   this.$nextTick(() => Prism.highlightAll());
+      // }
       this.$nextTick(() => Prism.highlightAll());
     }
   },
@@ -146,7 +156,7 @@ export default {
         setTimeout(() => {
           new TypeIt("#title", {
             strings: data.blog.title,
-            cursor: true,
+            cursor: false,
             speed: 70
           }).go();
 
@@ -194,7 +204,6 @@ export default {
       }
 
       #subtitle {
-        font-family: Roboto;
         font-size: 20px;
         color: $headingGrey;
         font-style: italic;
@@ -321,7 +330,7 @@ export default {
       }
     }
 
-    .text {
+    .blogText {
       line-height: 1.4em;
       color: $bodytextGrey;
       font-size: 18px;

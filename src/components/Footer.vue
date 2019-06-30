@@ -74,7 +74,6 @@ footer {
 
   .chat {
     margin-bottom: 20px;
-    font-family: Roboto;
     font-size: 18px;
   }
 
@@ -87,7 +86,6 @@ footer {
     flex-direction: column;
     text-align: center;
     margin-bottom: 20px;
-    font-family: Roboto;
     font-size: 16px;
   }
 
