@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import VuePerfectScrollbar from "vue-perfect-scrollbar";
 import CloseButton from "../components/CloseButton";
 
 export default {

@@ -4,7 +4,6 @@ import router from './router';
 import store from './store';
 
 import dotenv from 'dotenv';
-import VueParticles from 'vue-particles';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faExternalLinkAlt,
@@ -80,7 +79,6 @@ library.add(
 
 Vue.use(Vuebar);
 Vue.use(VueApollo);
-Vue.use(VueParticles);
 Vue.use(SocialSharing);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
