@@ -117,7 +117,6 @@ export default {
   width: 100%;
   padding-left: 25px;
   padding-right: 25px;
-  //border-radius: 5px;
 
   #title {
     font-family: "Fjalla One", sans-serif;
@@ -127,7 +126,6 @@ export default {
   }
 
   #subtitle {
-    font-family: Roboto;
     font-size: 20px;
     color: $bodytextGrey;
     font-style: italic;

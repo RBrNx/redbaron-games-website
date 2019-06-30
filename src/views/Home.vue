@@ -48,8 +48,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css?family=Fjalla+One");
-@import url("https://fonts.googleapis.com/css?family=Roboto");
 @import "../assets/global.scss";
 
 .home {
@@ -66,7 +64,6 @@ export default {
 
     .subtitle {
       font-size: 20px;
-      font-family: Roboto;
     }
   }
 

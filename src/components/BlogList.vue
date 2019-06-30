@@ -127,15 +127,12 @@ export default {
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css?family=Fjalla+One");
-@import url("https://fonts.googleapis.com/css?family=Roboto");
 @import "../assets/global.scss";
 
 #blogListContainer {
   width: 100%;
   background: $primaryGrey;
   color: $bodytextGrey;
-  font-family: "Roboto", sans-serif;
   text-align: left;
   padding-bottom: 50px;
 
