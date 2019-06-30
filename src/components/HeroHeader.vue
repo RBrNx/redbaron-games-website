@@ -3,7 +3,7 @@
     class="heroImage"
     :style="{ 'background': `url(${backgroundImage}) no-repeat center/cover` }"
   >
-    <vue-particles
+    <!-- <vue-particles
       color="#dedede"
       :particleOpacity="0.7"
       :particlesNumber="50"
@@ -19,7 +19,7 @@
       hoverMode="grab"
       :clickEffect="true"
       clickMode="push"
-    ></vue-particles>
+    ></vue-particles>-->
     <div class="heroText">
       <slot name="title"></slot>
       <slot name="subtitle"></slot>

@@ -4,7 +4,6 @@ import router from './router';
 import store from './store';
 
 import dotenv from 'dotenv';
-import VueParticles from 'vue-particles';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faExternalLinkAlt,
@@ -44,6 +43,7 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import VueApollo from 'vue-apollo';
 import SocialSharing from 'vue-social-sharing';
+import Vuebar from 'vuebar';
 
 dotenv.config();
 
@@ -77,8 +77,8 @@ library.add(
   faWhatsappSquare,
 );
 
+Vue.use(Vuebar);
 Vue.use(VueApollo);
-Vue.use(VueParticles);
 Vue.use(SocialSharing);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
