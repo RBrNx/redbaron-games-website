@@ -4,8 +4,13 @@
     <div class="chat">Want to chat about something?</div>
     <primary-button @buttonClick="contactMe">Contact Me</primary-button>
     <div class="contact">
-      <a href="https://github.com/RBrNx" target="_blank" rel="noreferrer">
-        <font-awesome-icon :icon="['fab', 'github']" aria-label="Vist my Github"></font-awesome-icon>
+      <a
+        href="https://github.com/RBrNx"
+        target="_blank"
+        aria-label="Vist my Github"
+        rel="noreferrer"
+      >
+        <font-awesome-icon :icon="['fab', 'github']"></font-awesome-icon>
       </a>
       <a
         href="https://stackoverflow.com/users/4237014/conor-watson"
