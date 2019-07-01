@@ -35,7 +35,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css?family=Fjalla+One|Roboto&display=swap");
 @import "./assets/global.scss";
 
 body {
