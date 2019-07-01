@@ -1,7 +1,10 @@
 <template>
   <div :class="`portfolioItem ${itemClass}`" v-if="portfolioData">
     <div class="header">
-      <img :src="require(`../assets/project-images/${portfolioData.displayImage}`)">
+      <img
+        :src="require(`../assets/project-images/${portfolioData.displayImage}`)"
+        alt="Portfolio item image"
+      >
     </div>
     <div class="body">
       <div class="title">{{ portfolioData.title }}</div>

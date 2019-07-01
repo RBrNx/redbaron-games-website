@@ -1,7 +1,7 @@
 <template>
   <div :class="`blogCard ${itemClass}`" v-if="blogData">
     <div class="header">
-      <img :src="blogData.blogImage.url">
+      <img :src="blogData.blogImage.url" alt="Blog header image">
     </div>
     <div class="body">
       <div class="title">{{ blogData.title }}</div>
