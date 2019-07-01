@@ -6,7 +6,9 @@ script:
 before_deploy: pip install --user awscli
 deploy:
   provider: script
-  script: ~/.local/bin/aws s3 sync dist s3://redbarongames.co.uk --region=eu-west-1 --acl public-read --delete
+  script: '
+    ~/.local/bin/aws s3 sync dist s3://redbarongames.co.uk --exclude "*.html" --region=eu-west-1 --acl public-read --cache-control max-age=31536000 --delete
+    ~/.local/bin/aws s3 sync dist s3://redbarongames.co.uk --exclude "*" --include "*.html" --region=eu-west-1 --acl public-read --cache-control no-cache --delete'
   skip_cleanup: true
   on:
     repo: RBrNx/RedbaronGames-v3
