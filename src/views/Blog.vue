@@ -16,6 +16,7 @@
       @cardCloneOpened="$emit('cardCloneOpened')"
       @cardCloneClosed="$emit('cardCloneClosed')"
     ></blog-list>
+    <web-footer></web-footer>
   </div>
 </template>
 
