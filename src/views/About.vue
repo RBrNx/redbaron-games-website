@@ -22,10 +22,10 @@
     <technologies></technologies>
     <web-footer></web-footer>
     <div id="preload">
-      <img src="../assets/hero-header/ClydeArc.jpg">
-      <img src="../assets/hero-header/DukeOfWellington.jpg">
-      <img src="../assets/hero-header/GeorgeSquare.jpg">
-      <img src="../assets/hero-header/Hydro.jpg">
+      <img src="../assets/hero-header/ClydeArc.jpg" alt="Clyde Arc">
+      <img src="../assets/hero-header/DukeOfWellington.jpg" alt="Duke of Wellington">
+      <img src="../assets/hero-header/GeorgeSquare.jpg" alt="George Square">
+      <img src="../assets/hero-header/Hydro.jpg" alt="SSE Hydro">
     </div>
   </div>
 </template>

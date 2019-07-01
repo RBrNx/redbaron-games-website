@@ -11,7 +11,11 @@
         paginationColor="#1d1d1d"
       >
         <slide v-for="(image, index) in portfolioItem.carouselImages" :key="index">
-          <img class="carouselImage" :src="require(`../assets/project-images/${image}`)">
+          <img
+            class="carouselImage"
+            :src="require(`../assets/project-images/${image}`)"
+            alt="Carousel image"
+          >
         </slide>
       </carousel>
     </div>
@@ -22,7 +26,7 @@
           v-if="portfolioItem.aboutProject"
           class="text"
           :source="portfolioItem.aboutProject"
-          :anchorAttributes="{ target: '_blank' }"
+          :anchorAttributes="{ target: '_blank', rel: 'noreferrer' }"
           :postrender="parseHTML"
         ></vue-markdown>
       </div>

@@ -1,5 +1,5 @@
 <template>
-  <a :href="href" target="_blank" class="linkButton">
+  <a :href="href" target="_blank" class="linkButton" rel="noreferrer">
     <div class="slot">
       <slot></slot>
     </div>

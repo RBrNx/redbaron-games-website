@@ -12,7 +12,7 @@
     </div>
     <div id="article" v-if="blog.blog">
       <div class="blogInfo">
-        <img :src="require('../assets/ConorWatson.png')">
+        <img :src="require('../assets/ConorWatson.png')" alt="Profile Picture">
         <div class="info">
           <span class="name">Conor Watson</span>
           <span class="metadata">{{ `${publishedDate} · ${readingTime} min read`}}</span>
@@ -59,7 +59,7 @@
       <vue-markdown
         class="blogText"
         :source="blog.blog"
-        :anchorAttributes="{ target: '_blank' }"
+        :anchorAttributes="{ target: '_blank', rel: 'noreferrer' }"
         @rendered="handleRenderedEvent"
       ></vue-markdown>
     </div>
