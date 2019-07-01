@@ -4,13 +4,14 @@
     <div class="chat">Want to chat about something?</div>
     <primary-button @buttonClick="contactMe">Contact Me</primary-button>
     <div class="contact">
-      <a href="https://github.com/RBrNx" target="_blank">
+      <a href="https://github.com/RBrNx" target="_blank" rel="noreferrer">
         <font-awesome-icon :icon="['fab', 'github']" aria-label="Vist my Github"></font-awesome-icon>
       </a>
       <a
         href="https://stackoverflow.com/users/4237014/conor-watson"
         target="_blank"
         aria-label="Vist my StackOverflow"
+        rel="noreferrer"
       >
         <font-awesome-icon :icon="['fab', 'stack-overflow']"></font-awesome-icon>
       </a>
@@ -18,6 +19,7 @@
         href="https://www.linkedin.com/in/conor-watson-8847665b/"
         target="_blank"
         aria-label="Vist my LinkedIn"
+        rel="noreferrer"
       >
         <font-awesome-icon :icon="['fab', 'linkedin']"></font-awesome-icon>
       </a>

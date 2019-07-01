@@ -59,7 +59,7 @@
       <vue-markdown
         class="blogText"
         :source="blog.blog"
-        :anchorAttributes="{ target: '_blank' }"
+        :anchorAttributes="{ target: '_blank', rel: 'noreferrer' }"
         @rendered="handleRenderedEvent"
       ></vue-markdown>
     </div>
