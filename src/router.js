@@ -1,15 +1,17 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
-import About from './views/About.vue';
-import Blog from './views/Blog.vue';
-import CV from './views/CV.vue';
 
-import CardClone from './components/CardClone.vue';
-import PortfolioItem from './components/PortfolioItem.vue';
-import PortfolioItemInformation from './components/PortfolioItemInformation.vue';
-import BlogCard from './components/BlogCard.vue';
-import BlogArticle from './components/BlogArticle.vue';
+const Home = () => import('./views/Home.vue');
+const About = () => import('./views/About.vue');
+const Blog = () => import('./views/Blog.vue');
+const CV = () => import('./views/CV.vue');
+
+const CardClone = () => import('./components/CardClone.vue');
+const PortfolioItem = () => import('./components/PortfolioItem.vue');
+const PortfolioItemInformation = () =>
+  import('./components/PortfolioItemInformation.vue');
+const BlogCard = () => import('./components/BlogCard.vue');
+const BlogArticle = () => import('./components/BlogArticle.vue');
 
 Vue.use(Router);
 
