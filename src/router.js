@@ -1,17 +1,25 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-const Home = () => import('./views/Home.vue');
-const About = () => import('./views/About.vue');
-const Blog = () => import('./views/Blog.vue');
-const CV = () => import('./views/CV.vue');
+const Home = () => import(/* webpackChunkName: "home" */ './views/Home.vue');
+const About = () => import(/* webpackChunkName: "about" */ './views/About.vue');
+const Blog = () => import(/* webpackChunkName: "blog" */ './views/Blog.vue');
+const CV = () => import(/* webpackChunkName: "cv" */ './views/CV.vue');
 
-const CardClone = () => import('./components/CardClone.vue');
-const PortfolioItem = () => import('./components/PortfolioItem.vue');
+const CardClone = () =>
+  import(/* webpackChunkName: "cardclone" */ './components/CardClone.vue');
+const PortfolioItem = () =>
+  import(
+    /* webpackChunkName: "portfolioitem" */ './components/PortfolioItem.vue'
+  );
 const PortfolioItemInformation = () =>
-  import('./components/PortfolioItemInformation.vue');
-const BlogCard = () => import('./components/BlogCard.vue');
-const BlogArticle = () => import('./components/BlogArticle.vue');
+  import(
+    /* webpackChunkName: "portfolioiteminformation" */ './components/PortfolioItemInformation.vue'
+  );
+const BlogCard = () =>
+  import(/* webpackChunkName: "blogcard" */ './components/BlogCard.vue');
+const BlogArticle = () =>
+  import(/* webpackChunkName: "blogarticle" */ './components/BlogArticle.vue');
 
 Vue.use(Router);
 
