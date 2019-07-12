@@ -82,6 +82,15 @@ Vue.use(VueApollo);
 Vue.use(SocialSharing);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
+var link = document.createElement('link');
+link.href = '/';
+link.rel = 'preload';
+link.as = 'style';
+link.addEventListener('load', e => (e.target.rel = 'stylesheet'));
+document.body.appendChild(link);
+link.href =
+  'https://fonts.googleapis.com/css?family=Fjalla+One|Roboto&display=swap';
+
 const apolloProvider = new VueApollo({
   defaultClient: new ApolloClient({
     link: new HttpLink({
