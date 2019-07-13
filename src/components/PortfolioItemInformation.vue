@@ -2,8 +2,8 @@
   <div class="portfolioItemInformation" v-if="!loading">
     <div id="title">{{ portfolioItem.title }}</div>
     <div id="subtitle">{{ portfolioItem.description }}</div>
-    <div id="carousel" v-resize="resizeCarousel">
-      <carousel
+    <div id="carousel">
+      <!-- <carousel
         :perPage="1"
         :navigationEnable="true"
         ref="carousel"
@@ -17,7 +17,19 @@
             alt="Carousel image"
           >
         </slide>
-      </carousel>
+      </carousel>-->
+      <slider ref="slider" :options="{ currentPage: 0 }">
+        <!-- slideritem wrapped package with the components you need -->
+        <slideritem v-for="(image, index) in portfolioItem.carouselImages" :key="index">
+          <img
+            class="carouselImage"
+            :src="require(`../assets/project-images/${image}`)"
+            alt="Carousel image"
+          />
+        </slideritem>
+        <!-- Customizable loading -->
+        <div slot="loading">loading...</div>
+      </slider>
     </div>
     <div id="info">
       <div id="description">
@@ -53,6 +65,7 @@ import { Carousel, Slide } from "vue-carousel";
 import VueMarkdown from "vue-markdown";
 import { PORTFOLIO_ITEM } from "../library/Queries";
 import resize from "vue-resize-directive";
+import { slider, slideritem } from "vue-concise-slider";
 
 export default {
   name: "PortfolioItemInformation",
@@ -60,7 +73,9 @@ export default {
     LinkButton,
     Carousel,
     Slide,
-    VueMarkdown
+    VueMarkdown,
+    slider,
+    slideritem
   },
   directives: {
     resize
@@ -138,15 +153,19 @@ export default {
   #carousel {
     margin-top: 40px;
 
-    .VueCarousel-slide {
-      display: flex;
-      justify-content: center;
-    }
+    // .VueCarousel-slide {
+    //   display: flex;
+    //   justify-content: center;
+    // }
 
-    .VueCarousel-dot {
-      &:focus {
-        outline: none;
-      }
+    // .VueCarousel-dot {
+    //   &:focus {
+    //     outline: none;
+    //   }
+    //@debug}
+
+    .slider-pagination-bullet {
+      background-color: #fff;
     }
 
     .carouselImage {
