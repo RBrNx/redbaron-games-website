@@ -3,23 +3,7 @@
     <div id="title">{{ portfolioItem.title }}</div>
     <div id="subtitle">{{ portfolioItem.description }}</div>
     <div id="carousel">
-      <!-- <carousel
-        :perPage="1"
-        :navigationEnable="true"
-        ref="carousel"
-        paginationActiveColor="#c32626"
-        paginationColor="#1d1d1d"
-      >
-        <slide v-for="(image, index) in portfolioItem.carouselImages" :key="index">
-          <img
-            class="carouselImage"
-            :src="require(`../assets/project-images/${image}`)"
-            alt="Carousel image"
-          >
-        </slide>
-      </carousel>-->
       <slider ref="slider" :options="{ currentPage: 0 }">
-        <!-- slideritem wrapped package with the components you need -->
         <slideritem v-for="(image, index) in portfolioItem.carouselImages" :key="index">
           <img
             class="carouselImage"
@@ -27,8 +11,6 @@
             alt="Carousel image"
           />
         </slideritem>
-        <!-- Customizable loading -->
-        <div slot="loading">loading...</div>
       </slider>
     </div>
     <div id="info">
@@ -61,24 +43,17 @@
 
 <script>
 import LinkButton from "./LinkButton";
-import { Carousel, Slide } from "vue-carousel";
 import VueMarkdown from "vue-markdown";
 import { PORTFOLIO_ITEM } from "../library/Queries";
-import resize from "vue-resize-directive";
 import { slider, slideritem } from "vue-concise-slider";
 
 export default {
   name: "PortfolioItemInformation",
   components: {
     LinkButton,
-    Carousel,
-    Slide,
     VueMarkdown,
     slider,
     slideritem
-  },
-  directives: {
-    resize
   },
   methods: {
     crossClicked() {
@@ -100,9 +75,6 @@ export default {
       }
 
       return doc.body.innerHTML;
-    },
-    resizeCarousel() {
-      this.$refs.carousel.onResize();
     }
   },
   mounted() {
@@ -152,17 +124,6 @@ export default {
 
   #carousel {
     margin-top: 40px;
-
-    // .VueCarousel-slide {
-    //   display: flex;
-    //   justify-content: center;
-    // }
-
-    // .VueCarousel-dot {
-    //   &:focus {
-    //     outline: none;
-    //   }
-    //@debug}
 
     .slider-pagination-bullet {
       background-color: #fff;
