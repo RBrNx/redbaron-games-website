@@ -36,6 +36,8 @@ import {
   faWhatsappSquare,
 } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { config } from '@fortawesome/fontawesome-svg-core';
+import '@fortawesome/fontawesome-svg-core/styles.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { ApolloClient } from 'apollo-client';
@@ -47,6 +49,7 @@ import Vuebar from 'vuebar';
 
 dotenv.config();
 
+config.autoAddCss = false;
 library.add(
   faTimes,
   faExternalLinkAlt,
