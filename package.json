@@ -55,7 +55,8 @@
     "vue-apollo": "^3.0.0-beta.28",
     "vue-concise-slider": "^3.4.1",
     "vue-template-compiler": "^2.6.7",
-    "webpack-bundle-analyzer": "^3.3.2"
+    "webpack-bundle-analyzer": "^3.3.2",
+    "worker-loader": "^2.0.0"
   },
   "config": {
     "ghooks": {

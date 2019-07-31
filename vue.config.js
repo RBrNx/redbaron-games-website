@@ -9,6 +9,14 @@ module.exports = {
       .use('pug-plain-loader')
       .loader('pug-plain-loader')
       .end();
+    config.module
+      .rule('worker')
+      .test(/\.worker\.js$/)
+      .use('worker-loader')
+      .loader('worker-loader')
+      .tap(() => {
+        return { inline: false, name: 'MarkedWorker.[hash].worker.js' };
+      });
   },
   configureWebpack: {
     plugins: [

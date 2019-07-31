@@ -46,6 +46,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory';
 import VueApollo from 'vue-apollo';
 import SocialSharing from 'vue-social-sharing';
 import Vuebar from 'vuebar';
+import VueWorker from 'vue-worker';
 
 dotenv.config();
 
@@ -81,6 +82,7 @@ library.add(
 );
 
 Vue.use(Vuebar);
+Vue.use(VueWorker);
 Vue.use(VueApollo);
 Vue.use(SocialSharing);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
