@@ -124,6 +124,7 @@ export default {
 
   #carousel {
     margin-top: 40px;
+    margin-bottom: 40px;
 
     .slider-pagination-bullet {
       background-color: #fff;
@@ -150,6 +151,7 @@ export default {
       line-height: 1.3em;
       color: $bodytextGrey;
       font-size: 18px;
+      margin-bottom: 15px;
 
       .fancyLink {
         position: relative;
