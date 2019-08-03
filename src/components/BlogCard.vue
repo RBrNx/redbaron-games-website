@@ -1,11 +1,11 @@
 <template>
   <div :class="`blogCard ${itemClass}`" v-if="blogData">
     <div class="header">
-      <img :src="blogData.blogImage.url" alt="Blog header image">
+      <img :src="blogData.blogImage.url" alt="Blog header image" />
     </div>
     <div class="body">
       <div class="title">{{ blogData.title }}</div>
-      <vue-markdown class="description" :source="blogData.description"></vue-markdown>
+      <markdown-renderer class="description" :source="blogData.description"></markdown-renderer>
       <primary-button @buttonClick="buttonClick">Read</primary-button>
       <div class="categories">
         <span v-for="(cat, index) in blogData.categories" :key="index">{{ cat.name }}</span>
@@ -16,14 +16,14 @@
 </template>
 
 <script>
-import VueMarkdown from "vue-markdown";
+import MarkdownRenderer from "./MarkdownRenderer";
 import PrimaryButton from "./PrimaryButton";
 import CardRibbon from "./CardRibbon";
 import { BLOG_POST } from "../library/Queries";
 
 export default {
   name: "BlogCard",
-  components: { PrimaryButton, CardRibbon, VueMarkdown },
+  components: { PrimaryButton, CardRibbon, MarkdownRenderer },
   props: ["itemData", "itemClass"],
   computed: {
     blogData() {
