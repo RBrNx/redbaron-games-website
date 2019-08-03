@@ -16,13 +16,6 @@
     <div id="info">
       <div id="description">
         <div class="title">About this project</div>
-        <!-- <vue-markdown
-          v-if="portfolioItem.aboutProject"
-          class="text"
-          :source="portfolioItem.aboutProject"
-          :anchorAttributes="{ target: '_blank', rel: 'noreferrer' }"
-          :postrender="parseHTML"
-        ></vue-markdown>-->
         <markdown-renderer
           v-if="portfolioItem.aboutProject"
           class="text"
@@ -48,7 +41,6 @@
 
 <script>
 import LinkButton from "./LinkButton";
-import VueMarkdown from "vue-markdown";
 import { PORTFOLIO_ITEM } from "../library/Queries";
 import { slider, slideritem } from "vue-concise-slider";
 import MarkdownRenderer from "./MarkdownRenderer";
@@ -57,7 +49,6 @@ export default {
   name: "PortfolioItemInformation",
   components: {
     LinkButton,
-    VueMarkdown,
     slider,
     slideritem,
     MarkdownRenderer
