@@ -13,10 +13,10 @@
           primaryColor="#141414"
           secondaryColor="#101010"
         >
-          <rect x="162.5" y="25" rx="5" ry="5" width="75" height="75"/>
-          <rect x="150" y="115" rx="5" ry="5" width="100" height="15"/>
-          <rect x="50" y="150" rx="2.5" ry="2.5" width="300" height="10"/>
-          <rect x="50" y="165" rx="2.5" ry="2.5" width="300" height="10"/>
+          <rect x="162.5" y="25" rx="5" ry="5" width="75" height="75" />
+          <rect x="150" y="115" rx="5" ry="5" width="100" height="15" />
+          <rect x="50" y="150" rx="2.5" ry="2.5" width="300" height="10" />
+          <rect x="50" y="165" rx="2.5" ry="2.5" width="300" height="10" />
         </content-loader>
       </div>
       <div class="content" v-if="!$apollo.loading && !$apollo.error">
@@ -28,7 +28,7 @@
           >
             <div v-html="require(`!html-loader!../assets/specialities/${speciality.iconPath}`)"></div>
             <div class="title">{{ speciality.title }}</div>
-            <vue-markdown class="description" :source="speciality.description"></vue-markdown>
+            <markdown-renderer class="description" :source="speciality.description"></markdown-renderer>
           </div>
         </div>
         <feedback-message
@@ -49,8 +49,8 @@
 <script>
 import gql from "graphql-tag";
 import { ContentLoader } from "vue-content-loader";
-import VueMarkdown from "vue-markdown";
 import FeedbackMessage from "./FeedbackMessage";
+import MarkdownRenderer from "./MarkdownRenderer";
 
 const ALL_SPECIALITIES_QUERY = gql`
   query specialities {
@@ -67,7 +67,7 @@ export default {
   name: "Specialities",
   components: {
     ContentLoader,
-    VueMarkdown,
+    MarkdownRenderer,
     FeedbackMessage
   },
   apollo: {

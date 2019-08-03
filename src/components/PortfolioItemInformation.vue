@@ -16,13 +16,11 @@
     <div id="info">
       <div id="description">
         <div class="title">About this project</div>
-        <vue-markdown
+        <markdown-renderer
           v-if="portfolioItem.aboutProject"
           class="text"
           :source="portfolioItem.aboutProject"
-          :anchorAttributes="{ target: '_blank', rel: 'noreferrer' }"
-          :postrender="parseHTML"
-        ></vue-markdown>
+        ></markdown-renderer>
       </div>
       <div id="techSheet">
         <div class="title">Technical Sheet</div>
@@ -43,17 +41,17 @@
 
 <script>
 import LinkButton from "./LinkButton";
-import VueMarkdown from "vue-markdown";
 import { PORTFOLIO_ITEM } from "../library/Queries";
 import { slider, slideritem } from "vue-concise-slider";
+import MarkdownRenderer from "./MarkdownRenderer";
 
 export default {
   name: "PortfolioItemInformation",
   components: {
     LinkButton,
-    VueMarkdown,
     slider,
-    slideritem
+    slideritem,
+    MarkdownRenderer
   },
   methods: {
     crossClicked() {
@@ -124,6 +122,7 @@ export default {
 
   #carousel {
     margin-top: 40px;
+    margin-bottom: 40px;
 
     .slider-pagination-bullet {
       background-color: #fff;
@@ -150,6 +149,7 @@ export default {
       line-height: 1.3em;
       color: $bodytextGrey;
       font-size: 18px;
+      margin-bottom: 15px;
 
       .fancyLink {
         position: relative;

@@ -38,8 +38,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import { ApolloClient } from 'apollo-client';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
@@ -107,9 +105,6 @@ const apolloProvider = new VueApollo({
 Vue.config.productionTip = false;
 
 new Vue({
-  created() {
-    AOS.init({ offset: 75 });
-  },
   apolloProvider,
   router,
   store,
