@@ -15,8 +15,9 @@ module.exports = {
       .use('worker-loader')
       .loader('worker-loader')
       .tap(() => {
-        return { inline: false, name: 'MarkedWorker.[hash].worker.js' };
+        return { inline: true, name: 'MarkedWorker.[hash].worker.js' };
       });
+    config.module.rule('js').exclude.add(/\.worker\.js$/);
   },
   configureWebpack: {
     plugins: [
