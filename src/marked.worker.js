@@ -1,4 +1,6 @@
+global.Prism = { disableWorkerMessageHandler: true };
 import marked from 'marked';
+const Prism = require('prismjs');
 
 onmessage = e => {
   const renderer = new marked.Renderer();
@@ -8,7 +10,12 @@ onmessage = e => {
   };
 
   const markdownString = e.data;
-  const HTML = marked(markdownString, { renderer: renderer });
+  const HTML = marked(markdownString, {
+    renderer: renderer,
+    highlight: (code, lang) => {
+      return Prism.highlight(code, Prism.languages[lang], lang);
+    },
+  });
 
   self.postMessage(HTML);
 };
