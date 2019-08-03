@@ -12,7 +12,7 @@
     </div>
     <div id="article" v-if="blog.blog">
       <div class="blogInfo">
-        <img :src="require('../assets/ConorWatson.png')" alt="Profile Picture">
+        <img :src="require('../assets/ConorWatson.png')" alt="Profile Picture" />
         <div class="info">
           <span class="name">Conor Watson</span>
           <span class="metadata">{{ `${publishedDate} · ${readingTime} min read`}}</span>
@@ -56,63 +56,29 @@
           </social-sharing>
         </div>
       </div>
-      <vue-markdown
-        class="blogText"
-        :source="blog.blog"
-        :anchorAttributes="{ target: '_blank', rel: 'noreferrer' }"
-        @rendered="handleRenderedEvent"
-      ></vue-markdown>
+      <markdown-renderer class="blogText" :source="blog.blog"></markdown-renderer>
     </div>
   </div>
 </template>
 
 <script>
-import VueMarkdown from "vue-markdown";
-import Prism from "prismjs";
 import "prismjs/themes/prism-okaidia.css";
 import HeroButton from "./HeroButton";
 import { BLOG_POST } from "../library/Queries";
 import TypeIt from "typeit";
 import moment from "moment";
+import MarkdownRenderer from "./MarkdownRenderer";
 
 export default {
   name: "BlogArticle",
   components: {
-    VueMarkdown,
     HeroButton,
-    moment
+    moment,
+    MarkdownRenderer
   },
   methods: {
     crossClicked() {
       this.$parent.overlayClicked();
-    },
-    // parseHTML(html) {
-    //   const parser = new DOMParser();
-    //   const doc = parser.parseFromString(html, "text/html");
-    //   const aTags = doc.getElementsByTagName("a");
-
-    //   for (let aTag of aTags) {
-    //     const span = document.createElement("span");
-    //     span.classList.add("fancyLink");
-    //     aTag.parentNode.insertBefore(span, aTag);
-    //     span.appendChild(aTag);
-    //   }
-
-    //   return doc.body.innerHTML;
-    // },
-    handleRenderedEvent() {
-      // const text = document.querySelector("#article .blogText");
-      // if (text) {
-      //   const aTags = text.querySelectorAll("a");
-      //   for (let aTag of aTags) {
-      //     const span = document.createElement("span");
-      //     span.classList.add("fancyLink");
-      //     aTag.parentNode.insertBefore(span, aTag);
-      //     span.appendChild(aTag);
-      //   }
-      //   this.$nextTick(() => Prism.highlightAll());
-      // }
-      this.$nextTick(() => Prism.highlightAll());
     }
   },
   computed: {
