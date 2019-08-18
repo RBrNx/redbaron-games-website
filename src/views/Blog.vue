@@ -37,6 +37,17 @@ export default {
     return {
       heroImage: BlogImage
     };
+  },
+  beforeRouteUpdate(to, from, next) {
+    if (from.name === "blogPost") {
+      const closeButton = this.$el.querySelector(".closeButton");
+      if (closeButton) closeButton.click();
+      setTimeout(() => {
+        next();
+      }, 800);
+    } else {
+      next();
+    }
   }
 };
 </script>
