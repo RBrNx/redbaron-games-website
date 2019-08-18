@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="portfolio">
     <hero-header :backgroundImage="heroImage" heroButtonScrollTo="#portfolioContainer">
       <div class="title enter-1" slot="title">
         <h2>The Name's Watson.</h2>
@@ -29,11 +29,11 @@
 // @ is an alias to /src
 import PortfolioList from "../components/PortfolioList";
 import HeroHeader from "../components/HeroHeader";
-import HomeImage from "../assets/hero-header/Home-Header.jpg";
+import PortfolioImage from "../assets/hero-header/Home-Header.jpg";
 import WebFooter from "../components/Footer";
 
 export default {
-  name: "home",
+  name: "portfolio",
   components: {
     PortfolioList,
     HeroHeader,
@@ -41,7 +41,7 @@ export default {
   },
   data() {
     return {
-      heroImage: HomeImage
+      heroImage: PortfolioImage
     };
   }
 };
@@ -50,7 +50,7 @@ export default {
 <style lang="scss">
 @import "../assets/global.scss";
 
-.home {
+.portfolio {
   .heroImage {
     .title {
       margin-top: 50px;
