@@ -20,14 +20,14 @@
         </div>
       </div>
     </hero-header>
-    <portfolio></portfolio>
+    <portfolio-list></portfolio-list>
     <web-footer></web-footer>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Portfolio from "../components/Portfolio";
+import PortfolioList from "../components/PortfolioList";
 import HeroHeader from "../components/HeroHeader";
 import HomeImage from "../assets/hero-header/Home-Header.jpg";
 import WebFooter from "../components/Footer";
@@ -35,7 +35,7 @@ import WebFooter from "../components/Footer";
 export default {
   name: "home",
   components: {
-    Portfolio,
+    PortfolioList,
     HeroHeader,
     WebFooter
   },

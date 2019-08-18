@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-const Home = () => import(/* webpackChunkName: "home" */ './views/Home.vue');
+const Portfolio = () =>
+  import(/* webpackChunkName: "portfolio" */ './views/Portfolio.vue');
 const About = () => import(/* webpackChunkName: "about" */ './views/About.vue');
 const Blog = () => import(/* webpackChunkName: "blog" */ './views/Blog.vue');
 const CV = () => import(/* webpackChunkName: "cv" */ './views/CV.vue');
@@ -34,7 +35,7 @@ export default new Router({
     {
       path: '/portfolio',
       name: 'home',
-      component: Home,
+      component: Portfolio,
       children: [
         {
           path: ':id',
