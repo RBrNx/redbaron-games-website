@@ -1,6 +1,23 @@
 <template>
   <div class="cv">
     <hero-header :hideHeroButton="true">
+      <vue-particles
+        color="#dedede"
+        :particleOpacity="0.7"
+        :particlesNumber="40"
+        shapeType="circle"
+        :particleSize="4"
+        linesColor="#dedede"
+        :linesWidth="1"
+        :lineLinked="true"
+        :lineOpacity="0.4"
+        :linesDistance="150"
+        :moveSpeed="2"
+        :hoverEffect="true"
+        hoverMode="grab"
+        :clickEffect="true"
+        clickMode="push"
+      ></vue-particles>
       <h2 class="title enter-1" slot="title">Curriculum Vitae</h2>
       <div class="buttonContainer">
         <primary-button
