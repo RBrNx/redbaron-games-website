@@ -11,11 +11,13 @@
       <hero-button></hero-button>
     </div>
     <div id="article" v-if="blog.blog">
-      <div class="blogInfo">
-        <img :src="require('../assets/ConorWatson.png')" alt="Profile Picture" />
-        <div class="info">
-          <span class="name">Conor Watson</span>
-          <span class="metadata">{{ `${publishedDate} · ${readingTime} min read`}}</span>
+      <div class="blogAuthor">
+        <div class="blogInformation">
+          <img :src="require('../assets/ConorWatson.png')" alt="Profile Picture" />
+          <div class="info">
+            <span class="name">Conor Watson</span>
+            <span class="metadata">{{ `${publishedDate} · ${readingTime} min read`}}</span>
+          </div>
         </div>
         <div class="social">
           <span class="text">Share this</span>
@@ -238,30 +240,40 @@ export default {
       padding-right: 250px;
     }
 
-    .blogInfo {
+    .blogAuthor {
       background-color: lighten($primaryGrey, 10%);
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       padding: 20px;
       border-radius: 5px;
 
-      img {
-        max-height: 75px;
-        max-width: 75px;
-        border-radius: 50%;
+      @include tablet {
+        flex-direction: row;
       }
 
-      .info {
+      .blogInformation {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding-left: 25px;
         flex: 1;
+        flex-direction: row;
 
-        .name {
-          margin-bottom: 10px;
-          color: $headingGrey;
-          font-size: 18px;
+        img {
+          max-height: 75px;
+          max-width: 75px;
+          border-radius: 50%;
+        }
+
+        .info {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding-left: 25px;
+          flex: 1;
+
+          .name {
+            margin-bottom: 10px;
+            color: $headingGrey;
+            font-size: 18px;
+          }
         }
       }
 
@@ -269,15 +281,20 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding-left: 25px;
+        margin-top: 25px;
         align-items: flex-start;
+
+        @include tablet {
+          margin-top: 0px;
+        }
       }
 
       .socialSharing {
         display: flex;
         flex-direction: row;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: space-between;
+        width: 100%;
 
         .text {
           margin-right: 10px;
@@ -286,11 +303,14 @@ export default {
         svg {
           width: 30px;
           height: 30px;
-          margin-right: 10px;
           cursor: pointer;
 
           &:hover {
             color: $headingGrey;
+          }
+
+          @include tablet {
+            margin-right: 10px;
           }
         }
       }
