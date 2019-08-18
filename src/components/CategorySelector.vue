@@ -28,6 +28,7 @@ export default {
 .categorySelector {
   margin-top: 25px;
   margin-bottom: 35px;
+  padding: 0 25px;
 
   @include tablet() {
     padding: 0 45px;
