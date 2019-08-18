@@ -43,6 +43,17 @@ export default {
     return {
       heroImage: PortfolioImage
     };
+  },
+  beforeRouteUpdate(to, from, next) {
+    if (from.name === "portfolioItem") {
+      const closeButton = this.$el.querySelector(".closeButton");
+      if (closeButton) closeButton.click();
+      setTimeout(() => {
+        next();
+      }, 650);
+    } else {
+      next();
+    }
   }
 };
 </script>
