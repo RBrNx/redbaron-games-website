@@ -23,6 +23,7 @@
     "prismjs": "^1.16.0",
     "typeit": "^6.0.3",
     "vue-content-loader": "^0.2.1",
+    "vue-particles": "^1.0.9",
     "vue-router": "^3.0.1",
     "vue-social-sharing": "^2.4.5",
     "vuebar": "0.0.20",
