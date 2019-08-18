@@ -1,5 +1,5 @@
 <template>
-  <section id="portfolioContainer">
+  <section id="portfolioListContainer">
     <h2 class="sectionTitle">Portfolio</h2>
     <p
       class="blurb"
@@ -16,10 +16,10 @@
           primaryColor="#141414"
           secondaryColor="#101010"
         >
-          <rect x="0" y="0" rx="0" ry="0" width="400" height="250"/>
-          <rect x="15" y="265" rx="5" ry="5" width="170" height="25"/>
-          <rect x="15" y="300" rx="5" ry="5" width="370" height="20"/>
-          <rect x="15" y="350" rx="5" ry="5" width="370" height="50"/>
+          <rect x="0" y="0" rx="0" ry="0" width="400" height="250" />
+          <rect x="15" y="265" rx="5" ry="5" width="170" height="25" />
+          <rect x="15" y="300" rx="5" ry="5" width="370" height="20" />
+          <rect x="15" y="350" rx="5" ry="5" width="370" height="50" />
         </content-loader>
       </div>
       <div class="content" v-if="!$apollo.loading && !$apollo.error">
@@ -39,7 +39,7 @@
           type="empty"
           message="Sorry, there doesn't seem to be anything in my Portfolio at the minute."
         ></feedback-message>
-        <router-view/>
+        <router-view />
       </div>
       <feedback-message
         v-if="$apollo.error"
@@ -98,7 +98,7 @@ export default {
 <style lang="scss">
 @import "../assets/global.scss";
 
-#portfolioContainer {
+#portfolioListContainer {
   width: 100%;
   background: $primaryGrey;
   color: $bodytextGrey;

@@ -71,6 +71,7 @@ export default {
     onClosed() {
       this.$el.removeEventListener("transitionend", this.onTransitionEnd);
       this.clonedElement.style.opacity = 1;
+      this.$el.style.opacity = 0;
 
       const currPath = this.$route.path;
       const id = this.$route.params.id;

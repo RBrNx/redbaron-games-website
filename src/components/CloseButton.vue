@@ -1,11 +1,13 @@
 <template>
-  <svg class="closeButton" xmlns="http://www.w3.org/2000/svg" @click="$emit('click')">
-    <g>
-      <circle class="circle" cy="30" cx="30" r="20" stroke-width="2"></circle>
-      <line class="line line1" x1="20" y1="30" x2="40" y2="30"></line>
-      <line class="line line2" x1="20" y1="30" x2="40" y2="30"></line>
-    </g>
-  </svg>
+  <div class="closeButton" @click="$emit('click')">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+      <g>
+        <circle class="circle" cy="30" cx="30" r="20" stroke-width="2" />
+        <line class="line line1" x1="20" y1="30" x2="40" y2="30" />
+        <line class="line line2" x1="20" y1="30" x2="40" y2="30" />
+      </g>
+    </svg>
+  </div>
 </template>
 
 <style lang="scss" scoped>
