@@ -78,11 +78,6 @@ export default {
     moment,
     MarkdownRenderer
   },
-  methods: {
-    crossClicked() {
-      this.$parent.overlayClicked();
-    }
-  },
   computed: {
     publishedDate() {
       return moment(this.blog.publishedDate).calendar(null, {
