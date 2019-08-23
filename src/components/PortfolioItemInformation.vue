@@ -54,9 +54,6 @@ export default {
     MarkdownRenderer
   },
   methods: {
-    crossClicked() {
-      this.$parent.overlayClicked();
-    },
     linkIcon(linkType) {
       return linkType ? ["fab", linkType] : "external-link-alt";
     },
