@@ -75,9 +75,21 @@ const BLOG_POST = gql`
   }
 `;
 
+const ALL_SPECIALITIES_QUERY = gql`
+  query specialities {
+    specialities(where: { status: PUBLISHED }) {
+      id
+      iconPath
+      title
+      description
+    }
+  }
+`;
+
 export {
   ALL_PORTFOLIO_ITEMS_QUERY,
   PORTFOLIO_ITEM,
   ALL_BLOGS_QUERY,
   BLOG_POST,
+  ALL_SPECIALITIES_QUERY,
 };

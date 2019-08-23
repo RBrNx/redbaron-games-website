@@ -47,21 +47,10 @@
 </template>
 
 <script>
-import gql from "graphql-tag";
 import { ContentLoader } from "vue-content-loader";
 import FeedbackMessage from "./FeedbackMessage";
 import MarkdownRenderer from "./MarkdownRenderer";
-
-const ALL_SPECIALITIES_QUERY = gql`
-  query specialities {
-    specialities(where: { status: PUBLISHED }) {
-      id
-      iconPath
-      title
-      description
-    }
-  }
-`;
+import { ALL_SPECIALITIES_QUERY } from "../library/Queries";
 
 export default {
   name: "Specialities",
