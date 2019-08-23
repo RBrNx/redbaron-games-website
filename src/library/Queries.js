@@ -2,11 +2,14 @@ import gql from 'graphql-tag';
 
 const ALL_PORTFOLIO_ITEMS_QUERY = gql`
   query portfolioItems {
-    portfolioItems(where: { visible: true, status: PUBLISHED }) {
+    portfolioItems(where: { status: PUBLISHED }) {
       id
       title
       description
-      displayImage
+      projectImage {
+        id
+        url
+      }
     }
   }
 `;
@@ -18,11 +21,12 @@ const PORTFOLIO_ITEM = gql`
       title
       description
       aboutProject
-      carouselImages
+      carouselImages {
+        id
+        url
+      }
       techSheet
       links
-      visible
-      displayImage
     }
   }
 `;
