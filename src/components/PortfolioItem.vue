@@ -2,7 +2,8 @@
   <div :class="`portfolioItem ${itemClass}`" v-if="portfolioData">
     <div class="header">
       <img
-        :src="require(`../assets/project-images/${portfolioData.displayImage}`)"
+        v-if="portfolioData.projectImage"
+        :src="portfolioData.projectImage.url"
         alt="Portfolio item image"
       />
     </div>
