@@ -7,7 +7,7 @@
           v-for="(tech, index) in technologies"
           :key="tech.id"
           :backgroundColor="tech.color"
-          :icon="tech.icon"
+          :icon="tech.icon.url"
           :title="tech.title"
           :isFile="tech.isFile"
           :description="tech.description"
