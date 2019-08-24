@@ -116,6 +116,7 @@ export default {
   #carousel {
     margin-top: 40px;
     margin-bottom: 40px;
+    min-height: 300px;
 
     .slider-pagination-bullet {
       background-color: #fff;
