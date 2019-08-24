@@ -146,13 +146,12 @@ export default {
       margin-bottom: 15px;
 
       p {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
         img {
           max-width: 75%;
           max-height: 300px;
+          margin-left: auto;
+          margin-right: auto;
+          display: block;
         }
       }
 
