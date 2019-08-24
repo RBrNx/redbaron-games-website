@@ -94,11 +94,13 @@ const ALL_TECHNOLOGIES_QUERY = gql`
   query technologies {
     technologies(where: { status: PUBLISHED }) {
       id
-      icon
+      icon {
+        id
+        url
+      }
       color
       title
       description
-      isFile
     }
   }
 `;
