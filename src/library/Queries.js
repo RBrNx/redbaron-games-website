@@ -90,10 +90,24 @@ const ALL_SPECIALITIES_QUERY = gql`
   }
 `;
 
+const ALL_TECHNOLOGIES_QUERY = gql`
+  query technologies {
+    technologies(where: { status: PUBLISHED }) {
+      id
+      icon
+      color
+      title
+      description
+      isFile
+    }
+  }
+`;
+
 export {
   ALL_PORTFOLIO_ITEMS_QUERY,
   PORTFOLIO_ITEM,
   ALL_BLOGS_QUERY,
   BLOG_POST,
   ALL_SPECIALITIES_QUERY,
+  ALL_TECHNOLOGIES_QUERY,
 };
