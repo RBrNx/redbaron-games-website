@@ -15,10 +15,10 @@
           primaryColor="#141414"
           secondaryColor="#101010"
         >
-          <rect x="0" y="0" rx="0" ry="0" width="400" height="250"/>
-          <rect x="15" y="265" rx="5" ry="5" width="170" height="25"/>
-          <rect x="15" y="300" rx="5" ry="5" width="370" height="20"/>
-          <rect x="15" y="350" rx="5" ry="5" width="370" height="50"/>
+          <rect x="0" y="0" rx="0" ry="0" width="400" height="250" />
+          <rect x="15" y="265" rx="5" ry="5" width="170" height="25" />
+          <rect x="15" y="300" rx="5" ry="5" width="370" height="20" />
+          <rect x="15" y="350" rx="5" ry="5" width="370" height="50" />
         </content-loader>
       </div>
       <div class="content" v-if="!loading && !$apollo.error">
@@ -118,7 +118,7 @@ export default {
     return {
       blogs: null,
       categories: null,
-      categoryFilter: [],
+      categoryFilter: [{ status: "PUBLISHED" }],
       loading: true,
       timer: null
     };
