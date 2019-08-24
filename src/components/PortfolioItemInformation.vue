@@ -145,6 +145,17 @@ export default {
       font-size: 18px;
       margin-bottom: 15px;
 
+      p {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        img {
+          max-width: 75%;
+          max-height: 300px;
+        }
+      }
+
       .fancyLink {
         position: relative;
         white-space: pre;
