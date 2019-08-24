@@ -26,7 +26,7 @@
             :class="`card enter-${index}`"
             :key="speciality.id"
           >
-            <div v-html="require(`!html-loader!../assets/specialities/${speciality.iconPath}`)"></div>
+            <svg-icon v-if="speciality.icon" :src="speciality.icon.url"></svg-icon>
             <div class="title">{{ speciality.title }}</div>
             <markdown-renderer class="description" :source="speciality.description"></markdown-renderer>
           </div>
@@ -50,6 +50,7 @@
 import { ContentLoader } from "vue-content-loader";
 import FeedbackMessage from "./FeedbackMessage";
 import MarkdownRenderer from "./MarkdownRenderer";
+import SvgIcon from "./SVGIcon.vue";
 import { ALL_SPECIALITIES_QUERY } from "../library/Queries";
 
 export default {
@@ -57,7 +58,8 @@ export default {
   components: {
     ContentLoader,
     MarkdownRenderer,
-    FeedbackMessage
+    FeedbackMessage,
+    SvgIcon
   },
   apollo: {
     specialities: {
