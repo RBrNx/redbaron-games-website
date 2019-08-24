@@ -1,5 +1,5 @@
 <template>
-  <span v-html="svgContent" />
+  <div class="iconContainer" v-html="svgContent" />
 </template>
 <script>
 export default {
