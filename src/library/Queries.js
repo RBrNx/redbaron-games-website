@@ -82,6 +82,10 @@ const ALL_SPECIALITIES_QUERY = gql`
       iconPath
       title
       description
+      icon {
+        id
+        url
+      }
     }
   }
 `;
