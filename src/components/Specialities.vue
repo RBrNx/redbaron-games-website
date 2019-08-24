@@ -26,7 +26,7 @@
             :class="`card enter-${index}`"
             :key="speciality.id"
           >
-            <div v-html="require(`!html-loader!../assets/specialities/${speciality.iconPath}`)"></div>
+            <svg-icon v-if="speciality.icon" :src="speciality.icon.url"></svg-icon>
             <div class="title">{{ speciality.title }}</div>
             <markdown-renderer class="description" :source="speciality.description"></markdown-renderer>
           </div>
@@ -47,28 +47,19 @@
 </template>
 
 <script>
-import gql from "graphql-tag";
 import { ContentLoader } from "vue-content-loader";
 import FeedbackMessage from "./FeedbackMessage";
 import MarkdownRenderer from "./MarkdownRenderer";
-
-const ALL_SPECIALITIES_QUERY = gql`
-  query specialities {
-    specialities(where: { status: PUBLISHED }) {
-      id
-      iconPath
-      title
-      description
-    }
-  }
-`;
+import SvgIcon from "./SVGIcon.vue";
+import { ALL_SPECIALITIES_QUERY } from "../library/Queries";
 
 export default {
   name: "Specialities",
   components: {
     ContentLoader,
     MarkdownRenderer,
-    FeedbackMessage
+    FeedbackMessage,
+    SvgIcon
   },
   apollo: {
     specialities: {

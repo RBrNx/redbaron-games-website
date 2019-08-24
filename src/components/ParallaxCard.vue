@@ -1,7 +1,7 @@
 <template>
   <div :class="`parallaxCard  ${containerClass}`">
     <div class="parallaxFront" :style="{ 'background-color' : backgroundColor }">
-      <Icon :icon="icon" :isFile="isFile"></Icon>
+      <svg-icon v-if="icon" :src="icon"></svg-icon>
     </div>
     <div class="parallaxBack">
       <div class="header">{{ title }}</div>
@@ -12,7 +12,7 @@
 
 <script>
 import MarkdownRenderer from "./MarkdownRenderer";
-import Icon from "./Icon";
+import SvgIcon from "./SVGIcon";
 
 export default {
   name: "ParallaxCard",
@@ -26,7 +26,7 @@ export default {
     "containerClass"
   ],
   components: {
-    Icon,
+    SvgIcon,
     MarkdownRenderer
   }
 };
@@ -68,6 +68,14 @@ export default {
     .iconContainer {
       transform-style: preserve-3d;
       transform: translateZ(80px);
+      display: flex;
+      justify-content: center;
+
+      svg {
+        width: 50%;
+        fill: #fff;
+        color: #fff;
+      }
     }
   }
 

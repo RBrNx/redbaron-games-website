@@ -7,7 +7,7 @@
           v-for="(tech, index) in technologies"
           :key="tech.id"
           :backgroundColor="tech.color"
-          :icon="tech.icon"
+          :icon="tech.icon.url"
           :title="tech.title"
           :isFile="tech.isFile"
           :description="tech.description"
@@ -30,21 +30,8 @@
 
 <script>
 import ParallaxCard from "./ParallaxCard";
-import gql from "graphql-tag";
 import FeedbackMessage from "./FeedbackMessage";
-
-const ALL_TECHNOLOGIES_QUERY = gql`
-  query technologies {
-    technologies(where: { status: PUBLISHED }) {
-      id
-      icon
-      color
-      title
-      description
-      isFile
-    }
-  }
-`;
+import { ALL_TECHNOLOGIES_QUERY } from "../library/Queries";
 
 export default {
   name: "Technologies",

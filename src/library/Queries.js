@@ -2,11 +2,14 @@ import gql from 'graphql-tag';
 
 const ALL_PORTFOLIO_ITEMS_QUERY = gql`
   query portfolioItems {
-    portfolioItems(where: { visible: true, status: PUBLISHED }) {
+    portfolioItems(where: { status: PUBLISHED }) {
       id
       title
       description
-      displayImage
+      projectImage {
+        id
+        url
+      }
     }
   }
 `;
@@ -18,11 +21,12 @@ const PORTFOLIO_ITEM = gql`
       title
       description
       aboutProject
-      carouselImages
+      carouselImages {
+        id
+        url
+      }
       techSheet
       links
-      visible
-      displayImage
     }
   }
 `;
@@ -71,9 +75,41 @@ const BLOG_POST = gql`
   }
 `;
 
+const ALL_SPECIALITIES_QUERY = gql`
+  query specialities {
+    specialities(where: { status: PUBLISHED }) {
+      id
+      iconPath
+      title
+      description
+      icon {
+        id
+        url
+      }
+    }
+  }
+`;
+
+const ALL_TECHNOLOGIES_QUERY = gql`
+  query technologies {
+    technologies(where: { status: PUBLISHED }) {
+      id
+      icon {
+        id
+        url
+      }
+      color
+      title
+      description
+    }
+  }
+`;
+
 export {
   ALL_PORTFOLIO_ITEMS_QUERY,
   PORTFOLIO_ITEM,
   ALL_BLOGS_QUERY,
   BLOG_POST,
+  ALL_SPECIALITIES_QUERY,
+  ALL_TECHNOLOGIES_QUERY,
 };

@@ -5,11 +5,7 @@
     <div id="carousel">
       <slider ref="slider" :options="{ currentPage: 0 }">
         <slideritem v-for="(image, index) in portfolioItem.carouselImages" :key="index">
-          <img
-            class="carouselImage"
-            :src="require(`../assets/project-images/${image}`)"
-            alt="Carousel image"
-          />
+          <img v-if="image.url" class="carouselImage" :src="image.url" alt="Carousel image" />
         </slideritem>
       </slider>
     </div>
@@ -54,9 +50,6 @@ export default {
     MarkdownRenderer
   },
   methods: {
-    crossClicked() {
-      this.$parent.overlayClicked();
-    },
     linkIcon(linkType) {
       return linkType ? ["fab", linkType] : "external-link-alt";
     },
