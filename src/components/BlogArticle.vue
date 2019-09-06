@@ -316,8 +316,14 @@ export default {
       color: $bodytextGrey;
       font-size: 18px;
 
-      h2 {
+      h1 {
+        margin-top: 100px;
+        font-size: 42px;
         color: $headingGrey;
+      }
+
+      h2 {
+        margin-top: 50px;
         font-size: 30px;
       }
 
@@ -326,6 +332,13 @@ export default {
         margin-left: auto;
         margin-right: auto;
         max-width: 90%;
+
+        & + em {
+          display: block;
+          text-align: center;
+          margin-top: 10px;
+          margin-bottom: 5px;
+        }
       }
 
       pre[class*="language-"] {
@@ -337,6 +350,26 @@ export default {
         padding: 3px;
         border-radius: 3px;
         color: $headingGrey;
+      }
+
+      pre > code {
+        display: block;
+        padding: 12px;
+        white-space: pre-wrap;
+      }
+
+      h4 {
+        margin-bottom: 0;
+        font-size: 20px;
+      }
+
+      h4 + pre {
+        margin-top: 0;
+        padding-top: 6px;
+      }
+
+      h4 code {
+        padding: 12px;
       }
 
       .fancyLink {
