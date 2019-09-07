@@ -356,7 +356,7 @@ export default {
       pre > code {
         display: block;
         padding: 12px;
-        white-space: pre-wrap;
+        overflow-x: auto;
       }
 
       h4 {
