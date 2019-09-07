@@ -320,6 +320,7 @@ export default {
         margin-top: 100px;
         font-size: 42px;
         color: $headingGrey;
+        line-height: normal;
       }
 
       h2 {
