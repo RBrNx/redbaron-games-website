@@ -45,7 +45,7 @@
     "html-loader": "^0.5.5",
     "node-sass": "^4.12.0",
     "nyc": "^14.1.1",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "pug-plain-loader": "^1.0.0",
     "sass-loader": "^7.0.1",
     "standard": "^8.4.0",
